@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# run git pull and summary of changes after
+git fetch &> /dev/null
+if [ $? -eq 0 ]; then
+	if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
+		echo "Repository is already up to date."
+		exit 0
+	else
+		git pull
+		git diff --stat HEAD@{1}.. --dirstat=cumulative,files
+		exit 0
+	fi
+else
+	echo "Directory is not a git repo."
+	exit 1
+fi
