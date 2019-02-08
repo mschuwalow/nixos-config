@@ -10,25 +10,20 @@
     layout = "us";
     xkbVariant = "colemak";
 
+    enableCtrlAltBackspace = true;
+
     displayManager.sddm = {
       enable = true;
-      #wayland = false;
     };
     desktopManager.plasma5.enable = true;
   };
 
   services.flatpak.enable = true;
 
-  sound.enable = true;
-
   hardware.opengl = {
-    enable = config.services.xserver.enable;
+    enable = true;
     driSupport32Bit = true;
-  };
-
-  hardware.pulseaudio = {
-    enable = config.services.xserver.enable;
-    support32Bit = true;
+    driSupport = true;
   };
 
   fonts = {
@@ -51,5 +46,4 @@
       };
     };
   };
-
 }

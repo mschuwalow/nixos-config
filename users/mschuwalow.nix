@@ -2,17 +2,16 @@
 
 let
 	sysPkgs = pkgs;
-	# channels = import ../channels.nix;
+	# channels = import ../modules/channels.nix;
 	# pkgs = channels.unstable;
 	secrets = import ../secrets.nix;
   confDir = ./mschuwalow.config;
-  concat = x: y: x + y;
   recFilesH = x: if lib.pathIsDirectory x
                    then (lib.concatMap (y: recFilesH (toString x + "/" + toString y)) (builtins.attrNames (builtins.readDir x)))
                    else [x];
   recFiles = x: if lib.pathIsDirectory x
                   then (map(y: lib.removePrefix (toString x + "/") y) (recFilesH x))
-                  else x;
+                  else [x];
 in
 {
   users.users.mschuwalow = {
@@ -60,10 +59,6 @@ in
         ncdu # Disk space usage analyzer
         ripgrep # rg, fast grepper
         rtv # Reddit
-        zeal
-        vscode
-        idea.idea-ultimate
-        maven
         tdesktop # Telegram
         chromium
         alacritty
@@ -71,7 +66,6 @@ in
         whois
         nix-prefetch-git
         binutils-unwrapped
-        meld
 
         stow
         gawk
