@@ -75,7 +75,7 @@ in
 
         stow
         gawk
-		httpstat
+		    httpstat
         
         seafile-client
         keepassxc
@@ -109,6 +109,12 @@ in
           name: (lib.nameValuePair "${name}" ({ source = "${confDir}/${name}"; }))
         ) (recFiles confDir)
       );
+
+      # sensitive files
+      home.file = {
+        ".m2/settings.xml".text = secrets.m2Settings;
+        ".m2/settings-security.xml".text = secrets.m2SettingsSecurity;
+      };
     };
   };
 }
