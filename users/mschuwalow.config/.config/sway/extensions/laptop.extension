@@ -1,0 +1,31 @@
+
+bindsym XF86KbdBrightnessDown exec $HOME/scripts/kbd-brightness.py -
+bindsym XF86KbdBrightnessUp exec $HOME/scripts/kbd-brightness.py +
+
+bindsym XF86MonBrightnessDown exec $HOME/scripts/brightness.sh -U 5
+bindsym XF86MonBrightnessUp exec $HOME/scripts/brightness.sh -A 5
+
+bindsym KEY_KBDILLUMDOWN exec pkill -RTMIN+2 i3blocks
+bindsym KEY_KBDILLUMUP exec pkill -RTMIN+2 i3blocks
+
+bindsym XF86TouchpadToggle exec --no-startup-id $HOME/scripts/toggleTouchPad
+
+bar {
+    status_command i3blocks -c ~/.config/sway/extensions/laptop_blocks.config
+    position top
+    strip_workspace_numbers yes
+    separator_symbol ''
+    font $bar-font
+    #disable scroll whell
+    bindsym button4 nop
+    bindsym button5 nop
+    tray_padding 1000
+    tray_output all
+    height 25
+    # $sway-theme-bar
+}
+
+# output HDMI-A-2 res 1920x1200 pos 0,0
+# output eDP-1 res 1920x1080 pos 1920,0
+
+output * bg ~/Pictures/wallpapers/archlinux.jpg fill

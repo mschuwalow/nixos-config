@@ -1,0 +1,13 @@
+bar {
+    status_command i3blocks -c ~/.config/i3blocks/desktop.config
+    i3bar_command i3bar
+    position bottom
+    tray_output primary
+    font $bar-font
+    strip_workspace_numbers yes
+    #disable scroll wheel
+    bindsym button4 nop
+    bindsym button5 nop
+    tray_padding 2
+    # $i3-theme-bar
+}

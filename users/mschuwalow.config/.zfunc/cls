@@ -1,0 +1,9 @@
+clear
+
+# clear terminal and tmux scrollback if tmux is used
+if [[ "$TMUX" ]] && type -p tmux > /dev/null; then
+	tmux clear-history
+fi
+
+# print status messsage
+status-message

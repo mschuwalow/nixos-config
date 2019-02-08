@@ -1,0 +1,5 @@
+jupyter
+pyqt5
+jupyter_contrib_nbextensions
+jupyter_nbextensions_configurator
+jupyter_qtconsole_colorschemes

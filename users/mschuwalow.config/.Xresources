@@ -1,0 +1,27 @@
+! ------------------------------------------------------------------------------
+! ROFI Options
+! ------------------------------------------------------------------------------
+
+rofi.modi: window,run,drun,ssh
+rofi.sidebar-mode: true
+rofi.separator-style: solid
+rofi.color-enabled: true
+rofi.location: 7
+rofi.terminal: roxterm
+rofi.ssh-command: {terminal} -e {ssh-client} {host}
+rofi.font: Fantasque Sans Mono 12
+rofi.padding: 5
+rofi.opacity: 95
+rofi.lines: 19
+rofi.width: 720
+rofi.bw: 0
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! User: leofa
+! Copyright: 2017 leofa
+! ------------------------------------------------------------------------------
+rofi.color-normal:                   argb:31d1f21, #c4cbd4, argb:31d1f21, #4084d6, #f9f9f9
+rofi.color-urgent:                   argb:2c1d1f21, #cc6666, argb:2c1d1f21, #a54242, #f9f9f9
+rofi.color-active:                   argb:2c1d1f21, #65acff, argb:2c1d1f21, #4491ed, #f9f9f9
+rofi.color-window:                   argb:f22d303b, #7c8389, #1d1f21
