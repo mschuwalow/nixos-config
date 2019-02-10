@@ -3,17 +3,17 @@ let
   secrets = import ./secrets.nix;
 in
 {
-	imports = [
-		# load modules
-		./modules/home-manager.nix
+  imports = [
+    # load modules
+    ./modules/home-manager.nix
 
-		# load default services & profiles
-		./services/default.nix
-		./profiles/default.nix
+    # load default services & profiles
+    ./services
+    ./profiles
 
-		# create users
-		./users/mschuwalow.nix
-	];
+    # create users
+    ./users/mschuwalow.nix
+  ];
 
   environment.systemPackages = with pkgs; [
     wget
@@ -23,10 +23,7 @@ in
     exa
     fzf
     tmux
-
-    jq
-    cowsay
-    lolcat
+    direnv
   ];
 
   boot = {
@@ -107,12 +104,16 @@ in
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs:
+      import ./pkgs/default.nix { inherit pkgs;  };
+  };
 
-	time.timeZone = "Europe/Berlin";
+  time.timeZone = "Europe/Berlin";
 
-	system = {
-	  stateVersion = "18.09";
-	  autoUpgrade.enable = true;
+  system = {
+    stateVersion = "18.09";
+	autoUpgrade.enable = true;
   };
 }

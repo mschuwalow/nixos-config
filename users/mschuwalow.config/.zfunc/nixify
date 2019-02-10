@@ -1,0 +1,62 @@
+if [ ! -e nixpkgs.nix ]; then
+  cat > nixpkgs.nix << 'EOF'
+let
+  nixpkgs = builtins.fetchTarball {
+    url = "https://d3g5gsiof5omrk.cloudfront.net/nixos/18.03/nixos-18.03.132008.ad771371fb2/nixexprs.tar.xz";
+    sha256 = "0kkvbglvjc3qw3170dcy18vq7fj6q0n7liir6vfymjgwb0vdmina";
+  };
+in nixpkgs
+EOF
+fi
+
+if [ ! -e derivation.nix ]; then
+  cat > derivation.nix << 'EOF'
+{stdenv, pkgconfig, cmake, cppunit, boost, ... }:
+stdenv.mkDerivation rec {
+  name = "project-${version}";
+  version = "0.0.1";
+
+  src = ./. ;
+  nativeBuildInputs = [ ];
+  buildInputs = [ ];
+
+  enableParallelBuilding = true;
+  releaseName = name;
+
+  meta = with stdenv.lib; {
+    description = "";
+    homepage = "";
+    license = licenses.gpl3Plus;
+    platforms = platforms.linux;
+    maintainers = [ ];
+  };
+}
+EOF
+fi
+
+if [ ! -e overlay.nix ]; then
+  cat > overlay.nix <<'EOF'
+self: super: {
+  my-project = self.callPackage ./derivation.nix{};
+}
+EOF
+fi
+
+if [ ! -e default.nix ]; then
+  cat > default.nix <<'EOF'
+let
+  nixpkgs = import ./nixpkgs.nix;
+  pkgs = import nixpkgs {
+    config = {};
+    overlays = [
+      (import ./overlay.nix)
+    ];
+  };
+
+in pkgs.my-project
+EOF
+fi
+
+if [ ! -e ./.envrc ]; then
+  echo "use nix" > .envrc
+fi

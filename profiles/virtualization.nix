@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.config = {
-  };
-
   environment.systemPackages = with pkgs; [
     kvm
     qemu

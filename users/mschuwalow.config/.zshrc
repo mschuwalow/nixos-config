@@ -63,16 +63,10 @@ zplug load
 # Custom Functions #
 ####################
 
-# Set user functions
-FPATH="$HOME/.zfunc:$FPATH"
-
 # Autoload
-autoload -Uz cdd
-autoload -Uz tcon
-autoload -Uz cls
-autoload -Uz status-message
-autoload -Uz zmv
-autoload -Uz tmux-update
+if [[ -z "$ZFUNC_DIR" ]]; then
+  autoload -Uz $(ls $ZFUNC_DIR)
+fi
 
 ############
 # Settings #
@@ -80,7 +74,7 @@ autoload -Uz tmux-update
 
 # Fzf
 FZF_DEFAULT_OPTS='--height 80% --reverse'
-FZFZ_EXTRA_DIRS="~/Projects ~/aim"
+FZFZ_EXTRA_DIRS="$PROJECT_HOME"
 
 # Reverse search
 HISTSIZE=50000
@@ -114,15 +108,13 @@ bindkey '\eOB' history-substring-search-down
 # Set Aliases
 alias ll="exa -lhg --git"
 alias la="exa -lahg --git"
-alias conda-source="source ~/anaconda3/bin/activate"
-alias mconda-source="source ~/miniconda3/bin/activate"
-alias vc="visual-studio-code"
-alias dc"docker-compose"
+alias dc="docker-compose"
+alias lsp-py="pyls --tcp --port 8081"
 unalias gr
 
 ###########
 # Startup #
 ###########
 
-# print message on load
-status-message
+# load direnv
+eval "$(direnv hook zsh)"

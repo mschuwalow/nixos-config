@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    docker_compose
+  ];
+
   virtualisation.libvirtd.enable = true;
   virtualisation.lxc.enable = true;
   virtualisation.lxc.usernetConfig = ''
@@ -11,6 +15,4 @@
     enable = true;
   	enableOnBoot = true;
   };
-
-  virtualisation.docker.storageDriver = "overlay";
 }

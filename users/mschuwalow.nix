@@ -19,7 +19,7 @@ in
     uid = 1000;
     extraGroups = [
       "wheel" "disk" "audio" "video"
-      "networkmanager" "systemd-journal"
+      "networkmanager" "systemd-journal" "docker"
     ];
     createHome = true;
     home = "/home/mschuwalow";
@@ -69,16 +69,21 @@ in
 
         stow
         gawk
-		    httpstat
+        httpstat
         
         seafile-client
         keepassxc
 
-        python3Full
+        sublime3
         
         kubetail
         kubectl
         helm
+        oni
+
+        jq
+        cowsay
+        lolcat
       ]);
 
       #gtk = {
