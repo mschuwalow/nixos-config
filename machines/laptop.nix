@@ -10,7 +10,9 @@
 
   services.xserver.libinput.enable = true;
   services.xserver.videoDrivers = [ "intel" ];
+
   hardware.bumblebee.enable = false;
+  services.tlp.enable = true;
 
   nix = {
     maxJobs = 4;

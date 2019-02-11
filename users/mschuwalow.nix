@@ -1,10 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
 	sysPkgs = pkgs;
-	# channels = import ../modules/channels.nix;
-	# pkgs = channels.unstable;
-	secrets = import ../secrets.nix;
+	secrets = import ../secrets;
   confDir = ./mschuwalow.config;
   recFilesH = x: if lib.pathIsDirectory x
                    then (lib.concatMap (y: recFilesH (toString x + "/" + toString y)) (builtins.attrNames (builtins.readDir x)))
@@ -30,6 +28,7 @@ in
     users.mschuwalow = {
 
       programs.command-not-found.enable = true;
+      programs.home-manager.enable = true;
 
       programs.git = {
         package = pkgs.gitAndTools.gitFull;
@@ -79,7 +78,7 @@ in
         kubetail
         kubectl
         helm
-        oni
+        custom.oni
 
         jq
         cowsay
@@ -109,8 +108,9 @@ in
         ) (recFiles confDir)
       ) // {
         # sensitive files
-        ".m2/settings.xml".text = secrets.m2Settings;
-        ".m2/settings-security.xml".text = secrets.m2SettingsSecurity;
+        ".m2/settings.xml".source = secrets.m2SettingsFile;
+        ".m2/settings-security.xml".source = secrets.m2SecSettingsFile;
+        ".config/sublime-text-3/Packages/User/SyncSettings.sublime-settings".source = secrets.st3SyncSettingsFile;
       };
     };
   };

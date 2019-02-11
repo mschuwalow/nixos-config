@@ -1,4 +1,4 @@
-secrets.nix
+secrets
 configuration.nix
 hardware-configuration.nix
 .idea

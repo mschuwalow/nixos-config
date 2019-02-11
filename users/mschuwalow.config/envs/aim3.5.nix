@@ -12,8 +12,8 @@ in
   
   targetPkgs = pkgs: with pkgs; [
     # Python
-    python36
-    python36.pkgs.virtualenv
+    python35
+    python35.pkgs.virtualenv
 
     # Python manylinux1 requirements
     which

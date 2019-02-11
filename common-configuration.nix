@@ -1,8 +1,10 @@
 { config, pkgs, ... }:
 let
-  secrets = import ./secrets.nix;
+  channels = import ./channels.nix;
+  secrets = import ./secrets;
 in
 {
+
   imports = [
     # load modules
     ./modules/home-manager.nix
@@ -15,6 +17,30 @@ in
     ./users/mschuwalow.nix
   ];
 
+  nix = {
+    nixPath = [ 
+      "nixpkgs=${channels.stable}"
+      "nixos-config=/etc/nixos/configuration.nix"
+    ];
+    autoOptimiseStore = true;
+    useSandbox = "relaxed";
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: {
+      unstable = import (channels.unstable) {
+       config = config.nixpkgs.config;
+      };
+      custom = import ./pkgs/default.nix { inherit pkgs; };
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     wget
     git
@@ -25,6 +51,7 @@ in
     tmux
     direnv
     gptfdisk
+    btrfs-progs
   ];
 
   boot = {
@@ -62,8 +89,9 @@ in
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
       allowPing = true;
+      allowedTCPPorts = [ 445 139 ];
+      allowedUDPPorts = [ 137 138 ];
     };
   };
 
@@ -84,37 +112,12 @@ in
   programs = {
     ssh.startAgent = true;
     zsh.enable = true;
-    tmux = {
-        enable = true;
-        baseIndex = 1;
-        extraTmuxConf = ''
-          run-shell ${pkgs.tmuxPlugins.fpp}/share/tmux-plugins/fpp/fpp.tmux
-          run-shell ${pkgs.tmuxPlugins.sensible}/share/tmux-plugins/sensible/sensible.tmux
-          ${builtins.readFile ./configs/tmux.conf}
-        '';
-      };
-  };
-
-  nix = {
-    autoOptimiseStore = true;
-    useSandbox = "relaxed";
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-  };
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs:
-      import ./pkgs/default.nix { inherit pkgs;  };
   };
 
   time.timeZone = "Europe/Berlin";
 
   system = {
     stateVersion = "18.09";
-	autoUpgrade.enable = true;
+    autoUpgrade.enable = true;
   };
 }

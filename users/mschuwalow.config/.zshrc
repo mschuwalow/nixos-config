@@ -64,7 +64,7 @@ zplug load
 ####################
 
 # Autoload
-if [[ -z "$ZFUNC_DIR" ]]; then
+if [[ ! -z "$ZFUNC_DIR" ]]; then
   autoload -Uz $(ls $ZFUNC_DIR)
 fi
 

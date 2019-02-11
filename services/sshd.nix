@@ -1,13 +1,11 @@
 { config, pkgs, ... }:
 let
-  sshDir = ../configs/ssh;
+  secrets = import ../secrets;
 in
 {
   services.openssh = {
   	enable = true;
   	passwordAuthentication = false;
-  	authorizedKeysFiles = [
-  	 "${sshDir}/schuwalow_rsa.pub"
-  	];
+  	authorizedKeysFiles = secrets.sshAuthorizedKeyFiles;
   };
 }
