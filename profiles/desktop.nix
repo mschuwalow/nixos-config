@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
   	gnome3.dconf
     gnome3.gnome-disk-utility
+    rocketchat
   ];
 
   services.xserver = {

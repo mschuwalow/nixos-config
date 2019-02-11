@@ -24,6 +24,7 @@ in
     fzf
     tmux
     direnv
+    gptfdisk
   ];
 
   boot = {
