@@ -10,7 +10,7 @@ export TPM_HOME=$HOME/.tmux/plugins/tpm
 export ZFUNC_DIR=$HOME/.zfunc 
 export FPATH=$ZFUNC_DIR:$FPATH
 
-export MAVEN_OPTS= -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+export MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
 # Conditional PATH additions
 for path_candidate in \
