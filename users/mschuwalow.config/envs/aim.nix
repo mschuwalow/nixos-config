@@ -40,6 +40,7 @@ in
     jre
     jdk
     maven
+    docker
     
     idea.idea-ultimate
     git
