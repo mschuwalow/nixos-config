@@ -14,6 +14,8 @@ in
     # Python
     python36
     python36.pkgs.virtualenv
+    python35
+    python35.pkgs.virtualenv
 
     # Python manylinux1 requirements
     which
@@ -32,6 +34,7 @@ in
     liblapack
     blas
     swig
+    thrift
 
     # JVM
     jre

@@ -11,7 +11,7 @@ in
     openvpn.servers = {
       workVPN = {
         config = "config ${secrets.workVPNFile}";
-        autoStart = true;
+        autoStart = false;
         updateResolvConf = true;
       };
     };
