@@ -6,6 +6,7 @@
     gnome3.gnome-disk-utility
     custom.rocketchat
     spotify
+    skypeforlinux
   ];
 
   services.xserver = {
