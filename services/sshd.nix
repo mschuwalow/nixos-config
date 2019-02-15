@@ -4,8 +4,8 @@ let
 in
 {
   services.openssh = {
-  	enable = true;
-  	passwordAuthentication = false;
-  	authorizedKeysFiles = secrets.sshAuthorizedKeyFiles;
+    enable = true;
+    passwordAuthentication = false;
+    authorizedKeysFiles = secrets.sshAuthorizedKeyFiles;
   };
 }

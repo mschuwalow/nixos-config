@@ -1,12 +1,12 @@
 { pkgs, lib, ... }:
 
 let
-	sysPkgs = pkgs;
-	secrets = import ../secrets;
+  sysPkgs = pkgs;
+  secrets = import ../secrets;
   confDir = ./mschuwalow.config;
   recFilesH = x: if lib.pathIsDirectory x
-                   then (lib.concatMap (y: recFilesH (toString x + "/" + toString y)) (builtins.attrNames (builtins.readDir x)))
-                   else [x];
+                  then (lib.concatMap (y: recFilesH (toString x + "/" + toString y)) (builtins.attrNames (builtins.readDir x)))
+                  else [x];
   recFiles = x: if lib.pathIsDirectory x
                   then (map(y: lib.removePrefix (toString x + "/") y) (recFilesH x))
                   else [x];
@@ -72,13 +72,12 @@ in
         
         seafile-client
         keepassxc
-
-        sublime3
         
         kubetail
         kubectl
         helm
         custom.oni
+        awscli
 
         jq
         cowsay

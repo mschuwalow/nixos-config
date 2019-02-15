@@ -3,54 +3,58 @@
   gnome2, libnotify, libxcb, nspr, nss, systemd, xorg 
 }:
 
-let version = "2.10.5";
-    rpath = stdenv.lib.makeLibraryPath  [ 
-      alsaLib
-      atk
-      cairo
-      cups
-      curl
-      dbus
-      expat
-      fontconfig
-      freetype
-      glib
-      gnome2.GConf
-      gnome2.gdk_pixbuf
-      gnome2.gtk
-      gnome2.pango
-      libnotify
-      libxcb
-      nspr
-      nss
-      stdenv.cc.cc
-      systemd
-      
-      xorg.libxkbfile
-      xorg.libX11
-      xorg.libXcomposite
-      xorg.libXcursor
-      xorg.libXdamage
-      xorg.libXext
-      xorg.libXfixes
-      xorg.libXi
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libXtst
-      xorg.libXScrnSaver ] + ":${stdenv.cc.cc.lib}/lib64";
+let 
+  version = "2.10.5";
+  rpath = stdenv.lib.makeLibraryPath  [ 
+    alsaLib
+    atk
+    cairo
+    cups
+    curl
+    dbus
+    expat
+    fontconfig
+    freetype
+    glib
+    gnome2.GConf
+    gnome2.gdk_pixbuf
+    gnome2.gtk
+    gnome2.pango
+    libnotify
+    libxcb
+    nspr
+    nss
+    stdenv.cc.cc
+    systemd
+    
+    xorg.libxkbfile
+    xorg.libX11
+    xorg.libXcomposite
+    xorg.libXcursor
+    xorg.libXdamage
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXi
+    xorg.libXrandr
+    xorg.libXrender
+    xorg.libXtst
+    xorg.libXScrnSaver ] + ":${stdenv.cc.cc.lib}/lib64";
 
-    src = fetchurl {
-                     url = "https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/${version}/rocketchat_${version}_amd64.deb";
-                     sha256 = "907de38c44a1663223bd43cc63b2a1347d9e08c72e248c736f9c88b995ddf583";
-                   };
+  src = fetchurl {
+          url = "https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/${version}/rocketchat_${version}_amd64.deb";
+          sha256 = "907de38c44a1663223bd43cc63b2a1347d9e08c72e248c736f9c88b995ddf583";
+        };
 
-in stdenv.mkDerivation {
-   name = "rocketchat-${version}";
-   inherit src;
-   buildInputs = [ dpkg ];
-   unpackPhase = true;
+in
+stdenv.mkDerivation {
+  name = "rocketchat-${version}";
 
-   buildCommand = ''
+  inherit src;
+
+  buildInputs = [ dpkg ];
+  unpackPhase = true;
+
+  buildCommand = ''
     mkdir -p $out $out/bin $out/lib
     dpkg -x $src $out
     mv $out/usr/share $out/share
@@ -69,8 +73,7 @@ in stdenv.mkDerivation {
     # Fix electron-updater warnings, must take exact same amount of
     # characters, otherwise the aspar archive breaks
     sed -i 's/    checkForUpdates();/\/\/  checkForUpdates();/' \
-        $out/lib/rocketchat/resources/app.asar
-    
+        $out/lib/rocketchat/resources/app.asar 
   '';
    
   meta = with stdenv.lib; {
@@ -78,7 +81,7 @@ in stdenv.mkDerivation {
     homepage = https://rocket.chat;
     license = licenses.mit;
     platforms = [ "x86_64-linux" ];
-    maintainers = [ maintainers.hlolli ];
+    maintainers = [ ];
   };
 
 }

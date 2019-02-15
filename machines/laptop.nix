@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 
 {
-	imports = [
-		../hardware-configuration.nix
-		../common-configuration.nix
-	];
+  imports = [
+    ../hardware-configuration.nix
+    ../common-configuration.nix
+  ];
 
   networking.hostName = "mschuwalow-laptop";
 

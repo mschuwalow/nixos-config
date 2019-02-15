@@ -13,6 +13,6 @@
 
   virtualisation.docker = {
     enable = true;
-  	enableOnBoot = true;
+    enableOnBoot = true;
   };
 }

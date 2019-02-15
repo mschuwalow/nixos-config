@@ -14,8 +14,11 @@ in
     # Python
     python36
     python36.pkgs.virtualenv
+    python36.pkgs.tkinter
+
     python35
     python35.pkgs.virtualenv
+    python35.pkgs.tkinter
 
     # Python manylinux1 requirements
     which

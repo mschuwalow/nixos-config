@@ -52,15 +52,17 @@ in
     direnv
     gptfdisk
     btrfs-progs
+    zip
+    unzip
   ];
 
   boot = {
     cleanTmpDir = true;
     loader = {
       systemd-boot = {
-          enable = true;
-          consoleMode = "max";
-       };
+        enable = true;
+        consoleMode = "max";
+      };
       efi.canTouchEfiVariables = true;
     };
     kernel.sysctl = {
@@ -83,8 +85,8 @@ in
     networkmanager.enable = true;
 
     nameservers = [
-        "8.8.8.8"
-        "8.8.4.4"
+      "8.8.8.8"
+      "8.8.4.4"
     ];
 
     firewall = {
