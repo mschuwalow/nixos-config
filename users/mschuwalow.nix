@@ -76,6 +76,7 @@ in
         kubetail
         kubectl
         helm
+        feh
         custom.oni
         awscli
 

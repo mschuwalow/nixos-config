@@ -1,10 +1,7 @@
-# autostart
-exec --no-startup-id prime-indicator
-
 # keybindings
-bindsym XF86MonBrightnessDown exec $HOME/scripts/brightness.sh -U 5
-bindsym XF86MonBrightnessUp exec $HOME/scripts/brightness.sh -A 5
-bindsym XF86Sleep exec --no-startup-id $HOME/.config/i3/i3exit.sh lock
+# bindsym XF86MonBrightnessDown exec $HOME/scripts/brightness.sh -U 5
+# bindsym XF86MonBrightnessUp exec $HOME/scripts/brightness.sh -A 5
+# bindsym XF86Sleep exec --no-startup-id $HOME/.config/i3/i3exit.sh lock
 
 bar {
     status_command i3blocks -c ~/.config/i3blocks/laptop.config

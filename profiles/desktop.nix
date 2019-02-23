@@ -9,7 +9,17 @@
     skypeforlinux
 
     mupdf
-    okular
+    rofi
+
+    i3blocks-gaps
+    i3lock
+    compton    
+    wirelesstools
+    lm_sensors
+    light
+    acpi
+    python3
+    python3.pkgs.dbus-python
   ];
 
   services.xserver = {
@@ -19,13 +29,26 @@
 
     enableCtrlAltBackspace = true;
 
-    displayManager.sddm = {
-      enable = true;
+    displayManager.slim.defaultUser = "mschuwalow";
+    desktopManager = {
+      default = "none";
+      xterm.enable = false;
+      xfce = {
+      	enable = true;
+      	noDesktop = true;
+      	enableXfwm = false;
+      };
     };
-    desktopManager.plasma5.enable = true;
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+    };
   };
 
+  programs.dconf.enable = true;
+
   services.flatpak.enable = true;
+  services.dbus.packages = [ pkgs.gnome3.dconf ];
 
   hardware.opengl = {
     enable = true;
@@ -36,6 +59,8 @@
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
+      font-awesome_5
+      
       fantasque-sans-mono
       source-code-pro
       fira-code

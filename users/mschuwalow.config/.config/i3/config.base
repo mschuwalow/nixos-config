@@ -9,7 +9,7 @@
 set $mod Mod4
 
 # Your preferred terminal emulator
-set $term gnome-terminal
+set $term alacritty
 
 font pango:Fantasque Sans Mono 0
 set $bar-font pango:Fantasque Sans Mono 10
@@ -242,16 +242,6 @@ floating_modifier $mod
 #
 # Autostart
 #
-
-    # for interactive authorization
-    exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-
-    # keep pretty ubuntu themes
-    exec --no-startup-id unity-settings-daemon
-
-    # for transparency
-    exec --no-startup-id compton --config ~/.config/compton.conf -b
-
     exec --no-startup-id seafile-applet
     exec --no-startup-id nm-applet
     exec --no-startup-id jetbrains-toolbox --minimize

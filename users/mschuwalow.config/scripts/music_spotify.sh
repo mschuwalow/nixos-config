@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 msg=$(sp metadata | grep --color=never -E '^albumArtist|^title' | sed 's/[^|]*|//' | awk -vORS=' >> ' 'y {print s} {s=$0;y=1} END {ORS=""; print s}')
 

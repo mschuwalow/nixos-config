@@ -54,6 +54,7 @@ in
     btrfs-progs
     zip
     unzip
+    htop
   ];
 
   boot = {

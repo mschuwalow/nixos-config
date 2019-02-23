@@ -41,9 +41,9 @@ let
     xorg.libXScrnSaver ] + ":${stdenv.cc.cc.lib}/lib64";
 
   src = fetchurl {
-          url = "https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/${version}/rocketchat_${version}_amd64.deb";
-          sha256 = "907de38c44a1663223bd43cc63b2a1347d9e08c72e248c736f9c88b995ddf583";
-        };
+    url = "https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/${version}/rocketchat_${version}_amd64.deb";
+    sha256 = "907de38c44a1663223bd43cc63b2a1347d9e08c72e248c736f9c88b995ddf583";
+  };
 
 in
 stdenv.mkDerivation {

@@ -42,6 +42,7 @@ in
     # JVM
     jre
     jdk
+    ammonite
     maven
     docker
     
