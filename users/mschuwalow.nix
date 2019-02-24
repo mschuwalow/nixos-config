@@ -64,20 +64,14 @@ in
         zim # desktop wiki
         whois
         nix-prefetch-git
-        binutils-unwrapped
 
         stow
         gawk
         httpstat
         
-        seafile-client
-        keepassxc
-        
         kubetail
         kubectl
         helm
-        feh
-        custom.oni
         awscli
 
         jq
@@ -85,22 +79,22 @@ in
         lolcat
       ]);
 
-      #gtk = {
-      #  enable = true;
-      #  theme = {
-      #    package = pkgs.adapta-gtk-theme;
-      #    name = "Adapta-Eta";
-      #  };
-      #  iconTheme = {
-      #    package = pkgs.paper-icon-theme;
-      #    name = "Paper";
-      #  };
-      #};
+      gtk = {
+        enable = true;
+        theme = {
+          package = pkgs.adapta-gtk-theme;
+          name = "Adapta-Eta";
+        };
+        iconTheme = {
+          package = pkgs.paper-icon-theme;
+          name = "Paper";
+        };
+      };
   
-      #qt = {
-      #  enable = true;
-      #  useGtkTheme = true;
-      #};
+      qt = {
+        enable = true;
+        useGtkTheme = true;
+      };
 
       home.file = lib.listToAttrs (
         map (
