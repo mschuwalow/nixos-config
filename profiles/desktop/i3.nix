@@ -388,6 +388,7 @@ for_window [instance="sun-awt-X11-XWindowPeer"] border pixel 0
 
 exec --no-startup-id seafile-applet
 exec --no-startup-id nm-applet
+exec --no-startup-id keepassxc
 
 # set background
 exec_always --no-startup-id sleep 5 & feh --bg-fill --no-xinerama ${wallpaper}
