@@ -44,8 +44,13 @@ in
 
       enableCtrlAltBackspace = true;
 
-      displayManager.gdm = {
-        wayland = false;
+      displayManager.lightdm = {
+        greeters.gtk = {
+          theme.name = "Adapta-Eta";
+          theme.package = pkgs.adapta-gtk-theme; 
+          iconTheme.name = "Paper";
+          iconTheme.package = pkgs.paper-icon-theme; 
+        };
         enable = true;
       };
       desktopManager = {
