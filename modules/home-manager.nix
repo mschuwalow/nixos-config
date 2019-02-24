@@ -7,7 +7,7 @@ in
   imports = [
     (import (fetchTarball {
       url = "https://github.com/rycee/home-manager/archive/${rev}.tar.gz";
-      sha256 = "10knp7bl6ql14szkgmc1lfb649i22ab21kkq8pc0gjrdsvpgnlsj";
+      sha256 = "0y4jj7nqfqa68shqx5cmzkmj2i65mbw9rmqq1i4r95sgrhc189iw";
     }) {}).nixos
   ];
 }
