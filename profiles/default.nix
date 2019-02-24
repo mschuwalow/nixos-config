@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   imports = [
     ./audio.nix
-    ./desktop.nix
+    ./desktop
+    ./games.nix
     ./development.nix
     ./docker.nix
     ./tmux.nix

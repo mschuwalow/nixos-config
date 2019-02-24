@@ -37,7 +37,7 @@ in
       unstable = import (channels.unstable) {
        config = config.nixpkgs.config;
       };
-      custom = import ./pkgs/default.nix { inherit pkgs; };
+      custom = pkgs.callPackage ./pkgs/default.nix { };
     };
   };
 
