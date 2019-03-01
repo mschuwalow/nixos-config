@@ -1,7 +1,6 @@
 { stdenv, fetchurl, dpkg, alsaLib, atk, cairo, 
   cups, curl, dbus, expat, fontconfig, freetype, glib,
-  gnome2, libnotify, libxcb, nspr, nss, systemd, xorg 
-}:
+  gnome2, libnotify, libxcb, nspr, nss, systemd, xorg, ... }:
 
 let 
   version = "2.10.5";

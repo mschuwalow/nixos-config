@@ -14,6 +14,11 @@ in
         autoStart = false;
         updateResolvConf = true;
       };
+      pureVPN = {
+        config = "config ${secrets.pureVPNFile}";
+        autoStart = false;
+        updateResolvConf = false;
+      };
     };
   };
 }

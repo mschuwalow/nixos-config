@@ -53,10 +53,8 @@ in
       home.packages = with pkgs; ([
         vlc
         shutter # Screenshots
-        zathura # document viewer
-        bc
+        bc # math
         ncdu # Disk space usage analyzer
-        ripgrep # rg, fast grepper
         rtv # Reddit
         tdesktop # Telegram
         chromium
@@ -65,7 +63,6 @@ in
         whois
         nix-prefetch-git
 
-        stow
         gawk
         httpstat
         

@@ -10,7 +10,7 @@ in
   environment.systemPackages = with pkgs; [
     gnome3.dconf
     gnome3.gnome-disk-utility
-    dolphin
+    gnome3.nautilus
 
     alacritty
 
@@ -21,6 +21,7 @@ in
     seafile-client
     keepassxc
 
+    powertop
     screenkey
     mupdf
   ];

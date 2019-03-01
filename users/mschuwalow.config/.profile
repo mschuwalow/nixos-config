@@ -1,11 +1,15 @@
 export EDITOR=micro
 export VISUAL=micro
+export PAGER=more
 export PROJECT_HOME=$HOME/Projects
 export MICRO_TRUECOLOR=1
 export REVIEW_BASE=master
 
 export ZPLUG_HOME=$HOME/.zplug
 export TPM_HOME=$HOME/.tmux/plugins/tpm
+
+export NNN_FALLBACK_OPENER=xdg-open
+export NNN_DE_FILE_MANAGER=nautilus
 
 export ZFUNC_DIR=$HOME/.zfunc 
 export FPATH=$ZFUNC_DIR:$FPATH

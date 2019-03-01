@@ -37,7 +37,7 @@ in
       unstable = import (channels.unstable) {
        config = config.nixpkgs.config;
       };
-      custom = pkgs.callPackage ./pkgs/default.nix { };
+      custom = import ./pkgs/default.nix { pkgs = pkgs; };
     };
   };
 
@@ -48,6 +48,7 @@ in
     micro
     exa
     fzf
+    nnn
     tmux
     direnv
     gptfdisk
@@ -55,6 +56,8 @@ in
     zip
     unzip
     htop
+    moreutils
+    tree
   ];
 
   boot = {
