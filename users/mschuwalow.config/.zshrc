@@ -68,6 +68,8 @@ if [[ ! -z "$ZFUNC_DIR" ]]; then
   autoload -Uz $(ls $ZFUNC_DIR)
 fi
 
+autoload zmv
+
 ############
 # Settings #
 ############

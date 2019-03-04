@@ -1,13 +1,13 @@
 { config, lib, pkgs, ... }:
 
 let
-  rev = "e27cd96494c91534797d5620698168ea9d7a49b6";
+  rev = "465d08d99f5b72b38cecb7ca1865b7255de3ee86";
 in
 {
   imports = [
     (import (fetchTarball {
       url = "https://github.com/rycee/home-manager/archive/${rev}.tar.gz";
-      sha256 = "0y4jj7nqfqa68shqx5cmzkmj2i65mbw9rmqq1i4r95sgrhc189iw";
+      sha256 = "1dkvz0sx8kjvk1lap50d5vfgm2wprh1cmhcrx3bn28r3skpj4rbj";
     }) {}).nixos
   ];
 }

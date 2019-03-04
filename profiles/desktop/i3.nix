@@ -391,7 +391,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id keepassxc
 
 # set background
-exec_always --no-startup-id sleep 5 & feh --bg-fill --no-xinerama ${wallpaper}
+exec_always --no-startup-id sleep 10 & feh --bg-fill --no-xinerama ${wallpaper}
 
 bar {
   status_command py3status -c ${i3status}
