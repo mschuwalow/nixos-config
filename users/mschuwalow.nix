@@ -86,6 +86,7 @@ in
           package = pkgs.paper-icon-theme;
           name = "Paper";
         };
+        gtk2.extraConfig = "gtk-icon-sizes = \"panel-menu=24,24:panel=20,20:gtk-button=18,18:gtk-large-toolbar=24,24\"";
       };
   
       qt = {

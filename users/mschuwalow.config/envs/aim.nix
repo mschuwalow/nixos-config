@@ -47,6 +47,8 @@ in
     docker
     
     idea.idea-ultimate
+    adapta-gtk-theme
+    paper-icon-theme
     git
   ];
 

@@ -12,8 +12,8 @@
   services.xserver.videoDrivers = [ "intel" ];
 
   hardware.bumblebee.enable = false;
-  services.tlp.enable = false;
-  powerManagement.powertop.enable = true;
+  services.tlp.enable = true;
+  # powerManagement.powertop.enable = true;
     
   nix = {
     maxJobs = 4;
