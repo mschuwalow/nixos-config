@@ -10,5 +10,6 @@
     ./docker.nix
     ./tmux.nix
     ./vpn.nix
+    ./mounts.nix
   ];
 }
