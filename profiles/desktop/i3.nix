@@ -21,7 +21,9 @@ let
 
   case "$1" in
     lock)
-      ${i3lock} lock
+      # when not using lightdm
+      # ${i3lock} lock
+      dm-tool lock
       ;;
     logout)
       i3-msg exit

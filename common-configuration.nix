@@ -53,6 +53,7 @@ in
     direnv
     gptfdisk
     btrfs-progs
+    ripgrep
     zip
     unzip
     htop

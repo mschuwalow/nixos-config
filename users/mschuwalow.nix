@@ -94,6 +94,14 @@ in
         useGtkTheme = true;
       };
 
+      xsession = {
+        pointerCursor = {
+          package = pkgs.vanilla-dmz;
+          name = "Vanilla-DMZ";
+          size = 24;
+        };
+      };
+
       home.file = lib.listToAttrs (
         map (
           name: (lib.nameValuePair "${name}" ({ source = "${confDir}/${name}"; }))

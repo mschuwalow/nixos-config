@@ -11,7 +11,8 @@
     python3Full
     python3Packages.pip
 
-    ripgrep
+	nodejs-10_x
+
     unstable.postman
   ];
 }
