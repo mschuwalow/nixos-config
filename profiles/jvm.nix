@@ -18,6 +18,7 @@
     sbt
     jre
     jdk
+    jd-gui
   ];
 
 }

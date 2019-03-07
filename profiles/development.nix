@@ -12,7 +12,6 @@
     python3Packages.pip
 
 	nodejs-10_x
-
     unstable.postman
   ];
 }
