@@ -54,15 +54,15 @@ in
         };
         enable = true;
       };
-      desktopManager = {
-        default = "none";
-        xterm.enable = false;
-        xfce = {
-          enable = true;
-          noDesktop = true;
-          enableXfwm = false;
-        };
-      };
+      #desktopManager = {
+      #  default = "none";
+      #  xterm.enable = false;
+      #  xfce = {
+      #    enable = true;
+      #    noDesktop = true;
+      #    enableXfwm = false;
+      #  };
+      #};
       windowManager.i3 = {
         enable = true;
         configFile = i3-config-file;
