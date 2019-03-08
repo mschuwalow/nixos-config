@@ -111,6 +111,7 @@ in
         ".m2/settings.xml".source = secrets.m2SettingsFile;
         ".m2/settings-security.xml".source = secrets.m2SecSettingsFile;
         ".config/sublime-text-3/Packages/User/SyncSettings.sublime-settings".source = secrets.st3SyncSettingsFile;
+        ".kube/config".source = secrets.kubeconfigFile;
       };
     };
   };
