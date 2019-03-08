@@ -41,6 +41,7 @@ in
           heatmap = "!git-heatmap -b $REVIEW_BASE";
           review = "!git difftool $REVIEW_BASE --dir-diff";
           reviewone = "!git difftool $REVIEW_BASE --";
+          sminit = "!git submodule update --init --recursive --progress";
         };
         extraConfig = {
           core = {

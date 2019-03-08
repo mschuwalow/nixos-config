@@ -24,6 +24,7 @@ in
     powertop
     screenkey
     mupdf
+    discord
   ];
 
   services = {
