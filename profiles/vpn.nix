@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   secrets = import ../secrets;
 in
@@ -13,6 +13,11 @@ in
         config = "config ${secrets.workVPNFile}";
         autoStart = false;
         updateResolvConf = true;
+      };
+      pureVPN = {
+        config = "config ${secrets.pureVPNFile}";
+        autoStart = false;
+        updateResolvConf = false;
       };
     };
   };

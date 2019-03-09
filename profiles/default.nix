@@ -1,12 +1,15 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   imports = [
     ./audio.nix
-    ./desktop.nix
+    ./desktop
+    ./games.nix
     ./development.nix
+    ./jvm.nix
     ./docker.nix
     ./tmux.nix
     ./vpn.nix
+    ./mounts.nix
   ];
 }

@@ -1,12 +1,17 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
     zeal
     vscode
+    meld    
     sublime3
     idea.idea-ultimate
-    meld
+
     python3Full
+    python3Packages.pip
+
+	nodejs-10_x
+    unstable.postman
   ];
 }

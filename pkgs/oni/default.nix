@@ -1,5 +1,5 @@
 { stdenv, runCommand, electron, callPackage, bash, python, jq,
-  nodejs-8_x, node? nodejs-8_x, neovim, ripgrep, xorg, ...}:
+  nodejs-8_x, node? nodejs-8_x, neovim, ripgrep, xorg, ... }:
 
 let 
   yarn2nix = callPackage ( builtins.fetchTarball { 

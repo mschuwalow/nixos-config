@@ -13,7 +13,8 @@
 
   hardware.bumblebee.enable = false;
   services.tlp.enable = true;
-
+  # powerManagement.powertop.enable = true;
+    
   nix = {
     maxJobs = 4;
     buildCores = 8;

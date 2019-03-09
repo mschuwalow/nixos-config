@@ -41,6 +41,7 @@ in
           heatmap = "!git-heatmap -b $REVIEW_BASE";
           review = "!git difftool $REVIEW_BASE --dir-diff";
           reviewone = "!git difftool $REVIEW_BASE --";
+          sminit = "!git submodule update --init --recursive --progress";
         };
         extraConfig = {
           core = {
@@ -53,10 +54,8 @@ in
       home.packages = with pkgs; ([
         vlc
         shutter # Screenshots
-        zathura # document viewer
-        bc
+        bc # math
         ncdu # Disk space usage analyzer
-        ripgrep # rg, fast grepper
         rtv # Reddit
         tdesktop # Telegram
         chromium
@@ -64,19 +63,13 @@ in
         zim # desktop wiki
         whois
         nix-prefetch-git
-        binutils-unwrapped
 
-        stow
         gawk
         httpstat
-        
-        seafile-client
-        keepassxc
         
         kubetail
         kubectl
         helm
-        custom.oni
         awscli
 
         jq
@@ -84,22 +77,31 @@ in
         lolcat
       ]);
 
-      #gtk = {
-      #  enable = true;
-      #  theme = {
-      #    package = pkgs.adapta-gtk-theme;
-      #    name = "Adapta-Eta";
-      #  };
-      #  iconTheme = {
-      #    package = pkgs.paper-icon-theme;
-      #    name = "Paper";
-      #  };
-      #};
+      gtk = {
+        enable = true;
+        theme = {
+          package = pkgs.adapta-gtk-theme;
+          name = "Adapta-Eta";
+        };
+        iconTheme = {
+          package = pkgs.paper-icon-theme;
+          name = "Paper";
+        };
+        gtk2.extraConfig = "gtk-icon-sizes = \"panel-menu=24,24:panel=20,20:gtk-button=18,18:gtk-large-toolbar=24,24\"";
+      };
   
-      #qt = {
-      #  enable = true;
-      #  useGtkTheme = true;
-      #};
+      qt = {
+        enable = true;
+        useGtkTheme = true;
+      };
+
+      xsession = {
+        pointerCursor = {
+          package = pkgs.vanilla-dmz;
+          name = "Vanilla-DMZ";
+          size = 24;
+        };
+      };
 
       home.file = lib.listToAttrs (
         map (
@@ -110,6 +112,7 @@ in
         ".m2/settings.xml".source = secrets.m2SettingsFile;
         ".m2/settings-security.xml".source = secrets.m2SecSettingsFile;
         ".config/sublime-text-3/Packages/User/SyncSettings.sublime-settings".source = secrets.st3SyncSettingsFile;
+        ".kube/config".source = secrets.kubeconfigFile;
       };
     };
   };

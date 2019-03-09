@@ -68,6 +68,8 @@ if [[ ! -z "$ZFUNC_DIR" ]]; then
   autoload -Uz $(ls $ZFUNC_DIR)
 fi
 
+autoload zmv
+
 ############
 # Settings #
 ############
@@ -110,6 +112,7 @@ alias ll="exa -lhg --git"
 alias la="exa -lahg --git"
 alias dc="docker-compose"
 alias lsp-py="pyls --tcp --port 8081"
+alias se="sudo -E"
 unalias gr
 
 ###########
