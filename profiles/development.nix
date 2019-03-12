@@ -1,7 +1,9 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [    
+  environment.systemPackages = with pkgs; [
+    custom.niv
+    
     zeal
     vscode
     meld    
