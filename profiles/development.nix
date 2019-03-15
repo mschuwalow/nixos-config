@@ -3,7 +3,8 @@
 {
   environment.systemPackages = with pkgs; [
     custom.niv
-    
+
+    go
     zeal
     vscode
     meld    

@@ -10,6 +10,7 @@ in
   environment.systemPackages = with pkgs; [
     gnome3.dconf
     gnome3.gnome-disk-utility
+    gnome3.gnome-system-monitor
     gnome3.nautilus
 
     alacritty
