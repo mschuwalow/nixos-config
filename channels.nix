@@ -3,6 +3,10 @@ fetchChannel = { rev, sha256 }: fetchTarball {
   inherit sha256;
   url = "https://github.com/NixOS/nixpkgs-channels/archive/${rev}.tar.gz";
 };
+fetchPkgs = { rev, sha256 }: fetchTarball {
+  inherit sha256;
+  url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
+};
 in
 {
   stable = fetchChannel {
@@ -10,8 +14,8 @@ in
     sha256 = "1yjn56jsczih4chjcll63a20v3nwv1jhl2rf6rk8d8cwvb10g0mk";
   };
 
-  unstable = fetchChannel {
-    rev = "1233c8d9e9bc463899ed6a8cf0232e6bf36475ee";
-    sha256 = "0gs8vqw7kc2f35l8wdg7ass06s1lynf7qdx1a10lrll8vv3gl5am";
+  unstable = fetchPkgs {
+    rev = "f7156588b28ea77c08a07a2d81298ebfb493330e";
+    sha256 = "0k2h1vv6izrnwqx838q4833d3r45154nif4828f2hf2jvlx8ah6r";
   };
 }

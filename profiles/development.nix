@@ -7,7 +7,7 @@
     go
     zeal
     vscode
-    meld    
+    unstable.meld    
     sublime3
     idea.idea-ultimate
 

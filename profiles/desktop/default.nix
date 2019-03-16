@@ -16,6 +16,7 @@ in
     alacritty
 
     custom.rocketchat
+    custom.discord
     spotify
     skypeforlinux
 
@@ -25,7 +26,6 @@ in
     powertop
     screenkey
     mupdf
-    discord
   ];
 
   services = {
@@ -77,7 +77,7 @@ in
           i3status
           i3lock
           (python3Packages.py3status.overrideAttrs (oldAttrs: {
-            propagatedBuildInputs = [ python3Packages.pytz python3Packages.tzlocal python3Packages.dbus-python ];
+            propagatedBuildInputs = [ python3Packages.pytz python3Packages.tzlocal python3Packages.dbus-python file ];
           }))
         ];
       };

@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 let
-  channels = import ./channels.nix;
   secrets = import ./secrets;
+  channels = import ./channels.nix;
+  unstablePkgs = import (channels.unstable) {
+    config = config.nixpkgs.config;
+  };
+  customPkgs = import ./pkgs/default.nix { pkgs = unstablePkgs; };
 in
 {
 
@@ -34,10 +38,8 @@ in
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = pkgs: {
-      unstable = import (channels.unstable) {
-       config = config.nixpkgs.config;
-      };
-      custom = import ./pkgs/default.nix { pkgs = pkgs; };
+      unstable = unstablePkgs;
+      custom = customPkgs;
     };
   };
 
