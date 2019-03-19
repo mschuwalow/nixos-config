@@ -15,6 +15,7 @@ export ZFUNC_DIR=$HOME/.zfunc
 export FPATH=$ZFUNC_DIR:$FPATH
 
 export MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -Xmx2G" 
 
 # Conditional PATH additions
 for path_candidate in \
