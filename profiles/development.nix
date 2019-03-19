@@ -15,5 +15,6 @@
     
     nodejs-10_x
     unstable.postman
+    sshfs
   ];
 }

@@ -16,6 +16,7 @@ export FPATH=$ZFUNC_DIR:$FPATH
 
 export MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -Xmx2G" 
+export _JAVA_OPTIONS="-Dsun.java2d.uiScale.enabled=false -Dprism.allowhidpi=false -Dsun.java2d.uiScale=1.0"
 
 # Conditional PATH additions
 for path_candidate in \
