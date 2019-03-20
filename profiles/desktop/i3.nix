@@ -6,9 +6,30 @@ let
 
   i3status = import ./i3status.nix { inherit pkgs; };
 
+  i3next = pkgs.writeScript "i3next.sh"
+  ''
+  #!${pkgs.bash}
+
+  case "$1" in
+    new)
+      i3-msg workspace $(($(i3-msg -t get_workspaces | tr , '\n' | grep '"num":' | cut -d : -f 2 | sort -rn | head -1) + 1))
+      ;;
+    move)
+      workspace=$(($(i3-msg -t get_workspaces | tr , '\n' | grep '"num":' | cut -d : -f 2 | sort -rn | head -1) + 1))
+      i3-msg move container to workspace $workspace
+      i3-msg workspace $workspace
+      ;;
+    *)
+      echo "Usage: $0 [new|move]"
+      exit 2
+  esac
+
+  exit 0
+  '';
+
   i3lock = pkgs.writeScript "i3lock.sh"
   ''
-  #!/usr/bin/env bash
+  #!${pkgs.bash}
   set -eu
 
   [[ -z "$(pgrep i3lock)" ]] || exit
@@ -17,7 +38,7 @@ let
 
   i3exit = pkgs.writeScript "i3exit.sh"
   ''
-  #!/usr/bin/env bash
+  #!${pkgs.bash}
 
   case "$1" in
     lock)
@@ -243,11 +264,9 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
-# Note: workspaces can have any name you want, not just numbers.
-# We just use 1-10 as the default.
 
-bindsym $mod+n exec --no-startup-id $HOME/.config/i3/i3new.sh new
-bindsym $mod+Shift+n exec --no-startup-id $HOME/.config/i3/i3new.sh move
+bindsym $mod+n exec --no-startup-id ${i3new} new
+bindsym $mod+Shift+n exec --no-startup-id ${i3new} move
   
 #
 # Layout stuff:

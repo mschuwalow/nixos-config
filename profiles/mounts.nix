@@ -25,7 +25,7 @@ in
       };
     }
     { what = "//192.168.68.6/aim/Kundenprojekte/AllgemeinesMavenRepo/aim-fs-maven-repo";
-      where = "/media/fs/aim-fs-maven-repo";
+      where = "/media/fs/aim_fs_maven_repo";
       type = "cifs";
       mountConfig = {
         TimeoutSec = "1";
@@ -33,7 +33,7 @@ in
       };
     }
     { what = "//192.168.68.6/ML_Projects/Cliplister";
-      where = "/media/fs/ML_Cliplister";
+      where = "/media/fs/ml_cliplister";
       type = "cifs";
       mountConfig = {
         TimeoutSec = "1";
