@@ -12,7 +12,7 @@ in
       where = "/media/fs/aim";
       type = "cifs";
       mountConfig = {
-        TimeoutSec = "1";
+        TimeoutSec = "3";
         Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile}";
       };
     }
@@ -20,7 +20,7 @@ in
       where = "/media/fs/teamordner";
       type = "cifs";
       mountConfig = {
-        TimeoutSec = "1";
+        TimeoutSec = "3";
         Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile}";
       };
     }
@@ -28,7 +28,7 @@ in
       where = "/media/fs/aim_fs_maven_repo";
       type = "cifs";
       mountConfig = {
-        TimeoutSec = "1";
+        TimeoutSec = "3";
         Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile}";
       };
     }
@@ -36,7 +36,7 @@ in
       where = "/media/fs/ml_cliplister";
       type = "cifs";
       mountConfig = {
-        TimeoutSec = "1";
+        TimeoutSec = "3";
         Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile}";
       };
     }

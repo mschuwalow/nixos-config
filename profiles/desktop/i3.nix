@@ -8,7 +8,7 @@ let
 
   i3next = pkgs.writeScript "i3next.sh"
   ''
-  #!${pkgs.bash}
+  #!${pkgs.bash}/bin/bash
 
   case "$1" in
     new)
@@ -29,7 +29,7 @@ let
 
   i3lock = pkgs.writeScript "i3lock.sh"
   ''
-  #!${pkgs.bash}
+  #!${pkgs.bash}/bin/bash
   set -eu
 
   [[ -z "$(pgrep i3lock)" ]] || exit
@@ -38,7 +38,7 @@ let
 
   i3exit = pkgs.writeScript "i3exit.sh"
   ''
-  #!${pkgs.bash}
+  #!${pkgs.bash}/bin/bash
 
   case "$1" in
     lock)
@@ -70,7 +70,7 @@ let
 
   i3new = pkgs.writeScript "i3new.sh"
   ''
-  #!/usr/bin/env bash
+  #!${pkgs.bash}/bin/bash
   case "$1" in
     new)
       i3-msg workspace $(($(i3-msg -t get_workspaces | tr , '\n' | grep '"num":' | cut -d : -f 2 | sort -rn | head -1) + 1))
@@ -89,7 +89,7 @@ let
 
   volumeControl = pkgs.writeScript "volumeControl.sh"
   ''
-  #!/usr/bin/env python3
+  #!${pkgs.python3}/bin/python
   import subprocess
   import sys
 
