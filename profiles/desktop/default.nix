@@ -1,10 +1,6 @@
 { pkgs, ... }:
 let
   i3-config = import ./i3.nix { inherit pkgs; };
-  i3-config-file = pkgs.writeTextFile {
-    name = "i3.conf";
-    text = i3-config;
-  };
 in
 {
   environment.systemPackages = with pkgs; [
@@ -57,7 +53,7 @@ in
         enable = true;
       };
       desktopManager = {
-        default = "none";
+        default = "xfce";
         xterm.enable = false;
         xfce = {
           enable = true;
@@ -67,7 +63,7 @@ in
       };
       windowManager.i3 = {
         enable = true;
-        configFile = i3-config-file;
+        configFile = i3-config;
         package = pkgs.i3-gaps;
         extraPackages = with pkgs; [
           python3
