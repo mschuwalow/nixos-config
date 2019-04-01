@@ -201,8 +201,8 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 
 # start your launcher
-bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+Shift+Tab exec --no-startup-id rofi -show window
+bindsym $mod+d exec --no-startup-id ${pkgs.rofi}/bin/rofi -show drun
+bindsym $mod+Shift+Tab exec --no-startup-id ${pkgs.rofi}/bin/rofi -show window
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -412,7 +412,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id keepassxc
 
 # set background
-exec_always --no-startup-id sleep 10 & feh --bg-fill --no-xinerama ${wallpaper}
+exec_always --no-startup-id sleep 10 & ${pkgs.feh}/bin/feh --bg-fill --no-xinerama ${wallpaper}
 
 bar {
   status_command py3status -c ${i3status}

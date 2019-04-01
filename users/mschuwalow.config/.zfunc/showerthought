@@ -1,7 +1,0 @@
-showerthoughts=$(
-curl -s --connect-timeout 1 -A '/u/ROFLLOLSTER' \
-    'https://www.reddit.com/r/showerthoughts/top.json?sort=top&t=week&limit=100' | \
-    jq -c -r '.d = .data.children['$((RANDOM%100))'].data | "\"\(.d.title)\" - \(.d.author)" '
-)
-
-echo $showerthoughts | cowsay | lolcat

@@ -10,8 +10,8 @@ fetchPkgs = { rev, sha256 }: fetchTarball {
 in
 {
   stable = fetchChannel {
-    rev = "5d3fd3674a66c5b1ada63e2eace140519849c967";
-    sha256 = "1yjn56jsczih4chjcll63a20v3nwv1jhl2rf6rk8d8cwvb10g0mk";
+    rev = "07b42ccf2de451342982b550657636d891c4ba35";
+    sha256 = "1a7ga18pwq0y4p9r787622ry8gssw1p6wsr5l7dl8pqnj1hbbzwh";
   };
 
   unstable = fetchPkgs {

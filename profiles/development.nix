@@ -1,13 +1,16 @@
 { pkgs, ... }:
 
 {
+
   environment.systemPackages = with pkgs; [
     custom.niv
 
     go
     zeal
+    emacs
     vscode
-    unstable.meld    
+    unstable.meld
+    custom.lorri
     sublime3
     idea.idea-ultimate
 

@@ -2,8 +2,9 @@
 
 let
   sysPkgs = pkgs;
-  secrets = import ../secrets;
-  confDir = ./mschuwalow.config;
+  secrets = import ../../secrets;
+  confDir = ./config;
+
   recFilesH = x: if lib.pathIsDirectory x
                   then (lib.concatMap (y: recFilesH (toString x + "/" + toString y)) (builtins.attrNames (builtins.readDir x)))
                   else [x];
@@ -29,6 +30,21 @@ in
 
       programs.command-not-found.enable = true;
       programs.home-manager.enable = true;
+      programs.direnv.enable = true;
+
+      programs.zsh = {
+        enable = true;
+        initExtra = "source ${import ./zshrc.nix { inherit pkgs; }}";
+        history = {
+          save = 50000;
+        };
+        shellAliases = {
+          ll = "${pkgs.exa}/bin/exa -lhg --git";
+          la = "${pkgs.exa}/bin/exa -lahg --git";
+          dc = "${pkgs.docker-compose}/bin/docker-compose";
+          se = "sudo -E";
+        };
+      };
 
       programs.git = {
         package = pkgs.gitAndTools.gitFull;
@@ -71,10 +87,6 @@ in
         kubectl
         helm
         awscli
-
-        jq
-        cowsay
-        lolcat
       ]);
 
       gtk = {
@@ -95,12 +107,20 @@ in
         useGtkTheme = true;
       };
 
-      xsession = {
-        pointerCursor = {
-          package = pkgs.vanilla-dmz;
-          name = "Vanilla-DMZ";
-          size = 24;
-        };
+      home.sessionVariables = {
+        EDITOR = "${pkgs.micro}/bin/micro";
+        VISUAL = "${pkgs.micro}/bin/micro";
+        PAGER = "${pkgs.more}/bin/more";
+        PROJECT_HOME = "$HOME_PROJECTS";
+        MICRO_TRUECOLOR = "1";
+        REVIEW_BASE = "master";
+        ZPLUG_HOME = "$HOME/.zplug";
+        TPM_HOME = "$HOME/.tmux/plugins/tpm";
+        MAVEN_OPTS = "-XX:+TieredCompilation -XX:TieredStopAtLevel=1";
+        SBT_OPTS = "-XX:+CMSClassUnloadingEnabled -Xmx2G";
+        _JAVA_OPTIONS = "-Dsun.java2d.uiScale.enabled=false -Dprism.allowhidpi=false -Dsun.java2d.uiScale=1.0";
+        FZF_DEFAULT_OPTS="--height 80% --reverse";
+        FZFZ_EXTRA_DIRS="$PROJECT_HOME";
       };
 
       home.file = lib.listToAttrs (

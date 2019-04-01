@@ -18,7 +18,7 @@ in
     ./profiles
 
     # create users
-    ./users/mschuwalow.nix
+    ./users/mschuwalow
   ];
 
   nix = {
@@ -52,7 +52,6 @@ in
     fzf
     nnn
     tmux
-    direnv
     gptfdisk
     btrfs-progs
     ripgrep

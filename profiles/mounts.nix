@@ -13,7 +13,7 @@ in
       type = "cifs";
       mountConfig = {
         TimeoutSec = "3";
-        Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile}";
+        Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile},file_mode=0774,dir_mode=0774";
       };
     }
     { what = "//192.168.68.6/Teamordner";
@@ -21,7 +21,7 @@ in
       type = "cifs";
       mountConfig = {
         TimeoutSec = "3";
-        Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile}";
+        Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile},file_mode=0774,dir_mode=0774";
       };
     }
     { what = "//192.168.68.6/aim/Kundenprojekte/AllgemeinesMavenRepo/aim-fs-maven-repo";
@@ -29,7 +29,7 @@ in
       type = "cifs";
       mountConfig = {
         TimeoutSec = "3";
-        Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile}";
+        Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile},file_mode=0774,dir_mode=0774";
       };
     }
     { what = "//192.168.68.6/ML_Projects/Cliplister";
@@ -37,7 +37,7 @@ in
       type = "cifs";
       mountConfig = {
         TimeoutSec = "3";
-        Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile}";
+        Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile},file_mode=0774,dir_mode=0774";
       };
     }
   ];
