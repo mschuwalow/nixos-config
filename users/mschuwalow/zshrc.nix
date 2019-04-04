@@ -31,6 +31,21 @@ tcon = pkgs.writeText "tcon.zsh" ''
   }
 '';
 
+cls = pkgs.writeText "cls.zsh" ''
+  #!${pkgs.zsh}/bin/zsh
+
+  cls () {
+    clear
+
+    # clear terminal and tmux scrollback if tmux is used
+    if [[ "$TMUX" ]]; then
+      ${pkgs.tmux}/bin/tmux clear-history
+    else
+      echo "Can't start nested sessions."
+    fi
+  }
+'';
+
 self = pkgs.writeText "zshrc" ''
   #########
   # zplug #
@@ -94,6 +109,7 @@ self = pkgs.writeText "zshrc" ''
   zplug load
 
   source ${tcon}
+  source ${cls}
 '';
 in
 self

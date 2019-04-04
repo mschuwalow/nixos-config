@@ -14,7 +14,7 @@
     sublime3
     idea.idea-ultimate
 
-    (python3.withPackages(ps: with ps; [ setuptools pip ]))
+    (python3.withPackages(ps: with ps; [ virtualenv ]))
     
     nodejs-10_x
     unstable.postman

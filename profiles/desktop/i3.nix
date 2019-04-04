@@ -319,6 +319,11 @@ let
   #
   # Other:
   #
+
+  # Brightnes
+  bindsym XF86MonBrightnessDown exec --no-startup-id ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10
+  bindsym XF86MonBrightnessUp exec --no-startup-id ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10
+
   bindsym $mod+Shift+w exec $term -t "__nmtui" -e "nmtui"
   bindsym $mod+Shift+v exec pavucontrol
 

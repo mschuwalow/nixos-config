@@ -60,6 +60,7 @@ in
     htop
     moreutils
     tree
+    nox
   ];
 
   boot = {

@@ -133,6 +133,8 @@ in
         ".m2/settings-security.xml".source = secrets.m2SecSettingsFile;
         ".config/sublime-text-3/Packages/User/SyncSettings.sublime-settings".source = secrets.st3SyncSettingsFile;
         ".kube/config".source = secrets.kubeconfigFile;
+        # other stuff
+        ".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
       };
     };
   };
