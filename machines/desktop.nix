@@ -7,7 +7,11 @@
   ];
 
   networking.hostName = "mschuwalow-desktop";
+  time.hardwareClockInLocalTime = true;
 
+  boot.kernelParams = [
+    "idle=nomwait"
+  ];
   services.xserver.videoDrivers = [ "nvidia" ];
 
   nix = {
