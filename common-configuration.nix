@@ -5,10 +5,15 @@ let
   unstablePkgs = import (channels.unstable) {
     config = config.nixpkgs.config;
   };
+  sublimePkgs = import (channels.sublime) {
+    config = config.nixpkgs.config;
+  };
+  steamPkgs = import (channels.steam) {
+    config = config.nixpkgs.config;
+  };
   customPkgs = import ./pkgs/default.nix { pkgs = unstablePkgs; };
 in
 {
-
   imports = [
     # load modules
     ./modules/home-manager.nix
@@ -40,6 +45,8 @@ in
     packageOverrides = pkgs: {
       unstable = unstablePkgs;
       custom = customPkgs;
+      pkgs-steam = steamPkgs;
+      pkgs-sublime = sublimePkgs;
     };
   };
 
@@ -52,6 +59,7 @@ in
     fzf
     nnn
     tmux
+    gnupg
     gptfdisk
     btrfs-progs
     ripgrep
@@ -102,6 +110,13 @@ in
       allowedTCPPorts = [ 445 139 ];
       allowedUDPPorts = [ 137 138 ];
     };
+
+    hosts = {
+      "127.0.0.1" = [
+        "www.sublimetext.com"
+        "sublimetext.com"
+      ];
+    };
   };
 
   users = {
@@ -121,6 +136,10 @@ in
   programs = {
     ssh.startAgent = true;
     zsh.enable = true;
+  };
+
+  services = {
+    dbus.enable = true;
   };
 
   time.timeZone = "Europe/Berlin";

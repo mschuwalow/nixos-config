@@ -38,7 +38,7 @@ cls = pkgs.writeText "cls.zsh" ''
     clear
 
     # clear terminal and tmux scrollback if tmux is used
-    if [[ "$TMUX" ]]; then
+    if [[ ! -z "$TMUX" ]]; then
       ${pkgs.tmux}/bin/tmux clear-history
     else
       echo "Can't start nested sessions."

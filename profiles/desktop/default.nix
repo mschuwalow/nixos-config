@@ -8,9 +8,13 @@ in
     gnome3.gnome-disk-utility
     gnome3.gnome-system-monitor
     gnome3.nautilus
+    gnome3.eog
+    gnome3.evince
+    polkit_gnome
+    (xfce.thunar.override { thunarPlugins = [ xfce.thunar-archive-plugin ]; })
+    xfce.thunar-volman
 
     alacritty
-
     custom.rocketchat
     custom.discord
     spotify
@@ -22,6 +26,10 @@ in
     powertop
     screenkey
     mupdf
+    transmission-gtk
+
+    adapta-gtk-theme
+    paper-icon-theme
   ];
 
   services = {
@@ -33,7 +41,7 @@ in
     };
 
     flatpak.enable = true;
-    dbus.packages = [ pkgs.gnome3.dconf ];
+    dbus.packages = with pkgs; [ gnome3.dconf gnome2.GConf ];
     gnome3.gnome-keyring.enable = true;
 
     xserver = {
@@ -43,6 +51,18 @@ in
 
       enableCtrlAltBackspace = true;
 
+      # displayManager = {
+      #   gdm.enable = true;
+      #   gdm.wayland = false;
+      # };
+      # desktopManager.gnome3 = {
+      #   enable = true;
+      #   extraGSettingsOverrides = ''
+      #     [org.gnome.desktop.interface]
+      #     gtk-theme='Adapta-Eta'
+      #     icon-theme='Paper'
+      #   '';
+      # };
       displayManager.lightdm = {
         greeters.gtk = {
           theme.name = "Adapta-Eta";

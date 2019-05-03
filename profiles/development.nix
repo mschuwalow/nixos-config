@@ -11,7 +11,8 @@
     vscode
     unstable.meld
     custom.lorri
-    sublime3
+    pkgs-sublime.sublime3
+    pkgs-sublime.sublime-merge
     idea.idea-ultimate
 
     (python3.withPackages(ps: with ps; [ virtualenv ]))
