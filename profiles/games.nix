@@ -2,8 +2,8 @@
 
 {
   environment.systemPackages = with pkgs; [
-    pkgs-steam.steam
-    pkgs-steam.steam-run
+    unstable.steam
+    unstable.steam-run
   ];
 
 }

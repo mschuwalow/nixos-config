@@ -65,7 +65,7 @@ in
             whitespace = "trailing-space,space-before-tab";
           };
           diff.tool = "Sublime Merge";
-          "difftool \"Sublime Merge\"".cmd = "smerge mergetool \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"";
+          "difftool \"Sublime Merge\"".cmd = "smerge difftool \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"";
           merge.tool = "Sublime Merge";
           "mergetool \"Sublime Merge\"".cmd = "smerge mergetool \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"";
         };
@@ -78,8 +78,6 @@ in
         ncdu
         rtv
         tdesktop
-        chromium
-        alacritty
         whois
         nix-prefetch-git
 

@@ -1,34 +1,30 @@
+{ fetchgit }:
 let
-fetchChannel = { rev, sha256 }: fetchTarball {
+fetchChannel = { rev, sha256 }: fetchgit {
+  inherit rev;
   inherit sha256;
-  url = "https://github.com/NixOS/nixpkgs-channels/archive/${rev}.tar.gz";
+  url = "https://github.com/NixOS/nixpkgs-channels";
 };
-fetchPkgs = { rev, sha256, owner ? "NixOS" }: fetchTarball {
+fetchPkgs = { rev, sha256, owner ? "NixOS" }: fetchgit {
+  inherit rev;
   inherit sha256;
-  url = "https://github.com/${owner}/nixpkgs/archive/${rev}.tar.gz";
+  url = "https://github.com/${owner}/nixpkgs";
 };
 in
 {
   stable = fetchChannel {
-    rev = "1fc591f9a5bd1b016b5d66dfab29560073955a14";
-    sha256 = "1ij5x1qw486rbih7xh2c01s60c3zblj6ad1isf5y99sh47jcq76c";
+    rev = "971b731fc18c86569211a460ef62e1d8001799e9";
+    sha256 = "1b8xjrrwb8fz92bcrqvfvfg7gwn40ss12by2ka4yclcxk5yylmw0";
   };
 
   unstable = fetchPkgs {
-    rev = "b8243d104f63e83eb7bf799e89a5d93d0a2edeac";
-    sha256 = "0skj5d3syj5vrqh1ly9fnyc6950lr91h994x6yrnl61gb0ni4vds";
-  };
-
-  steam = fetchPkgs {
-    rev = "87e35a1439392f66f8234f18bc7f3c0999ddf91d";
-    sha256 = "179f0dbvsfhqx5jjsg51yv1wbqc6an2c9dfqm4icczvbjls78c9r";
-    owner = "nyanloutre";
+    rev = "2ed6903da5121a32a9acbb2afcc4e5524c06931b";
+    sha256 = "0q19k4aps4dlnv47vrmsazhk9wmnps8rz3clzvbfy9lrzn9v1qma";
   };
 
   sublime = fetchPkgs {
-    rev = "b321e40e1173ac320060dfd6be086ca841a84742";
-    sha256 = "1sf8i0x4qrh6dmyaar89pp7zp6b7qp78wfaz29kr35ml4xdz3rka";
+    rev = "4aeafc6b63fbf9b0207ce51a3bbf0bc81c807115";
+    sha256 = "0va50i6fr75qlkcnrys51fv5z4z3ybjv1kdpi6r8idxsx77vhc0h";
     owner = "zookatron";   
   };
-  
 }

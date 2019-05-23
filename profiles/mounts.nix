@@ -25,7 +25,7 @@ in
         Options = "user,gid=users,rw,credentials=${secrets.aimSMBCredentialsFile},file_mode=0774,dir_mode=0774";
       };
     }
-    { what = "//192.168.68.6/aim/Kundenprojekte/AllgemeinesMavenRepo/aim-fs-maven-repo";
+    { what = "//192.168.68.6/ML_Projects/aim-fs-maven-repo";
       where = "/media/fs/aim_fs_maven_repo";
       type = "cifs";
       mountConfig = {

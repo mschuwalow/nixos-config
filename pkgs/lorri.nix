@@ -7,6 +7,6 @@ let
     url = "https://github.com/target/lorri/archive/${rev}.tar.gz";
     sha256 = sha;
   };
-  self = (import (lorri-src) { pkgs = pkgs; src = lorri-src; });
+  self = (import (lorri-src) { src = lorri-src; });
 in
 self

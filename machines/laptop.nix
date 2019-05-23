@@ -23,7 +23,8 @@
   hardware.bumblebee.connectDisplay = true;
   hardware.bluetooth.enable = true;
   services.tlp.enable = true;
-  # powerManagement.powertop.enable = true;
+  
+  powerManagement.resumeCommands = "xrandr --output HDMI1 --auto --left-of DP2 --output DP2 --auto --left-of eDP1";
     
   nix = {
     maxJobs = 4;

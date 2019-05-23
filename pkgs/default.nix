@@ -2,8 +2,9 @@
 
 {
   oni = pkgs.callPackage ./oni {};
-  rocketchat = pkgs.callPackage ./rocketchat {};
-  niv = pkgs.callPackage ./niv {};
-  discord = pkgs.callPackage ./discord {};
-  lorri = pkgs.callPackage ./lorri {};
+  rocketchat = pkgs.callPackage ./rocketchat.nix {};
+  niv = pkgs.callPackage ./niv.nix {};
+  discord = pkgs.callPackage ./discord.nix {};
+  lorri = pkgs.callPackage ./lorri.nix {};
+  git-heatmap = pkgs.callPackage ./git-heatmap {};
 }

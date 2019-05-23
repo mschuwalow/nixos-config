@@ -1,14 +1,8 @@
 { config, pkgs, ... }:
 let
   secrets = import ./secrets;
-  channels = import ./channels.nix;
+  channels = import ./channels.nix { fetchgit = pkgs.fetchgit; };
   unstablePkgs = import (channels.unstable) {
-    config = config.nixpkgs.config;
-  };
-  sublimePkgs = import (channels.sublime) {
-    config = config.nixpkgs.config;
-  };
-  steamPkgs = import (channels.steam) {
     config = config.nixpkgs.config;
   };
   customPkgs = import ./pkgs/default.nix { pkgs = unstablePkgs; };
@@ -45,8 +39,6 @@ in
     packageOverrides = pkgs: {
       unstable = unstablePkgs;
       custom = customPkgs;
-      pkgs-steam = steamPkgs;
-      pkgs-sublime = sublimePkgs;
     };
   };
 

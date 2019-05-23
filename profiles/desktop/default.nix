@@ -11,10 +11,10 @@ in
     gnome3.eog
     gnome3.evince
     polkit_gnome
-    (xfce.thunar.override { thunarPlugins = [ xfce.thunar-archive-plugin ]; })
-    xfce.thunar-volman
 
     alacritty
+    chromium
+    firefox
     custom.rocketchat
     custom.discord
     spotify
@@ -27,6 +27,8 @@ in
     screenkey
     mupdf
     transmission-gtk
+
+    xorg.setxkbmap
 
     adapta-gtk-theme
     paper-icon-theme
