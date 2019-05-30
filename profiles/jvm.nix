@@ -5,19 +5,13 @@
     allowUnfree = true;
 
     oraclejdk.accept_license = true;
-
-    #packageOverrides = pkgs: {
-    #  jre = pkgs.oraclejre8;
-    #  jdk = pkgs.oraclejdk8;
-    #};
   };
 
   # install development packages
   environment.systemPackages = with pkgs; [
     maven
     sbt
-    jre
-    jdk
+    jdk11
     jd-gui
   ];
 

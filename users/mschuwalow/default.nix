@@ -23,8 +23,6 @@ let
     ".m2/settings-security.xml".source = secrets.m2SecSettingsFile;
     ".config/sublime-text-3/Packages/User/SyncSettings.sublime-settings".source = secrets.st3SyncSettingsFile;
     ".kube/config".source = secrets.kubeconfigFile;
-    # other stuff
-    ".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
   };
 
   homeDirectory = "/home/mschuwalow";
@@ -64,6 +62,7 @@ in
           la = "${pkgs.exa}/bin/exa -lahg --git";
           dc = "${pkgs.docker-compose}/bin/docker-compose";
           se = "sudo -E";
+          nixedit = "se ${pkgs.sublime3}/bin/sublime /etc/nixos";
         };
       };
 
@@ -140,7 +139,7 @@ in
         TPM_HOME = "$HOME/.tmux/plugins/tpm";
         MAVEN_OPTS = "-XX:+TieredCompilation -XX:TieredStopAtLevel=1";
         SBT_OPTS ="-Xmx4G -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=2G -Xss2M -Duser.timezone=GMT";
-        _JAVA_OPTIONS = "-Dsun.java2d.uiScale.enabled=false -Dprism.allowhidpi=false -Dsun.java2d.uiScale=1.0";
+        _JAVA_OPTIONS = "-Dsun.java2d.uiScale.enabled=false -Dprism.allowhidpi=false -Dsun.java2d.uiScale=1.0 -XX:+UnlockExperimentalVMOptions";
         FZF_DEFAULT_OPTS = "--height 80% --reverse";
         FZFZ_EXTRA_DIRS = "$PROJECT_HOME";
       };
@@ -153,6 +152,11 @@ in
           '')
           (lib.attrsets.mapAttrsToList (name: value: { source = lib.strings.escapeShellArg value.source; target = lib.strings.escapeShellArg "${homeDirectory}/${name}"; }) files)
       );
+
+      home.file = {
+        ".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+      };
+
     };
   };
 }
