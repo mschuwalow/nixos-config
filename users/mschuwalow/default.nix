@@ -1,9 +1,10 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  sysPkgs = pkgs;
+  hm = import ../../modules/home-manager.nix { inherit lib; };
+
   secrets = import ../../secrets;
-  confDir = ./config;
+  confDir = "/etc/nixos/users/mschuwalow/config";
 
   recFilesH = x: if lib.pathIsDirectory x
                   then (lib.concatMap (y: recFilesH (toString x + "/" + toString y)) (builtins.attrNames (builtins.readDir x)))
@@ -11,8 +12,28 @@ let
   recFiles = x: if lib.pathIsDirectory x
                   then (map(y: lib.removePrefix (toString x + "/") y) (recFilesH x))
                   else [x];
+
+  files = lib.listToAttrs (
+    map (
+      name: (lib.nameValuePair "${name}" ({ source = "${confDir}/${name}"; }))
+    ) (recFiles confDir)
+  ) // {
+    # sensitive files
+    ".m2/settings.xml".source = secrets.m2SettingsFile;
+    ".m2/settings-security.xml".source = secrets.m2SecSettingsFile;
+    ".config/sublime-text-3/Packages/User/SyncSettings.sublime-settings".source = secrets.st3SyncSettingsFile;
+    ".kube/config".source = secrets.kubeconfigFile;
+    # other stuff
+    ".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+  };
+
+  homeDirectory = "/home/mschuwalow";
 in
 {
+  imports = [
+    hm.nixos
+  ];
+
   users.users.mschuwalow = {
     isNormalUser = true;
     uid = 1000;
@@ -21,7 +42,7 @@ in
       "networkmanager" "systemd-journal" "docker"
     ];
     createHome = true;
-    home = "/home/mschuwalow";
+    home = homeDirectory;
     hashedPassword = secrets.hashedMschuwalowPassword;
   };
 
@@ -124,19 +145,14 @@ in
         FZFZ_EXTRA_DIRS = "$PROJECT_HOME";
       };
 
-      home.file = lib.listToAttrs (
-        map (
-          name: (lib.nameValuePair "${name}" ({ source = "${confDir}/${name}"; }))
-        ) (recFiles confDir)
-      ) // {
-        # sensitive files
-        ".m2/settings.xml".source = secrets.m2SettingsFile;
-        ".m2/settings-security.xml".source = secrets.m2SecSettingsFile;
-        ".config/sublime-text-3/Packages/User/SyncSettings.sublime-settings".source = secrets.st3SyncSettingsFile;
-        ".kube/config".source = secrets.kubeconfigFile;
-        # other stuff
-        ".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
-      };
+      home.activation.linkFiles = hm.lib.dag.entryAfter [ "writeBoundary" ] (
+        lib.strings.concatMapStrings
+          (s: ''
+          mkdir --parents ''$(dirname ${s.target})
+          ln -sf ${s.source} ${s.target}
+          '')
+          (lib.attrsets.mapAttrsToList (name: value: { source = lib.strings.escapeShellArg value.source; target = lib.strings.escapeShellArg "${homeDirectory}/${name}"; }) files)
+      );
     };
   };
 }

@@ -27,6 +27,7 @@ in
     screenkey
     mupdf
     transmission-gtk
+    nmap-graphical
 
     xorg.setxkbmap
 
@@ -53,18 +54,6 @@ in
 
       enableCtrlAltBackspace = true;
 
-      # displayManager = {
-      #   gdm.enable = true;
-      #   gdm.wayland = false;
-      # };
-      # desktopManager.gnome3 = {
-      #   enable = true;
-      #   extraGSettingsOverrides = ''
-      #     [org.gnome.desktop.interface]
-      #     gtk-theme='Adapta-Eta'
-      #     icon-theme='Paper'
-      #   '';
-      # };
       displayManager.lightdm = {
         greeters.gtk = {
           theme.name = "Adapta-Eta";

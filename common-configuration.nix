@@ -9,9 +9,6 @@ let
 in
 {
   imports = [
-    # load modules
-    ./modules/home-manager.nix
-
     # load default services & profiles
     ./services
     ./profiles
