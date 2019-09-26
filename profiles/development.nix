@@ -14,7 +14,7 @@
     idea.idea-ultimate
     nodePackages.node2nix
     custom.git-heatmap
-
+    ncurses.dev
     (python3.withPackages(ps: with ps; [ virtualenv ]))
     
     nodejs-10_x

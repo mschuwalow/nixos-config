@@ -10,6 +10,7 @@ in
     gnome3.nautilus
     gnome3.eog
     gnome3.evince
+    gparted
     polkit_gnome
 
     alacritty
@@ -35,6 +36,8 @@ in
     paper-icon-theme
   ];
 
+  xdg.portal.enable = true;
+  
   services = {
     compton = {
       enable = true;

@@ -95,8 +95,9 @@ self = pkgs.writeText "zshrc" ''
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
   # set theme
-  zplug 'themes/clean', from:oh-my-zsh, as:theme
-
+  # zplug 'themes/clean', from:oh-my-zsh, as:theme
+    zplug 'themes/philips', from:oh-my-zsh, as:theme
+  
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
       printf "Install? [y/N]: "
