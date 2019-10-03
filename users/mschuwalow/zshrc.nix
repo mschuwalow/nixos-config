@@ -66,37 +66,45 @@ self = pkgs.writeText "zshrc" ''
   source "''${ZPLUG_HOME}/init.zsh"
 
   # load OMZsh components
-  # zplug "robbyrussell/oh-my-zsh", use:"lib/*\.zsh"
+  zplug 'robbyrussell/oh-my-zsh', use:'lib/*.zsh'
 
   # load OMZsh plugins
-  zplug "plugins/git", from:oh-my-zsh
-  zplug "plugins/sudo", from:oh-my-zsh
-  zplug "plugins/command-not-found", from:oh-my-zsh
-  zplug "plugins/history-substring-search", from:oh-my-zsh
-  zplug "plugins/docker", from:oh-my-zsh
-  zplug "plugins/docker-compose", from:oh-my-zsh
+  zplug 'plugins/git', from:oh-my-zsh
+  zplug 'plugins/sudo', from:oh-my-zsh
+  zplug 'plugins/command-not-found', from:oh-my-zsh
+  zplug 'plugins/history-substring-search', from:oh-my-zsh
+  zplug 'plugins/docker', from:oh-my-zsh
+  zplug 'plugins/docker-compose', from:oh-my-zsh
 
   # load commands
-  zplug "k4rthik/git-cal", as:command
-  zplug "rupa/z", as:command, use:'z.sh', rename-to:'z'
-  zplug "c-bata/kube-prompt", as:command, from:gh-r, use:"*linux*amd64*"
-  zplug "astefanutti/kubebox", as:command, from:gh-r, use:"*linux*"
-  zplug "deltaroe/63afd52ba84274ed5b86ba9b0c357e8f", as:command, from:gist, use:"add-ns.py", rename-to:"k8s-add-namespace"
+  zplug 'k4rthik/git-cal', as:command
+  zplug 'junegunn/fzf-bin', as:command, from:gh-r, use:'*linux*amd64*', rename-to:'fzf'
+  zplug 'knu/z', as:command, use:'z.sh'
+  zplug 'b4b4r07/httpstat', as:command, use:'(*).sh', rename-to:'$1'
+  zplug 'johanhaleby/kubetail', as:command
+  zplug 'c-bata/kube-prompt', as:command, from:gh-r, use:'*linux*amd64*'
+  zplug 'astefanutti/kubebox', as:command, from:gh-r, use:'*linux*'
+  zplug 'BurntSushi/ripgrep', as:command, from:gh-r, use:'*x86_64*linux*'
+  zplug 'ogham/exa', as:command, from:gh-r, use:'*linux*'
+  zplug 'deltaroe/63afd52ba84274ed5b86ba9b0c357e8f', as:command, from:gist, use:'add-ns.py', rename-to:'k8s-add-namespace'
+  #zplug 'onilton/ogl', as:command, from:gh-r, at:'v0.0.2', use:'*ogl-linux.tar*', rename-to:'ogl'
+  zplug 'peco/peco', as:command, from:gh-r, use:'*linux*amd64*'
+  zplug 'motemen/ghq', as:command, from:gh-r, use:'*linux*amd64*'
+  zplug 'stedolan/jq', as:command, from:gh-r, rename-to:'jq'
 
   # load completions
-  zplug "zsh-users/zsh-completions"
-  zplug "Schnouki/git-annex-zsh-completion"
+  zplug 'zsh-users/zsh-completions'
+  zplug 'Schnouki/git-annex-zsh-completion'
 
   # load other plugins
-  zplug "junegunn/fzf", use:"shell/{completion.zsh,key-bindings.zsh}"
-  zplug "andrewferrier/fzf-z"
-  zplug "l4u/zsh-output-highlighting"
-  zplug "changyuheng/zsh-interactive-cd"
-  zplug "zsh-users/zsh-syntax-highlighting", defer:2
+  zplug 'junegunn/fzf', use:'shell/{completion.zsh,key-bindings.zsh}'
+  zplug 'andrewferrier/fzf-z'
+  zplug 'l4u/zsh-output-highlighting'
+  zplug 'changyuheng/zsh-interactive-cd'
+  zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 
   # set theme
-  # zplug 'themes/clean', from:oh-my-zsh, as:theme
-    zplug 'themes/philips', from:oh-my-zsh, as:theme
+  zplug 'themes/philips', from:oh-my-zsh, as:theme
   
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then

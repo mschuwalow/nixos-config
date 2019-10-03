@@ -7,11 +7,13 @@
     oraclejdk.accept_license = true;
   };
 
+  programs.java.enable = true;
+  
   # install development packages
   environment.systemPackages = with pkgs; [
     maven
     sbt
-    jdk11
+    jdk8
     jd-gui
   ];
 

@@ -3,14 +3,15 @@
 {
   environment.systemPackages = with pkgs; [
 
-    go
-    zeal
-    emacs
+    stack
+    # go
+    # zeal
+    # emacs
     vscode
     unstable.meld
-    custom.lorri
-    sublime3
-    unstable.sublime-merge
+    # custom.lorri
+    # sublime3
+    # unstable.sublime-merge
     idea.idea-ultimate
     nodePackages.node2nix
     custom.git-heatmap

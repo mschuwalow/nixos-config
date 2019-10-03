@@ -138,7 +138,7 @@ in
         ZPLUG_HOME = "$HOME/.zplug";
         TPM_HOME = "$HOME/.tmux/plugins/tpm";
         MAVEN_OPTS = "-XX:+TieredCompilation -XX:TieredStopAtLevel=1";
-        SBT_OPTS ="-Xmx4G -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=2G -Xss2M -Duser.timezone=GMT";
+        SBT_OPTS = "-J-Xmx4G -J-XX:+UseConcMarkSweepGC -J-XX:+CMSClassUnloadingEnabled -J-XX:MaxPermSize=2G -J-Xss2M -J-Duser.timezone=GMT";
         _JAVA_OPTIONS = "-Dsun.java2d.uiScale.enabled=false -Dprism.allowhidpi=false -Dsun.java2d.uiScale=1.0 -XX:+UnlockExperimentalVMOptions";
         FZF_DEFAULT_OPTS = "--height 80% --reverse";
         FZFZ_EXTRA_DIRS = "$PROJECT_HOME";

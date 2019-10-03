@@ -36,6 +36,7 @@ in
     packageOverrides = pkgs: {
       unstable = unstablePkgs;
       custom = customPkgs;
+      nur = customPkgs.nur;
     };
   };
 
