@@ -70,7 +70,7 @@ in
         package = pkgs.gitAndTools.gitFull;
         enable = true;
         userName = "Maxim Schuwalow";
-        userEmail = "mschuwalow@agile-im.de";
+        userEmail = "maxim.schuwalow@gmail.com";
         aliases = {
           files = "!git diff --name-only $(git merge-base HEAD $REVIEW_BASE)";
           stat = "!git diff --stat $(git merge-base HEAD $REVIEW_BASE)";

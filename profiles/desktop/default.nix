@@ -16,7 +16,6 @@ in
     alacritty
     chromium
     firefox
-    custom.rocketchat
     custom.discord
     spotify
     skypeforlinux

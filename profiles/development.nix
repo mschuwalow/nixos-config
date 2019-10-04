@@ -3,6 +3,8 @@
 {
   environment.systemPackages = with pkgs; [
 
+    cabal-install
+    cabal2nix
     stack
     # go
     # zeal
