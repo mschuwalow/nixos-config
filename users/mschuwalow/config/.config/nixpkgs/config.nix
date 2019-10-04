@@ -1,4 +1,2 @@
-{ 
-  allowUnfree = true;
-  oraclejdk.accept_license = true;
-}
+{ pkgs }:
+import ../../../../../nixpkgs-config.nix { pkgs = pkgs; }

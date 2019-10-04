@@ -1,11 +1,7 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   secrets = import ./secrets;
-  channels = import ./channels.nix { fetchgit = pkgs.fetchgit; };
-  unstablePkgs = import (channels.unstable) {
-    config = config.nixpkgs.config;
-  };
-  customPkgs = import ./pkgs/default.nix { pkgs = unstablePkgs; };
+  config = import ./nixpkgs-config.nix { pkgs = pkgs; };
 in
 {
   imports = [
@@ -19,7 +15,7 @@ in
 
   nix = {
     nixPath = [ 
-      "nixpkgs=${channels.stable}"
+      "nixpkgs=${config.nixpkgs}"
       "nixos-config=/etc/nixos/configuration.nix"
     ];
     autoOptimiseStore = true;
@@ -31,15 +27,8 @@ in
     };
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs: {
-      unstable = unstablePkgs;
-      custom = customPkgs;
-      nur = customPkgs.nur;
-    };
-  };
-
+  nixpkgs.config = config;
+  
   environment.systemPackages = with pkgs; [
     wget
     git
