@@ -1,19 +1,21 @@
-{ pkgs }:
+{ pkgs, ... }:
 let
-  channels = import ./channels.nix { fetchgit = pkgs.fetchgit; };
+  pins = import ./pins.nix;
+  customPkgs = import ./pkgs/default.nix { 
+    inherit pkgs;
+  };
   config = {
-    nixpkgs = channels.stable;
     allowUnfree = true;
     oraclejdk.accept_license = true;
-    packageOverrides = pkgs: rec {
-      unstable = import (channels.unstable) {
+    packageOverrides = pkgs: {
+      unstable = import (pins.unstable) {
         inherit config;
       };
-      custom = import ./pkgs/default.nix { 
-        inherit pkgs;
-      };
-      nur = custom.nur;
-    };    
+      custom = customPkgs;
+      nur = customPkgs.nur;
+    };
   };
 in
-config
+{
+  nixpkgs.config = config;
+} 

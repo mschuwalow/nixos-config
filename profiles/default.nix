@@ -4,7 +4,6 @@
   imports = [
     ./audio.nix
     ./desktop
-    ./games.nix
     ./development.nix
     ./jvm.nix
     ./docker.nix

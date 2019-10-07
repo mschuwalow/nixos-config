@@ -1,10 +1,11 @@
 { pkgs, ... }:
 let
   secrets = import ./secrets;
-  config = import ./nixpkgs-config.nix { pkgs = pkgs; };
 in
 {
   imports = [
+    ./nixpkgs-config.nix
+
     # load default services & profiles
     ./services
     ./profiles
@@ -14,9 +15,16 @@ in
   ];
 
   nix = {
-    nixPath = [ 
-      "nixpkgs=${config.nixpkgs}"
+    nixPath = [
+      "/etc/nixos"
       "nixos-config=/etc/nixos/configuration.nix"
+    ];
+    binaryCaches = [
+      https://cache.nixos.org/
+      https://r-ryantm.cachix.org
+    ];
+    binaryCachePublicKeys = [
+      "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c="
     ];
     autoOptimiseStore = true;
     useSandbox = "relaxed";
@@ -27,8 +35,6 @@ in
     };
   };
 
-  nixpkgs.config = config;
-  
   environment.systemPackages = with pkgs; [
     wget
     git

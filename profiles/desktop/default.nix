@@ -15,8 +15,7 @@ in
 
     alacritty
     chromium
-    firefox
-    custom.discord
+    discord
     spotify
     skypeforlinux
 

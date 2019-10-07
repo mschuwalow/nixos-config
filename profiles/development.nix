@@ -4,13 +4,13 @@
   environment.systemPackages = with pkgs; [
 
     cabal-install
-    cabal2nix
+    # cabal2nix
     stack
     # go
     # zeal
     # emacs
     vscode
-    unstable.meld
+    meld
     # custom.lorri
     # sublime3
     # unstable.sublime-merge
