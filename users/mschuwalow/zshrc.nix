@@ -47,11 +47,7 @@ cls = pkgs.writeText "cls.zsh" ''
 '';
 
 self = pkgs.writeText "zshrc" ''
-  #########
-  # zplug #
-  #########
-
-  # Clone zgen if you haven't already
+  # Clone zplug if you haven't already
   if [[ -z "$ZPLUG_HOME" ]]; then
     export ZPLUG_HOME=$HOME/.zplug
   fi
@@ -114,11 +110,29 @@ self = pkgs.writeText "zshrc" ''
       fi
   fi
 
-  # Then, source plugins and add commands to $PATH
+  # then, source plugins and add commands to $PATH
   zplug load
 
+  # load functions
   source ${tcon}
   source ${cls}
+
+  # custom options
+  setopt HIST_FIND_NO_DUPS
+  setopt HIST_IGNORE_ALL_DUPS
+  setopt AUTO_CD
+
+  # style
+  zstyle ':completion:*' rehash true
+  zstyle ':completion:*:descriptions' format '%B%d%b'
+  zstyle ':completion:*:messages' format '%d'
+  zstyle ':completion:*' group-name '''
+
+  # keybindings
+  bindkey '\eOA' history-substring-search-up
+  bindkey '\eOB' history-substring-search-down
+  
+  bindkey '^R' fzf-history-widget # gets overridden by something
 '';
 in
 self

@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
-
 {
   imports = [
-    ../hardware-configuration.nix
-    ../common-configuration.nix
-    ../profiles/bluetooth.nix
+    ./profiles/bluetooth.nix
   ];
 
   networking.hostName = "mschuwalow-laptop";

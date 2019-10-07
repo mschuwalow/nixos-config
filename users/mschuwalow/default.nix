@@ -132,7 +132,10 @@ in
         EDITOR = "${pkgs.micro}/bin/micro";
         VISUAL = "${pkgs.micro}/bin/micro";
         PAGER = "${pkgs.more}/bin/more";
-        PROJECT_HOME = "$HOME_PROJECTS";
+        PROJECT_HOME = "$HOME/Projects";
+        HISTSIZE = "50000";
+        HISTFILE = "$HOME/.zsh_history";
+        SAVEHIST = "10000";
         MICRO_TRUECOLOR = "1";
         REVIEW_BASE = "master";
         ZPLUG_HOME = "$HOME/.zplug";

@@ -6,6 +6,10 @@ in
   imports = [
     ./nixpkgs-config.nix
 
+    # load system specific configuration
+    ./hardware-configuration.nix
+    ./machine-configuration.nix
+
     # load default services & profiles
     ./services
     ./profiles
