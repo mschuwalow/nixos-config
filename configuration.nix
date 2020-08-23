@@ -1,11 +1,19 @@
 { pkgs, ... }:
 let
+  pins = import ./pin.nix;
+  externalPkgs = import ./pkgs/default.nix { inherit pkgs; };
   secrets = import ./secrets;
-in
-{
+  config = {
+    allowUnfree = true;
+    oraclejdk.accept_license = true;
+    packageOverrides = pkgs: {
+      unstable = import (pins.unstable) { inherit config; };
+      external = externalPkgs;
+      nur = pkgs.nur;
+    };
+  };
+in {
   imports = [
-    ./nixpkgs-config.nix
-
     # load system specific configuration
     ./hardware-configuration.nix
     ./machine-configuration.nix
@@ -19,17 +27,10 @@ in
   ];
 
   nix = {
-    nixPath = [
-      "/etc/nixos"
-      "nixos-config=/etc/nixos/configuration.nix"
-    ];
-    binaryCaches = [
-      https://cache.nixos.org/
-      https://r-ryantm.cachix.org
-    ];
-    binaryCachePublicKeys = [
-      "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c="
-    ];
+    nixPath = [ "nixpkgs=${<nixpkgs>}" "nixos-config=/etc/nixos/configuration.nix" ];
+    binaryCaches = [ "https://cache.nixos.org/" "https://r-ryantm.cachix.org" ];
+    binaryCachePublicKeys =
+      [ "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c=" ];
     autoOptimiseStore = true;
     useSandbox = "relaxed";
     gc = {
@@ -38,6 +39,8 @@ in
       options = "--delete-older-than 30d";
     };
   };
+
+  nixpkgs.config = config;
 
   environment.systemPackages = with pkgs; [
     wget
@@ -50,14 +53,20 @@ in
     tmux
     gnupg
     gptfdisk
-    btrfs-progs
     ripgrep
     zip
     unzip
     htop
-    moreutils
+    powertop
+    # moreutils
     tree
-    nox
+    bc
+    whois
+    ncdu
+    nix-prefetch-git
+    # httpstat
+    gawk
+    # nox
   ];
 
   boot = {
@@ -70,9 +79,9 @@ in
       efi.canTouchEfiVariables = true;
     };
     kernel.sysctl = {
-      "fs.inotify.max_user_watches"   = 1048576;   # default:  8192
-      "fs.inotify.max_user_instances" =    1024;   # default:   128
-      "fs.inotify.max_queued_events"  =   32768;   # default: 16384
+      "fs.inotify.max_user_watches" = 1048576; # default:  8192
+      "fs.inotify.max_user_instances" = 1024; # default:   128
+      "fs.inotify.max_queued_events" = 32768; # default: 16384
     };
   };
 
@@ -88,10 +97,7 @@ in
   networking = {
     networkmanager.enable = true;
 
-    nameservers = [
-      "8.8.8.8"
-      "8.8.4.4"
-    ];
+    nameservers = [ "8.8.8.8" "8.8.4.4" ];
 
     firewall = {
       enable = true;
@@ -100,20 +106,13 @@ in
       allowedUDPPorts = [ 137 138 ];
     };
 
-    hosts = {
-      "127.0.0.1" = [
-        "www.sublimetext.com"
-        "sublimetext.com"
-      ];
-    };
+    hosts = { "127.0.0.1" = [ "www.sublimetext.com" "sublimetext.com" ]; };
   };
 
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
-    users.root = {
-      hashedPassword = secrets.hashedRootPassword;
-    };
+    users.root = { hashedPassword = secrets.hashedPasswords.root; };
   };
 
   i18n = {
@@ -127,14 +126,11 @@ in
     zsh.enable = true;
   };
 
-  services = {
-    dbus.enable = true;
-  };
+  services = { dbus.enable = true; };
 
   time.timeZone = "Europe/Berlin";
 
   system = {
-    stateVersion = "18.09";
     autoUpgrade.enable = true;
   };
 }

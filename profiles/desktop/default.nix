@@ -1,8 +1,6 @@
 { pkgs, ... }:
-let
-  i3-config = import ./i3.nix { inherit pkgs; };
-in
-{
+let i3-config = import ./i3.nix { inherit pkgs; };
+in {
   environment.systemPackages = with pkgs; [
     gnome3.dconf
     gnome3.gnome-disk-utility
@@ -14,19 +12,15 @@ in
     polkit_gnome
 
     alacritty
-    chromium
-    discord
-    spotify
-    skypeforlinux
+    # firefox
+    # spotify
+   
+    # seafile-client
 
-    seafile-client
-    keepassxc
-
-    powertop
-    screenkey
-    mupdf
-    transmission-gtk
-    nmap-graphical
+    # screenkey
+    # mupdf
+    # transmission-gtk
+    # nmap-graphical
 
     xorg.setxkbmap
 
@@ -35,7 +29,7 @@ in
   ];
 
   xdg.portal.enable = true;
-  
+
   services = {
     compton = {
       enable = true;
@@ -58,9 +52,9 @@ in
       displayManager.lightdm = {
         greeters.gtk = {
           theme.name = "Adapta-Eta";
-          theme.package = pkgs.adapta-gtk-theme; 
+          theme.package = pkgs.adapta-gtk-theme;
           iconTheme.name = "Paper";
-          iconTheme.package = pkgs.paper-icon-theme; 
+          iconTheme.package = pkgs.paper-icon-theme;
         };
         enable = true;
       };
@@ -85,7 +79,12 @@ in
           i3status
           i3lock
           (python3Packages.py3status.overrideAttrs (oldAttrs: {
-            propagatedBuildInputs = [ python3Packages.pytz python3Packages.tzlocal python3Packages.dbus-python file ];
+            propagatedBuildInputs = [
+              python3Packages.pytz
+              python3Packages.tzlocal
+              python3Packages.dbus-python
+              file
+            ];
           }))
         ];
       };
@@ -104,7 +103,7 @@ in
     enableFontDir = true;
     fonts = with pkgs; [
       font-awesome_5
-      
+
       fantasque-sans-mono
       source-code-pro
       fira-code
@@ -114,7 +113,6 @@ in
     ];
     fontconfig = {
       penultimate.enable = true;
-      ultimate.enable = false;
       defaultFonts = {
         monospace = [ "roboto-mono" ];
         sansSerif = [ "roboto" ];

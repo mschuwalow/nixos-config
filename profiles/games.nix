@@ -1,9 +1,6 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    unstable.steam
-    unstable.steam-run
-  ];
+  environment.systemPackages = with pkgs; [ unstable.steam unstable.steam-run ];
 
 }

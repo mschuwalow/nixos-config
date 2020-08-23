@@ -7,5 +7,4 @@ let
     url = "https://github.com/nix-community/NUR/archive/${rev}.tar.gz";
     sha256 = sha;
   };
-in
-import tar { inherit pkgs; }
+in import tar { inherit pkgs; }

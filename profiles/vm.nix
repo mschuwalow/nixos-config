@@ -1,12 +1,7 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    kvm
-    qemu
-    vagrant
-    virtmanager
-  ];
+  environment.systemPackages = with pkgs; [ kvm qemu vagrant virtmanager ];
 
   virtualisation.libvirtd = {
     enable = true;

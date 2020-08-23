@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
-let
-  secrets = import ../secrets;
-in
-{
+let secrets = import ../secrets;
+in {
   services.openssh = {
     enable = true;
     passwordAuthentication = false;

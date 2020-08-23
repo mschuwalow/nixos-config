@@ -1,10 +1,10 @@
-{ stdenv, fetchurl, dpkg, alsaLib, atk, cairo, 
-  cups, curl, dbus, expat, fontconfig, freetype, glib,
-  gnome2, libnotify, libxcb, nspr, nss, systemd, xorg, ... }:
+{ stdenv, fetchurl, dpkg, alsaLib, atk, cairo, cups, curl, dbus, expat
+, fontconfig, freetype, glib, gnome2, libnotify, libxcb, nspr, nss, systemd
+, xorg, ... }:
 
-let 
+let
   version = "2.10.5";
-  rpath = stdenv.lib.makeLibraryPath  [ 
+  rpath = stdenv.lib.makeLibraryPath [
     alsaLib
     atk
     cairo
@@ -25,7 +25,7 @@ let
     nss
     stdenv.cc.cc
     systemd
-    
+
     xorg.libxkbfile
     xorg.libX11
     xorg.libXcomposite
@@ -37,15 +37,16 @@ let
     xorg.libXrandr
     xorg.libXrender
     xorg.libXtst
-    xorg.libXScrnSaver ] + ":${stdenv.cc.cc.lib}/lib64";
+    xorg.libXScrnSaver
+  ] + ":${stdenv.cc.cc.lib}/lib64";
 
   src = fetchurl {
-    url = "https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/${version}/rocketchat_${version}_amd64.deb";
+    url =
+      "https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/${version}/rocketchat_${version}_amd64.deb";
     sha256 = "907de38c44a1663223bd43cc63b2a1347d9e08c72e248c736f9c88b995ddf583";
   };
 
-in
-stdenv.mkDerivation {
+in stdenv.mkDerivation {
   name = "rocketchat-${version}";
 
   inherit src;
@@ -74,10 +75,10 @@ stdenv.mkDerivation {
     sed -i 's/    checkForUpdates();/\/\/  checkForUpdates();/' \
         $out/lib/rocketchat/resources/app.asar 
   '';
-   
+
   meta = with stdenv.lib; {
     description = "Desktop client for Rocket.Chat";
-    homepage = https://rocket.chat;
+    homepage = "https://rocket.chat";
     license = licenses.mit;
     platforms = [ "x86_64-linux" ];
     maintainers = [ ];

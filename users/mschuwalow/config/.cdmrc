@@ -1,7 +1,0 @@
-binlist=(
-  '/usr/bin/sway'
-  '$SHELL -li'
-)
-namelist=(Sway Console)
-flaglist=(C C)
-dialogrc=/usr/share/cdm/themes/blackandwhite

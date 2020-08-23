@@ -8,13 +8,8 @@
   };
 
   programs.java.enable = true;
-  
+
   # install development packages
-  environment.systemPackages = with pkgs; [
-    maven
-    sbt
-    jdk8
-    jd-gui
-  ];
+  environment.systemPackages = with pkgs; [ maven sbt jdk8 jd-gui ];
 
 }

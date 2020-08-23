@@ -16,10 +16,10 @@
     # unstable.sublime-merge
     idea.idea-ultimate
     nodePackages.node2nix
-    custom.git-heatmap
+    external.git-heatmap
     ncurses.dev
-    (python3.withPackages(ps: with ps; [ virtualenv ]))
-    
+    (python3.withPackages (ps: with ps; [ virtualenv ]))
+
     nodejs-10_x
     unstable.postman
     sshfs

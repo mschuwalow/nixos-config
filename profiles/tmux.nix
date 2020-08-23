@@ -5,8 +5,13 @@
     enable = true;
     baseIndex = 1;
     extraTmuxConf = ''
+      ###############
+      ### Plugins ###
+      ###############
+
       run-shell ${pkgs.tmuxPlugins.fpp}/share/tmux-plugins/fpp/fpp.tmux
       run-shell ${pkgs.tmuxPlugins.sensible}/share/tmux-plugins/sensible/sensible.tmux
+
       ###############
       ### GENERAL ###
       ###############
@@ -29,6 +34,10 @@
       set-option -g visual-bell off
       set-option -g bell-action none
 
+      # pretend to be xterm
+      set -g default-terminal "xterm-256color"
+      set-window-option -g xterm-keys on
+
       ####################
       ### KEY BINDINGS ###
       ####################
@@ -48,13 +57,17 @@
       unbind '"'
       unbind %
 
+      # fix scrolling to go one line at a time
+      bind -Tcopy-mode WheelUpPane send -N1 -X scroll-up
+      bind -Tcopy-mode WheelDownPane send -N1 -X scroll-down
+
       ######################
       ### DESIGN CHANGES ###
       ######################
 
       # The modes
       setw -g clock-mode-colour colour135
-      
+
       # The statusbar
       set -g status-position bottom
       set -g status-bg colour234

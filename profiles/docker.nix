@@ -1,9 +1,7 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    docker_compose
-  ];
+  environment.systemPackages = with pkgs; [ docker_compose ];
 
   virtualisation.libvirtd.enable = true;
   virtualisation.lxc.enable = true;
