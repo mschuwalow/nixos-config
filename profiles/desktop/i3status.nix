@@ -1,6 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, python3Packages, file, ... }:
 let
-  self = pkgs.writeText "i3status.conf" ''
+  py3status = (python3Packages.py3status.overrideAttrs (oldAttrs: {
+    propagatedBuildInputs = [
+      python3Packages.pytz
+      python3Packages.tzlocal
+      python3Packages.dbus-python
+      python3Packages.setuptools
+      file
+    ];
+  }));
+
+  configFile = pkgs.writeText "i3status.conf" ''
     # i3status configuration file.
     # see "man i3status" for documentation.
 
@@ -117,4 +127,5 @@ let
       format = "%d/%m %H:%M:%S"
     }
   '';
-in self
+in
+  "${py3status}/bin/py3status -c ${configFile}"

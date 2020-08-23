@@ -2,12 +2,12 @@
 
 {
   imports = [
-    # ./audio.nix
+    ./audio.nix
     ./desktop
-    # ./development.nix
-    # ./jvm.nix
-    # ./docker.nix
-    # ./tmux.nix
-    # ./vpn.nix
+    ./development.nix
+    ./jvm.nix
+    ./docker.nix
+    ./tmux.nix
+    ./vpn.nix
   ];
 }

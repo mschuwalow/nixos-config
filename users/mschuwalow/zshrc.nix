@@ -96,10 +96,7 @@ let
     zplug 'l4u/zsh-output-highlighting'
     zplug 'changyuheng/zsh-interactive-cd'
     zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-    zplug 'zpm-zsh/autoenv'
-
-    # set theme
-    zplug 'romkatv/powerlevel10k', as:theme, depth:1
+    zplug 'zpm-zsh/autoenv'    
 
     # Install plugins if there are plugins that have not been installed
     if ! zplug check --verbose; then
@@ -112,7 +109,8 @@ let
     # then, source plugins and add commands to $PATH
     zplug load
 
-    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+    # Set theme. To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
     ####################

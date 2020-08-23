@@ -2,26 +2,28 @@
 
 {
   environment.systemPackages = with pkgs; [
-
-    cabal-install
-    # cabal2nix
-    stack
-    # go
+    awscli
+    cabal2nix
     # zeal
-    # emacs
     vscode
     meld
     # custom.lorri
     # sublime3
     # unstable.sublime-merge
-    idea.idea-ultimate
     nodePackages.node2nix
-    external.git-heatmap
-    ncurses.dev
-    (python3.withPackages (ps: with ps; [ virtualenv ]))
-
+    git-heatmap
+    (python3.withPackages (ps: with ps; [ ]))
+    gnumake
+    nixfmt
     nodejs-10_x
-    unstable.postman
+    postman
     sshfs
+    ghq
+    jq
+    yq
+    ngrok
+    pspg
+    watch
+    wget
   ];
 }

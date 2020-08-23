@@ -1,13 +1,25 @@
 { pkgs, ... }:
 let
+  i3status = pkgs.callPackage (import ./i3status.nix) {};
 
-  wallpaper = pkgs.copyPathToStore ./wallpaper.jpg;
-  lockscreen = pkgs.copyPathToStore ./lock.png;
-
-  i3status = import ./i3status.nix { inherit pkgs; };
+  cmds = {
+    alacritty = "${pkgs.alacritty}/bin/alacritty";
+    amixer = "${pkgs.alsaUtils}/bin/amixer";
+    bash = "${pkgs.bash}/bin/bash";
+    feh = "${pkgs.feh}/bin/feh";
+    i3lock = "${pkgs.i3lock}/bin/i3lock";
+    maim = "${pkgs.maim}/bin/maim";
+    pacmd = "${pkgs.pulseaudio}/bin/pacmd";
+    pactl = "${pkgs.pulseaudio}/bin/pactl";
+    pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
+    playerctl = "${pkgs.playerctl}/bin/playerctl";
+    python3 = "${pkgs.python3}/bin/python";
+    rofi = "${pkgs.rofi}/bin/rofi";
+    xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
+  };
 
   i3next = pkgs.writeScript "i3next.sh" ''
-    #!${pkgs.bash}/bin/bash
+    #!${cmds.bash}
 
     case "$1" in
       new)
@@ -27,15 +39,14 @@ let
   '';
 
   i3lock = pkgs.writeScript "i3lock.sh" ''
-    #!${pkgs.bash}/bin/bash
+    #!${cmds.bash}
     set -eu
 
-    [[ -z "$(pgrep i3lock)" ]] || exit
-    i3lock -n -t -f -d -i ${lockscreen}
+    ${cmds.i3lock} -n -t -f -d -i ${pkgs.copyPathToStore ./lock.png}
   '';
 
   i3exit = pkgs.writeScript "i3exit.sh" ''
-    #!${pkgs.bash}/bin/bash
+    #!${cmds.bash}
 
     case "$1" in
       lock)
@@ -66,7 +77,7 @@ let
   '';
 
   i3new = pkgs.writeScript "i3new.sh" ''
-    #!${pkgs.bash}/bin/bash
+    #!${cmds.bash}
     case "$1" in
       new)
         i3-msg workspace $(($(i3-msg -t get_workspaces | tr , '\n' | grep '"num":' | cut -d : -f 2 | sort -rn | head -1) + 1))
@@ -84,7 +95,7 @@ let
   '';
 
   volumeControl = pkgs.writeScript "volumeControl.sh" ''
-    #!${pkgs.python3}/bin/python
+    #!${cmds.python3}
     import subprocess
     import sys
 
@@ -94,21 +105,21 @@ let
       return stdout.strip().decode('utf-8'), call.returncode
 
     def get_active_sink():
-      return run('pacmd list-sinks | grep "* index" | awk \'{print $3}\''')[0]
+      return run('${cmds.pacmd} list-sinks | grep "* index" | awk \'{print $3}\''')[0]
 
     def get_volume():
-      return run('amixer get Master | grep -o "\[.*%\]" | grep -o "[0-9]*" | head -n1')[0]
+      return run('${cmds.amixer} get Master | grep -o "\[.*%\]" | grep -o "[0-9]*" | head -n1')[0]
 
     def set_volume(percentage):
-      run('pactl set-sink-volume ' + get_active_sink() + ' ' + str(percentage) + '%')
+      run('${cmds.pactl} set-sink-volume ' + get_active_sink() + ' ' + str(percentage) + '%')
       emit_signal()
 
     def toggle_volume():
-      run('amixer set Master Playback Switch toggle')
+      run('${cmds.amixer} set Master Playback Switch toggle')
       emit_signal()
 
     def is_muted():
-      return not run('amixer get Master | grep -o "\[on\]" | head -n1')[0]
+      return not run('${cmds.amixer} get Master | grep -o "\[on\]" | head -n1')[0]
 
     def write(message):
       sys.stdout.write(message)
@@ -171,7 +182,7 @@ let
     set $mod Mod4
 
     # Your preferred terminal emulator
-    set $term alacritty
+    set $term ${cmds.alacritty}
 
     font pango:Roboto Mono 0
     set $bar-font pango:Roboto Mono 8
@@ -195,8 +206,8 @@ let
     bindsym $mod+Shift+q kill
 
     # start your launcher
-    bindsym $mod+d exec --no-startup-id ${pkgs.rofi}/bin/rofi -show drun
-    bindsym $mod+Shift+Tab exec --no-startup-id ${pkgs.rofi}/bin/rofi -show window
+    bindsym $mod+d exec --no-startup-id ${cmds.rofi} -show drun
+    bindsym $mod+Shift+Tab exec --no-startup-id ${cmds.rofi} -show window
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
@@ -308,25 +319,25 @@ let
     bindsym XF86AudioMute exec --no-startup-id ${volumeControl} toggle
 
     # Media player controls
-    bindsym XF86AudioPlay exec playerctl play-pause
-    bindsym XF86AudioPause exec playerctl play-pause
-    bindsym XF86AudioPlayPause exec playerctl play-pause
-    bindsym XF86AudioNext exec playerctl next
-    bindsym XF86AudioPrev exec playerctl previous
+    bindsym XF86AudioPlay      exec ${cmds.playerctl} play-pause
+    bindsym XF86AudioPause     exec ${cmds.playerctl} play-pause
+    bindsym XF86AudioPlayPause exec ${cmds.playerctl} play-pause
+    bindsym XF86AudioNext      exec ${cmds.playerctl} next
+    bindsym XF86AudioPrev      exec ${cmds.playerctl} previous
 
     #
     # Other:
     #
 
     # Brightnes
-    bindsym XF86MonBrightnessDown exec --no-startup-id ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10
-    bindsym XF86MonBrightnessUp exec --no-startup-id ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10
+    bindsym XF86MonBrightnessDown exec --no-startup-id ${cmds.xbacklight} -dec 10
+    bindsym XF86MonBrightnessUp exec --no-startup-id ${cmds.xbacklight} -inc 10
 
     bindsym $mod+Shift+w exec $term -t "__nmtui" -e "nmtui"
-    bindsym $mod+Shift+v exec pavucontrol
+    bindsym $mod+Shift+v exec ${cmds.pavucontrol}
 
     # screenshot
-    bindsym $mod+Print exec maim $HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
+    bindsym $mod+Print exec ${cmds.maim} $HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
 
     set $mode_resize resize
     bindsym $mod+Shift+r mode "$mode_resize"
@@ -408,13 +419,12 @@ let
 
     exec --no-startup-id seafile-applet
     exec --no-startup-id nm-applet
-    exec --no-startup-id keepassxc
 
     # set background
-    exec_always --no-startup-id sleep 10 & ${pkgs.feh}/bin/feh --bg-fill --no-xinerama ${wallpaper}
+    exec_always --no-startup-id sleep 10 & ${cmds.feh} --bg-fill --no-xinerama ${pkgs.copyPathToStore ./wallpaper.jpg}
 
     bar {
-      status_command py3status -c ${i3status}
+      status_command ${i3status}
       i3bar_command i3bar
       position bottom
       #tray_output primary

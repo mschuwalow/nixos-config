@@ -1,16 +1,16 @@
 { pkgs, ... }:
 let
-  pins = import ./pin.nix;
-  externalPkgs = import ./pkgs/default.nix { inherit pkgs; };
+  pins = import ./pins.nix;
+  # externalPkgs = import ./pkgs/default.nix { inherit pkgs; };
   secrets = import ./secrets;
   config = {
     allowUnfree = true;
     oraclejdk.accept_license = true;
-    packageOverrides = pkgs: {
-      unstable = import (pins.unstable) { inherit config; };
-      external = externalPkgs;
-      nur = pkgs.nur;
-    };
+    # packageOverrides = pkgs: {
+    #   unstable = import (pins.unstable) { inherit config; };
+    #   external = externalPkgs;
+    #   nur = pkgs.nur;
+    #};
   };
 in {
   imports = [
@@ -27,7 +27,12 @@ in {
   ];
 
   nix = {
-    nixPath = [ "nixpkgs=${<nixpkgs>}" "nixos-config=/etc/nixos/configuration.nix" ];
+    nixPath =
+      [ 
+        "nixpkgs=${<nixpkgs>}"
+        "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+        "nixos-config=/etc/nixos/configuration.nix"
+      ];
     binaryCaches = [ "https://cache.nixos.org/" "https://r-ryantm.cachix.org" ];
     binaryCachePublicKeys =
       [ "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c=" ];
@@ -40,7 +45,19 @@ in {
     };
   };
 
-  nixpkgs.config = config;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      oraclejdk.accept_license = true;
+    };
+    overlays = [
+      (import ./overlays/unstable.nix)
+      (import ./overlays/nur.nix)
+      (import ./overlays/pythonPackages.nix)
+      (import ./overlays/git-heatmap)
+      (import ./overlays/rocketchat)
+    ];
+  };
 
   environment.systemPackages = with pkgs; [
     wget
@@ -57,16 +74,25 @@ in {
     zip
     unzip
     htop
+    unstable.ytop
     powertop
-    # moreutils
+    moreutils
     tree
     bc
     whois
     ncdu
     nix-prefetch-git
-    # httpstat
-    gawk
-    # nox
+    httpstat
+    mawk
+    fd
+    nox
+    most
+    ncdu
+    parallel
+    peco
+    sd
+    termdown
+    tree
   ];
 
   boot = {
@@ -115,22 +141,24 @@ in {
     users.root = { hashedPassword = secrets.hashedPasswords.root; };
   };
 
-  i18n = {
-    consoleFont = "lat9w-16";
-    consoleKeyMap = "colemak/colemak";
-    defaultLocale = "en_US.UTF-8";
+  console = {
+    keyMap = "colemak/colemak";
+    font = "lat9w-16";
   };
+
+  i18n = { defaultLocale = "en_US.UTF-8"; };
 
   programs = {
     ssh.startAgent = true;
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    };
   };
 
   services = { dbus.enable = true; };
 
   time.timeZone = "Europe/Berlin";
 
-  system = {
-    autoUpgrade.enable = true;
-  };
+  system = { autoUpgrade.enable = true; };
 }

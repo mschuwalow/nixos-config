@@ -26,7 +26,8 @@ let
     (recFiles confDir)) // {
       # sensitive files
       ".m2/settings.xml".source = "${secretFiles}/maven/settings.xml";
-      ".m2/settings-security.xml".source = "${secretFiles}/maven/settings-security.xml";
+      ".m2/settings-security.xml".source =
+        "${secretFiles}/maven/settings-security.xml";
       ".kube/config".source = "${secretFiles}/kubeconfig";
     };
 
@@ -65,9 +66,9 @@ in {
         shellAliases = {
           ll = "${pkgs.exa}/bin/exa -lhg --git";
           la = "${pkgs.exa}/bin/exa -lahg --git";
-          # dc = "${pkgs.docker-compose}/bin/docker-compose";
+          dc = "${pkgs.docker-compose}/bin/docker-compose";
           se = "sudo -E";
-          nixedit = "se ${pkgs.sublime3}/bin/sublime /etc/nixos";
+          nixedit = "se ${pkgs.vscode}/bin/vscode /etc/nixos";
         };
       };
 
@@ -83,11 +84,16 @@ in {
           review = "difftool $REVIEW_BASE --dir-diff";
           reviewone = "difftool $REVIEW_BASE --";
           sminit = "submodule update --init --recursive --progress";
-          releaseNotes = "log --pretty=format:'- %s%n%b' --since='$(git show -s --format=%ad `git rev-list --tags --max-count=1`)'";
-          sh = "log --graph --all --simplify-by-decoration --decorate --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --date=short";
-          shr = "log --graph --all --simplify-by-decoration --decorate --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --date=relative";
-          fh = "log --graph --all --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=short";
-          fhr = "log --graph --all --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+          releaseNotes =
+            "log --pretty=format:'- %s%n%b' --since='$(git show -s --format=%ad `git rev-list --tags --max-count=1`)'";
+          sh =
+            "log --graph --all --simplify-by-decoration --decorate --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --date=short";
+          shr =
+            "log --graph --all --simplify-by-decoration --decorate --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --date=relative";
+          fh =
+            "log --graph --all --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=short";
+          fhr =
+            "log --graph --all --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
           news = "log --word-diff=color -p HEAD@{1}..HEAD@{0}";
           st = "status --short --branch";
         };
@@ -105,15 +111,16 @@ in {
         };
       };
 
-      home.packages = with pkgs; ([
-        # vlc
-        # shutter
-        # rtv
+      home.packages = with pkgs;
+        ([
+          # vlc
+          # shutter
+          # rtv
 
-        # kubetail
-        # kubectl
-        # helm
-      ]);
+          # kubetail
+          # kubectl
+          # helm
+        ]);
 
       gtk = {
         enable = true;

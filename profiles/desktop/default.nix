@@ -10,20 +10,18 @@ in {
     gnome3.evince
     gparted
     polkit_gnome
-
     alacritty
-    # firefox
-    # spotify
-   
-    # seafile-client
-
-    # screenkey
-    # mupdf
-    # transmission-gtk
-    # nmap-graphical
-
+    firefox
+    spotify
+    spotify-tui
+    bitwarden
+    seafile-client
+    unstable.ferdi
+    screenkey
+    mupdf
+    transmission-gtk
+    nmap-graphical
     xorg.setxkbmap
-
     adapta-gtk-theme
     paper-icon-theme
   ];
@@ -49,17 +47,19 @@ in {
 
       enableCtrlAltBackspace = true;
 
-      displayManager.lightdm = {
-        greeters.gtk = {
-          theme.name = "Adapta-Eta";
-          theme.package = pkgs.adapta-gtk-theme;
-          iconTheme.name = "Paper";
-          iconTheme.package = pkgs.paper-icon-theme;
+      displayManager = {
+        defaultSession = "xfce+i3";
+        lightdm = {
+          greeters.gtk = {
+            theme.name = "Adapta-Eta";
+            theme.package = pkgs.adapta-gtk-theme;
+            iconTheme.name = "Paper";
+            iconTheme.package = pkgs.paper-icon-theme;
+          };
+          enable = true;
         };
-        enable = true;
       };
       desktopManager = {
-        default = "xfce";
         xterm.enable = false;
         xfce = {
           enable = true;
@@ -71,22 +71,6 @@ in {
         enable = true;
         configFile = i3-config;
         package = pkgs.i3-gaps;
-        extraPackages = with pkgs; [
-          python3
-          rofi
-          feh
-          maim
-          i3status
-          i3lock
-          (python3Packages.py3status.overrideAttrs (oldAttrs: {
-            propagatedBuildInputs = [
-              python3Packages.pytz
-              python3Packages.tzlocal
-              python3Packages.dbus-python
-              file
-            ];
-          }))
-        ];
       };
     };
   };
@@ -103,7 +87,6 @@ in {
     enableFontDir = true;
     fonts = with pkgs; [
       font-awesome_5
-
       fantasque-sans-mono
       source-code-pro
       fira-code
