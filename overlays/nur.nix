@@ -6,7 +6,9 @@ let
     inherit sha256;
     url = "https://github.com/nix-community/nur/archive/${rev}.tar.gz";
   };
-in
-{
-  nur = import tarball { nurpkgs = pkgs; pkgs = pkgs; };
+in {
+  nur = import tarball {
+    nurpkgs = pkgs;
+    pkgs = pkgs;
+  };
 }

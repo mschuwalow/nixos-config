@@ -1,3 +1,1 @@
-pkgs: oldPkgs: {
-  rocketchat = oldPkgs.callPackage ./deriv.nix {};
-}
+pkgs: oldPkgs: { rocketchat = oldPkgs.callPackage ./deriv.nix { }; }

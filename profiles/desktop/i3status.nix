@@ -127,5 +127,4 @@ let
       format = "%d/%m %H:%M:%S"
     }
   '';
-in
-  "${py3status}/bin/py3status -c ${configFile}"
+in "${py3status}/bin/py3status -c ${configFile}"

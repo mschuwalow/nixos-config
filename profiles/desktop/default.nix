@@ -19,6 +19,7 @@ in {
     unstable.ferdi
     screenkey
     mupdf
+    xclip
     transmission-gtk
     nmap-graphical
     xorg.setxkbmap

@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  i3status = pkgs.callPackage (import ./i3status.nix) {};
+  i3status = pkgs.callPackage (import ./i3status.nix) { };
 
   cmds = {
     alacritty = "${pkgs.alacritty}/bin/alacritty";
@@ -421,7 +421,9 @@ let
     exec --no-startup-id nm-applet
 
     # set background
-    exec_always --no-startup-id sleep 10 & ${cmds.feh} --bg-fill --no-xinerama ${pkgs.copyPathToStore ./wallpaper.jpg}
+    exec_always --no-startup-id sleep 10 & ${cmds.feh} --bg-fill --no-xinerama ${
+      pkgs.copyPathToStore ./wallpaper.jpg
+    }
 
     bar {
       status_command ${i3status}

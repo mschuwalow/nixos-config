@@ -6,7 +6,4 @@ let
     inherit sha256;
     url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
   };
-in
-{
-  unstable = import tarball { config = pkgs.config; };
-}
+in { unstable = import tarball { config = pkgs.config; }; }

@@ -5,17 +5,14 @@ pkgs: oldPkgs: {
         pname = "stups-berry";
         version = "1.0.28";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.dnspython
-          self.pyyaml
-          self.boto3
-        ];
-      patches = [
-        (oldPkgs.fetchpatch {
-          name = "fix-pip10-compat.patch";
-          url = "https://github.com/zalando-stups/berry/commit/209587e855d93cbe31339a88ab47f1cc641dba63.patch";
-          sha256 = "0lgpz409c51d5xlw520szhb3fxrxss1kg7rdls8rwd2b95dfxp4j";
-        })
+        propagatedBuildInputs = [ self.dnspython self.pyyaml self.boto3 ];
+        patches = [
+          (oldPkgs.fetchpatch {
+            name = "fix-pip10-compat.patch";
+            url =
+              "https://github.com/zalando-stups/berry/commit/209587e855d93cbe31339a88ab47f1cc641dba63.patch";
+            sha256 = "0lgpz409c51d5xlw520szhb3fxrxss1kg7rdls8rwd2b95dfxp4j";
+          })
         ];
         src = super.fetchPypi {
           inherit pname version;
@@ -59,11 +56,8 @@ pkgs: oldPkgs: {
         pname = "stups-fullstop";
         version = "1.1.31";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.requests
-          self.stups-cli-support
-          self.stups-zign
-        ];
+        propagatedBuildInputs =
+          [ self.requests self.stups-cli-support self.stups-zign ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "0cpsijwmciczn85kd3k8wmhaizh599wpa3swqkvlsrpa1a662212";
@@ -73,11 +67,8 @@ pkgs: oldPkgs: {
         pname = "stups-pierone";
         version = "1.1.42";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.requests
-          self.stups-cli-support
-          self.stups-zign
-        ];
+        propagatedBuildInputs =
+          [ self.requests self.stups-cli-support self.stups-zign ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "1bfwl31bmvhvfri52x1zjad8mlkhrnn5h24c69qgf0ahwasy3cn1";
@@ -108,12 +99,8 @@ pkgs: oldPkgs: {
         pname = "stups-piu";
         version = "1.2.2";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.stups-zign
-          self.pyperclip
-          self.sshpubkeys
-          self.boto3
-        ];
+        propagatedBuildInputs =
+          [ self.stups-zign self.pyperclip self.sshpubkeys self.boto3 ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "14v4mpcr6wpclcarj1v8f1g0b4i02pp8axc1i4xasnb91145i4gh";
@@ -123,11 +110,8 @@ pkgs: oldPkgs: {
         pname = "stups-kio";
         version = "0.1.22";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.requests
-          self.stups-cli-support
-          self.stups-zign
-        ];
+        propagatedBuildInputs =
+          [ self.requests self.stups-cli-support self.stups-zign ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "14gfsj394b7f4yxl8li7kvgyilxvljbsln7zy5an8y1z8sl7dj0n";
@@ -137,10 +121,7 @@ pkgs: oldPkgs: {
         pname = "stups-zign";
         version = "1.2";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.stups-tokens
-          self.stups-cli-support
-        ];
+        propagatedBuildInputs = [ self.stups-tokens self.stups-cli-support ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "06dga2144xp715lbjgmvq04a3i9hka0p232skpnx2f72pjgb6ral";
@@ -150,9 +131,7 @@ pkgs: oldPkgs: {
         pname = "stups-tokens";
         version = "1.1.19";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.requests
-        ];
+        propagatedBuildInputs = [ self.requests ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "0q1ir951lcmx9wdcj328x5y165x9rkpzr3v06jbjmmdzrj1ssc3q";
@@ -162,11 +141,8 @@ pkgs: oldPkgs: {
         pname = "stups-cli-support";
         version = "1.1.20";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.requests
-          self.clickclick
-          self.dnspython
-        ];
+        propagatedBuildInputs =
+          [ self.requests self.clickclick self.dnspython ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "1nc5va3j9gc9w2vqmg9rbp91kw51xnmshkhifyhfvi7fcdd5r8rw";
@@ -194,10 +170,7 @@ pkgs: oldPkgs: {
         pname = "scm-source";
         version = "1.0.11";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.clickclick
-          self.pyyaml
-        ];
+        propagatedBuildInputs = [ self.clickclick self.pyyaml ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "0dicplclkrzgkg5nkja5nin2r2919a404vkl81b6ccjg121pwxwm";
@@ -207,9 +180,7 @@ pkgs: oldPkgs: {
         pname = "opentracing";
         version = "2.2.0";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.future
-        ];
+        propagatedBuildInputs = [ self.future ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "03kyzdqxzfs0qaz5fag4fspy9imh3s364zkqfz10pyaqbjx33lng";
@@ -219,9 +190,7 @@ pkgs: oldPkgs: {
         pname = "opentracing-utils";
         version = "0.18.1";
         doCheck = false;
-        propagatedBuildInputs = [
-          self.opentracing
-        ];
+        propagatedBuildInputs = [ self.opentracing ];
         src = super.fetchPypi {
           inherit pname version;
           sha256 = "142zi9rfyhavw5874a1gnkjldlv578l5anffjzvwmc5ax0bhq2x7";

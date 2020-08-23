@@ -68,7 +68,9 @@ in {
           la = "${pkgs.exa}/bin/exa -lahg --git";
           dc = "${pkgs.docker-compose}/bin/docker-compose";
           se = "sudo -E";
-          nixedit = "se ${pkgs.vscode}/bin/vscode /etc/nixos";
+          nixedit = "${pkgs.vscode}/bin/code /etc/nixos";
+          nixrebuild =
+            "sudo nixos-rebuild -I nixpkgs=/etc/nixos/nixpkgs -I nixpkgs-overlays=/etc/nixos/overlays/";
         };
       };
 

@@ -27,12 +27,11 @@ in {
   ];
 
   nix = {
-    nixPath =
-      [ 
-        "nixpkgs=${<nixpkgs>}"
-        "nixpkgs-overlays=/etc/nixos/overlays-compat/"
-        "nixos-config=/etc/nixos/configuration.nix"
-      ];
+    nixPath = [
+      "nixpkgs=${<nixpkgs>}"
+      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+      "nixos-config=/etc/nixos/configuration.nix"
+    ];
     binaryCaches = [ "https://cache.nixos.org/" "https://r-ryantm.cachix.org" ];
     binaryCachePublicKeys =
       [ "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c=" ];
@@ -63,7 +62,7 @@ in {
     wget
     git
     mkpasswd
-    micro
+    unstable.micro
     exa
     fzf
     nnn
@@ -98,9 +97,13 @@ in {
   boot = {
     cleanTmpDir = true;
     loader = {
-      systemd-boot = {
+      grub = {
+        device = "nodev";
+        efiSupport = true;
         enable = true;
-        consoleMode = "max";
+        memtest86.enable = true;
+        useOSProber = true;
+        version = 2;
       };
       efi.canTouchEfiVariables = true;
     };

@@ -1,3 +1,1 @@
-pkgs: oldPkgs: {
-  git-heatmap = oldPkgs.callPackage ./deriv.nix {};
-}
+pkgs: oldPkgs: { git-heatmap = oldPkgs.callPackage ./deriv.nix { }; }
