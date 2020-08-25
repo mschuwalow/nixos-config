@@ -1,6 +1,6 @@
 { ... }:
 
 {
-  _module.args.rootDir = "/etx/nixos";
+  _module.args.rootDir = "/etc/nixos";
   imports = [ ./secrets ./system.nix ];
 }
