@@ -8,8 +8,6 @@ let
   };
 in {
   _module.args.hmLib = import "${home-manager}/modules/lib" { inherit lib; };
-  
-  imports = [
-    "${home-manager}/nixos"
-  ];
+
+  imports = [ "${home-manager}/nixos" ];
 }

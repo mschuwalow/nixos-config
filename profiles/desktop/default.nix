@@ -24,8 +24,6 @@ in {
     transmission-gtk
     nmap-graphical
     xorg.setxkbmap
-    adapta-gtk-theme
-    paper-icon-theme
   ];
 
   xdg.portal.enable = true;
@@ -60,9 +58,6 @@ in {
           };
           enable = true;
         };
-        sessionCommands = ''
-          ${pkgs.xlibs.xsetroot}/bin/xsetroot -cursor_name ${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ/cursors/left_ptr 32 &disown
-        '';
       };
       desktopManager = {
         xterm.enable = false;

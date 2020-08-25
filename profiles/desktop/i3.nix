@@ -399,6 +399,7 @@ let
     # for_window [class="(?i)VirtualBox"] floating enable
     for_window [class="(?i)blueman"] floating enable
     for_window [class="(?i)VMWare"] floating enable
+    for_window [class="Seafile Client"] floating enable
 
     for_window [class="(?i)Skype"] layout stacking 
 
