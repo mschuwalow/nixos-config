@@ -5,6 +5,7 @@ in {
     gnome3.dconf
     gnome3.gnome-disk-utility
     gnome3.gnome-system-monitor
+    gnome3.gnome-font-viewer
     gnome3.nautilus
     gnome3.eog
     gnome3.evince
@@ -59,6 +60,9 @@ in {
           };
           enable = true;
         };
+        sessionCommands = ''
+          ${pkgs.xlibs.xsetroot}/bin/xsetroot -cursor_name ${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ/cursors/left_ptr 32 &disown
+        '';
       };
       desktopManager = {
         xterm.enable = false;

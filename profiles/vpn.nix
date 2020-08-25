@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-let secrets = import ../secrets;
-in {
+{ pkgs, secrets, ... }: {
   environment.systemPackages = with pkgs; [ openvpn ];
 
   services = {
     openvpn.servers = {
       pureVPN = {
-        config = "config ${secrets.files}/vpn/pureVPN.ovpn";
+        config = "config ${secrets.vpn.pureVPNConfig}";
         autoStart = false;
         updateResolvConf = false;
       };

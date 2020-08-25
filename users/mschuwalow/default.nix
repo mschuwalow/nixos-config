@@ -1,37 +1,32 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, secrets, rootDir, ... }:
 
 let
   hm = import ../../modules/home-manager.nix { inherit lib; };
+  homeDirectory = "/home/mschuwalow";
 
-  secrets = import ../../secrets;
-  secretFiles = "${secrets.files}/mschuwalow";
+  userSecrets = secrets.users.mschuwalow;
 
-  confDir = "/etc/nixos/users/mschuwalow/files";
-
-  recFiles' = x:
+  recFiles = x:
     if lib.pathIsDirectory x then
-      (lib.concatMap (y: recFiles' (toString x + "/" + toString y))
+      (lib.concatMap (y: recFiles (toString x + "/" + toString y))
         (builtins.attrNames (builtins.readDir x)))
     else
       [ x ];
 
-  recFiles = x:
+  recDir = x:
     if lib.pathIsDirectory x then
-      (map (y: lib.removePrefix (toString x + "/") y) (recFiles' x))
+      (map (y: lib.removePrefix (toString x + "/") y) (recFiles x))
     else
-      [ x ];
+      [ ];
 
-  files = lib.listToAttrs (map
-    (name: (lib.nameValuePair "${name}" ({ source = "${confDir}/${name}"; })))
-    (recFiles confDir)) // {
-      # sensitive files
-      ".m2/settings.xml".source = "${secretFiles}/maven/settings.xml";
-      ".m2/settings-security.xml".source =
-        "${secretFiles}/maven/settings-security.xml";
-      ".kube/config".source = "${secretFiles}/kubeconfig";
-    };
+  listFiles = dir:
+    lib.listToAttrs (map (name:
+      (lib.nameValuePair (toString name) ({ source = "${dir}/${name}"; })))
+      (recDir dir));
 
-  homeDirectory = "/home/mschuwalow";
+  files = (listFiles "${rootDir}/users/mschuwalow/files")
+    // (listFiles userSecrets.files);
+
 in {
   imports = [ hm.nixos ];
 
@@ -49,7 +44,7 @@ in {
     ];
     createHome = true;
     home = homeDirectory;
-    hashedPassword = secrets.hashedPasswords.mschuwalow;
+    hashedPassword = userSecrets.password;
   };
 
   home-manager = {
@@ -113,16 +108,15 @@ in {
         };
       };
 
-      home.packages = with pkgs;
-        ([
-          # vlc
-          # shutter
-          # rtv
+      home.packages = with pkgs; ([
+        vlc
+        shutter
+        rtv
 
-          # kubetail
-          # kubectl
-          # helm
-        ]);
+        kubetail
+        kubectl
+        helm
+      ]);
 
       gtk = {
         enable = true;
