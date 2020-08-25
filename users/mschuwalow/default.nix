@@ -1,9 +1,7 @@
-{ config, pkgs, lib, secrets, rootDir, ... }:
+{ config, pkgs, lib, secrets, rootDir, hmLib, ... }:
 
 let
-  hm = import ../../modules/home-manager.nix { inherit lib; };
   homeDirectory = "/home/mschuwalow";
-
   userSecrets = secrets.users.mschuwalow;
 
   recFiles = x:
@@ -28,8 +26,6 @@ let
     // (listFiles userSecrets.files);
 
 in {
-  imports = [ hm.nixos ];
-
   users.users.mschuwalow = {
     isNormalUser = true;
     uid = 1000;
@@ -134,7 +130,7 @@ in {
 
       qt = {
         enable = true;
-        useGtkTheme = true;
+        platformTheme = "gtk";
       };
 
       home.sessionVariables = {
@@ -158,7 +154,7 @@ in {
         FZFZ_EXTRA_DIRS = "$PROJECT_HOME";
       };
 
-      home.activation.linkFiles = hm.lib.dag.entryAfter [ "writeBoundary" ]
+      home.activation.linkFiles = hmLib.dag.entryAfter [ "writeBoundary" ]
         (lib.strings.concatMapStrings (s: ''
           mkdir --parents $(dirname ${s.target})
           ln -sf ${s.source} ${s.target}

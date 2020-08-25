@@ -6,6 +6,9 @@ in {
     ./hardware-configuration.nix
     ./machine-configuration.nix
 
+    # load modules
+    ./modules/home-manager.nix
+
     # load default services & profiles
     ./services
     ./profiles

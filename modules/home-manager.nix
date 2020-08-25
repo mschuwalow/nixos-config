@@ -1,12 +1,15 @@
 { lib, ... }:
 let
-  rev = "465d08d99f5b72b38cecb7ca1865b7255de3ee86";
-  sha = "1dkvz0sx8kjvk1lap50d5vfgm2wprh1cmhcrx3bn28r3skpj4rbj";
-  hm = fetchTarball {
+  rev = "9854342b9f088712ca3c5b67059fff5ec4f59182";
+  sha256 = "1zy443ihvdaifx5ckb2akkvrqlbnym6k63rl00zhy5ik9fdyqxla";
+  home-manager = fetchTarball {
+    inherit sha256;
     url = "https://github.com/rycee/home-manager/archive/${rev}.tar.gz";
-    sha256 = sha;
   };
 in {
-  nixos = "${hm}/nixos";
-  lib = import "${hm}/modules/lib" { inherit lib; };
+  _module.args.hmLib = import "${home-manager}/modules/lib" { inherit lib; };
+  
+  imports = [
+    "${home-manager}/nixos"
+  ];
 }
