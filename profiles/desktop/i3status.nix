@@ -1,4 +1,4 @@
-{ pkgs, python3Packages, file, ... }:
+{ pkgs, acpi, file, python3Packages, ... }:
 let
   py3status = (python3Packages.py3status.overrideAttrs (oldAttrs: {
     propagatedBuildInputs = [
@@ -7,6 +7,7 @@ let
       python3Packages.dbus-python
       python3Packages.setuptools
       file
+      acpi
     ];
   }));
 
@@ -20,8 +21,8 @@ let
     # If the above line is not correctly displayed, fix your editor first!
 
     general {
-      colors = true
       interval = 5
+      colors = true
       color_good = "#F9FAF9"
       color_bad = "#F9FAF9"
       color_degraded = "#DC322F"
@@ -32,43 +33,32 @@ let
     order += "whatismyip"
     order += "wireless _first_"
     order += "ethernet _first_"
-    # order += "load"
-    order += "cpu_usage"
-    #order += "disk /"
+    order += "load"
     order += "diskdata"
-    #order += "battery all"
     order += "battery_level"
-    # order += "load"
     order += "volume_status"
     order += "timer"
     order += "external_script"
     order += "tztime local"
-    # order += "ipv6"
 
     spotify {
-      format = "  {artist}: {title}"
+      format = " {artist}: {title}"
       format_down = ""
       format_stopped = ""
     }
 
     timer {
-      format = "  {timer}"
+      format = " {timer}"
       time = 3600
     }
 
-    cpu_usage {
-      format = "  %usage"
-    }
-
     load {
-      format = "load %1min"
-      # max_threshold = 0.3
+      format = " %1min %5min %15min"
     }
 
     diskdata {
       prefix_type = decimal
-        #format_space = "[\?min_length=5 {value:.2f}]"
-      format = " ⛁ {used_percent}% (U:{used} GB, F:{free} GB) "
+      format = "⛁ {used_percent}% (U:{used} GB, F:{free} GB)"
     }
 
     external_script {
@@ -77,19 +67,19 @@ let
     }
 
     whatismyip {
-      format = "  {isp}\|{city}\|{countryCode} ({ip})"
+      format = " {isp}\|{city}\|{countryCode} ({ip})"
       icon_on = ""
       hide_when_offline = True
       url_geo = "http://ip-api.com/json"
     }
 
     wireless _first_ {
-      format_up = "  %essid (%ip)"
+      format_up = " %essid (%ip)"
       format_down = ""
     }
 
     ethernet _first_ {
-      format_up = "  eth (%ip)"
+      format_up = " eth (%ip)"
       format_down = ""
     }
 
@@ -99,28 +89,15 @@ let
       format = "{down}⇣ {up}⇡"
     }
 
-    battery all {
-      # format = "%status %percentage %remaining %emptytime"
-      format = " %status %percentage %remaining "
-      format_down = "No battery"
-      last_full_capacity = true
-      integer_battery_capacity = true
-      status_chr = ""
-      status_bat = "⚡"
-      status_unk = "?"
-      status_full = "☻"
-      low_threshold = 15
-      threshold_type = time
-    }
-
     battery_level {
+      battery_id = "all"
       cache_timeout = 30
       measurement_mode = "acpi"
       hide_when_full = "True"
       hide_seconds = "True"
       blocks = ""
       color_charging = "#00ff00"
-      format = " {icon} {percent}% ({time_remaining})"
+      format = "{icon} {percent}% ({time_remaining})"
     }
 
     tztime local {

@@ -8,6 +8,7 @@ let
     bash = "${pkgs.bash}/bin/bash";
     feh = "${pkgs.feh}/bin/feh";
     i3lock = "${pkgs.i3lock}/bin/i3lock";
+    killall = "${pkgs.killall}/bin/killall";
     maim = "${pkgs.maim}/bin/maim";
     pacmd = "${pkgs.pulseaudio}/bin/pacmd";
     pactl = "${pkgs.pulseaudio}/bin/pactl";
@@ -140,7 +141,7 @@ let
         return 'on'
 
     def emit_signal():
-      run('pkill -RTMIN+11 i3blocks')
+      run("${cmds.killall} -USR1 -r '.*py3status.*'")
 
     if __name__ == '__main__':
       command = sys.argv[1]
@@ -185,7 +186,7 @@ let
     set $term ${cmds.alacritty}
 
     font pango:Roboto Mono 0
-    set $bar-font pango:Roboto Mono 8
+    set $bar-font pango:Roboto Mono 12
 
     set $border_pixels 3
 

@@ -2,12 +2,13 @@
 let pins = import ./pins.nix;
 in {
   imports = [
+    # load modules
+    ./modules/home-manager.nix
+    ./modules/xcursor.nix
+
     # load system specific configuration
     ./hardware-configuration.nix
     ./machine-configuration.nix
-
-    # load modules
-    ./modules/home-manager.nix
 
     # load default services & profiles
     ./services
@@ -120,7 +121,7 @@ in {
     nameservers = [ "8.8.8.8" "8.8.4.4" ];
 
     firewall = {
-      enable = true;
+      enable = false;
       allowPing = true;
       allowedTCPPorts = [ 445 139 ];
       allowedUDPPorts = [ 137 138 ];
@@ -143,6 +144,7 @@ in {
   i18n = { defaultLocale = "en_US.UTF-8"; };
 
   programs = {
+    command-not-found.enable = true;
     ssh.startAgent = true;
     zsh = {
       enable = true;

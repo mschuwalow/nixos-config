@@ -2,7 +2,8 @@ project/metals.sbt
 .metals/
 .bloop/
 .idea/
-.ensime*
+.vscode/
+.ensime/
 stack.yaml.lock
 nixpkgs.nix
 shell.nix

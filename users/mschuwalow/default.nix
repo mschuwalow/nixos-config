@@ -56,8 +56,6 @@ in {
           package = pkgs.paper-icon-theme;
           name = "Paper";
         };
-        # gtk2.extraConfig = ''
-        #  gtk-icon-sizes = "panel-menu=24,24:panel=20,20:gtk-button=18,18:gtk-large-toolbar=24,24"'';
       };
 
       home = {
@@ -104,7 +102,6 @@ in {
       };
 
       programs = {
-        command-not-found.enable = true;
         direnv.enable = true;
         git = {
           package = pkgs.gitAndTools.gitFull;
@@ -180,7 +177,7 @@ in {
         "rofi.font" = "Fantasque Sans Mono 12";
         "rofi.lines" = 19;
         "rofi.location" = 7;
-        "rofi.modi" = [ "window" "run" "drun" "ssh" ];
+        "rofi.modi" = "window,run,drun,ssh";
         "rofi.opacity" = 95;
         "rofi.padding" = 5;
         "rofi.seperator-style" = "solid";
@@ -188,13 +185,6 @@ in {
         "rofi.ssh-command" = "{terminal} -e {ssh-client} {host}";
         "rofi.terminal" = "${pkgs.alacritty}/bin/alacritty";
         "rofi.width" = 720;
-
-      };
-
-      xsession.pointerCursor = {
-        package = pkgs.vanilla-dmz;
-        name = "Vanilla-DMZ";
-        size = 32;
       };
     };
   };

@@ -24,6 +24,7 @@ in {
     transmission-gtk
     nmap-graphical
     xorg.setxkbmap
+    zoom-us
   ];
 
   xdg.portal.enable = true;
@@ -51,10 +52,19 @@ in {
         defaultSession = "xfce+i3";
         lightdm = {
           greeters.gtk = {
-            theme.name = "Adapta-Eta";
-            theme.package = pkgs.adapta-gtk-theme;
-            iconTheme.name = "Paper";
-            iconTheme.package = pkgs.paper-icon-theme;
+            cursorTheme = {
+              name = "Vanilla-DMZ";
+              package = pkgs.vanilla-dmz;
+              size = 16;
+            };
+            iconTheme = {
+              name = "Paper";
+              package = pkgs.paper-icon-theme;
+            };
+            theme = {
+              name = "Adapta-Eta";
+              package = pkgs.adapta-gtk-theme;
+            };
           };
           enable = true;
         };
@@ -102,5 +112,10 @@ in {
         serif = [ "roboto-slab" ];
       };
     };
+  };
+  xcursor = {
+    name = "Vanilla-DMZ";
+    package = pkgs.vanilla-dmz;
+    size = 16;
   };
 }
