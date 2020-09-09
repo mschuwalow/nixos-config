@@ -1,4 +1,4 @@
-{ pkgs, acpi, file, python3Packages, ... }:
+{ xorg, acpi, file, python3Packages, writeText, ... }:
 let
   py3status = (python3Packages.py3status.overrideAttrs (oldAttrs: {
     propagatedBuildInputs = [
@@ -11,7 +11,7 @@ let
     ];
   }));
 
-  configFile = pkgs.writeText "i3status.conf" ''
+  configFile = writeText "i3status.conf" ''
     # i3status configuration file.
     # see "man i3status" for documentation.
 
@@ -98,6 +98,10 @@ let
       blocks = ""
       color_charging = "#00ff00"
       format = "{icon} {percent}% ({time_remaining})"
+    }
+
+    keyboard_layout {
+      format = " {layout}"
     }
 
     tztime local {

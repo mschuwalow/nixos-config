@@ -390,17 +390,17 @@ let
     for_window [window_type="menu"] floating enable
     for_window [window_type="dialog"] floating enable
     for_window [class="(?i)albert"] floating enable
-    # for_window [class="(?i)nautilus"] floating enable
+    for_window [class="Org.gnome.Nautilus"] floating enable
 
     for_window [class="(?i)gsimplecal"] floating enable, move position mouse
 
     for_window [class="(?i)qemu-system"] floating enable
     for_window [class="(?i)qemu"] floating enable
     for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
-    # for_window [class="(?i)VirtualBox"] floating enable
     for_window [class="(?i)blueman"] floating enable
     for_window [class="(?i)VMWare"] floating enable
     for_window [class="Seafile Client"] floating enable
+    for_window [class="Fcitx-config-gtk3"] floating enable
 
     for_window [class="(?i)Skype"] layout stacking 
 
@@ -419,19 +419,20 @@ let
     # Autostart
     #
 
-    exec --no-startup-id seafile-applet
-    exec --no-startup-id nm-applet
+    exec --no-startup-id ${pkgs.seafile-client}/bin/seafile-applet
+    exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet
+    exec --no-startup-id ${pkgs.fcitx}/bin/fcitx
 
     # set background
-    exec_always --no-startup-id sleep 10 & ${cmds.feh} --bg-fill --no-xinerama ${
-      pkgs.copyPathToStore ./wallpaper.jpg
+    exec_always ${cmds.feh} --bg-tile --no-xinerama ${
+      pkgs.copyPathToStore ./wallpaper.png
     }
 
     bar {
       status_command ${i3status}
       i3bar_command i3bar
       position bottom
-      #tray_output primary
+      tray_output primary
       font $bar-font
       strip_workspace_numbers yes
       bindsym button4 nop

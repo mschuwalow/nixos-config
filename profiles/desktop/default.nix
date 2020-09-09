@@ -2,13 +2,13 @@
 let i3-config = import ./i3.nix { inherit pkgs; };
 in {
   environment.systemPackages = with pkgs; [
-    gnome3.dconf
     gnome3.gnome-disk-utility
     gnome3.gnome-system-monitor
     gnome3.gnome-font-viewer
     gnome3.nautilus
     gnome3.eog
     gnome3.evince
+    arandr
     gparted
     polkit_gnome
     alacritty
@@ -23,75 +23,8 @@ in {
     xclip
     transmission-gtk
     nmap-graphical
-    xorg.setxkbmap
     zoom-us
   ];
-
-  xdg.portal.enable = true;
-
-  services = {
-    compton = {
-      enable = true;
-      fade = true;
-      shadow = true;
-      shadowOpacity = "0.7";
-    };
-
-    flatpak.enable = true;
-    dbus.packages = with pkgs; [ gnome3.dconf gnome2.GConf ];
-    gnome3.gnome-keyring.enable = true;
-
-    xserver = {
-      enable = true;
-      layout = "us";
-      xkbVariant = "colemak";
-
-      enableCtrlAltBackspace = true;
-
-      displayManager = {
-        defaultSession = "xfce+i3";
-        lightdm = {
-          greeters.gtk = {
-            cursorTheme = {
-              name = "Vanilla-DMZ";
-              package = pkgs.vanilla-dmz;
-              size = 16;
-            };
-            iconTheme = {
-              name = "Paper";
-              package = pkgs.paper-icon-theme;
-            };
-            theme = {
-              name = "Adapta-Eta";
-              package = pkgs.adapta-gtk-theme;
-            };
-          };
-          enable = true;
-        };
-      };
-      desktopManager = {
-        xterm.enable = false;
-        xfce = {
-          enable = true;
-          noDesktop = true;
-          enableXfwm = false;
-        };
-      };
-      windowManager.i3 = {
-        enable = true;
-        configFile = i3-config;
-        package = pkgs.i3-gaps;
-      };
-    };
-  };
-
-  programs.dconf.enable = true;
-
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
-    driSupport = true;
-  };
 
   fonts = {
     enableFontDir = true;
@@ -113,9 +46,76 @@ in {
       };
     };
   };
+
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+    driSupport = true;
+  };
+
+  i18n.inputMethod = {
+    enabled = "fcitx";
+    fcitx.engines = with pkgs.fcitx-engines; [ chewing ];
+  };
+
+  programs.dconf.enable = true;
+
+  services = {
+    compton = {
+      enable = true;
+      fade = true;
+      shadow = true;
+      shadowOpacity = "0.7";
+    };
+
+    dbus.packages = [ pkgs.gnome3.dconf ];
+
+    flatpak.enable = true;
+    gnome3.gnome-keyring.enable = true;
+
+    xserver = {
+      enable = true;
+      layout = "us";
+      xkbVariant = "colemak";
+
+      enableCtrlAltBackspace = true;
+
+      displayManager = {
+        defaultSession = "none+i3";
+        lightdm = {
+          greeters.gtk = {
+            cursorTheme = {
+              name = "Vanilla-DMZ";
+              package = pkgs.vanilla-dmz;
+              size = 16;
+            };
+            iconTheme = {
+              name = "Paper";
+              package = pkgs.paper-icon-theme;
+            };
+            theme = {
+              name = "Adapta-Eta";
+              package = pkgs.adapta-gtk-theme;
+            };
+          };
+          enable = true;
+        };
+      };
+      desktopManager.xterm.enable = false;
+      windowManager.i3 = {
+        enable = true;
+        configFile = i3-config;
+        package = pkgs.i3-gaps;
+      };
+    };
+  };
+
   xcursor = {
     name = "Vanilla-DMZ";
     package = pkgs.vanilla-dmz;
     size = 16;
   };
+
+  xdg.portal.enable = true;
+
 }
