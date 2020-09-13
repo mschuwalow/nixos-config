@@ -1,10 +1,23 @@
 { config, pkgs, ... }:
 
 {
+  boot = {
+    # extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
+    initrd.checkJournalingFS = false;
+    kernelParams = [ "idle=nomwait" ];
+  };
+
+  hardware.enableRedistributableFirmware = true;
+
   networking.hostName = "mschuwalow-desktop";
+
+  nix = {
+    maxJobs = 8;
+    buildCores = 16;
+  };
+
   time.hardwareClockInLocalTime = true;
 
-  boot.kernelParams = [ "idle=nomwait" ];
   services.xserver = {
     displayManager.sessionCommands = ''
       xrandr \
@@ -22,9 +35,4 @@
   };
 
   system.stateVersion = "20.03";
-
-  nix = {
-    maxJobs = 8;
-    buildCores = 16;
-  };
 }

@@ -63,6 +63,7 @@ in {
     gptfdisk
     ripgrep
     zip
+    unrar
     unzip
     htop
     unstable.ytop
@@ -82,7 +83,7 @@ in {
     parallel
     peco
     sd
-    termdown
+    unstable.termdown
     tree
   ];
 

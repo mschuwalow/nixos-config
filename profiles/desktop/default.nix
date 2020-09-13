@@ -20,6 +20,7 @@ in {
     unstable.ferdi
     screenkey
     mupdf
+    usbutils
     xclip
     transmission-gtk
     nmap-graphical
@@ -72,6 +73,8 @@ in {
 
     flatpak.enable = true;
     gnome3.gnome-keyring.enable = true;
+
+    pipewire.enable = true;
 
     xserver = {
       enable = true;
