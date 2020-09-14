@@ -453,6 +453,7 @@ let
       i3bar_command i3bar
       position bottom
       output nonprimary
+      tray_output non
       font $bar-font
       strip_workspace_numbers yes
       bindsym button4 nop

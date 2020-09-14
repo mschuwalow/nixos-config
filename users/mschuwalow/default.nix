@@ -81,6 +81,7 @@ in {
           EDITOR = "${pkgs.micro}/bin/micro";
           VISUAL = "${pkgs.micro}/bin/micro";
           PAGER = "${pkgs.more}/bin/more";
+          ROVER_PAGER = "${pkgs.less}/bin/less";
           PROJECT_HOME = "$HOME/Projects";
           SAVEHIST = "500000";
           HISTSIZE = "500000";

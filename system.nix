@@ -61,6 +61,7 @@ in {
     fzf
     tmux
     rover
+    nnn
     gnupg
     gptfdisk
     killall
