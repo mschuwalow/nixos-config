@@ -7,5 +7,6 @@ project/metals.sbt
 stack.yaml.lock
 nixpkgs.nix
 shell.nix
+metals.sbt
 .DS_Store
 .gcroots/

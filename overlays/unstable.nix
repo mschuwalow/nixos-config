@@ -1,7 +1,7 @@
 pkgs: oldpkgs:
 let
-  rev = "70cfd9d25e1d4f5a40f5d0a518f0749635792667";
-  sha256 = "05hrcqi41fgsxvc94c4al7jk9nbpzk1lvms1ygxn2vd7yfqgavim";
+  rev = "d31ddcb42cd9c64438c3c452fc8814ca0e7494f3";
+  sha256 = "0n82rajqirfrgsfnklz9hxgwz7myhs49pz1faanl5k77f7l3wjcp";
   tarball = builtins.fetchTarball {
     inherit sha256;
     url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";

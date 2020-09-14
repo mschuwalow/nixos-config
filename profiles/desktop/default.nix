@@ -13,6 +13,7 @@ in {
     polkit_gnome
     alacritty
     firefox
+    google-chrome
     spotify
     spotify-tui
     bitwarden
@@ -24,6 +25,7 @@ in {
     xclip
     transmission-gtk
     nmap-graphical
+    unstable.vlc
     zoom-us
   ];
 
@@ -31,9 +33,9 @@ in {
     enableFontDir = true;
     fonts = with pkgs; [
       font-awesome_5
-      fantasque-sans-mono
-      source-code-pro
-      fira-code
+      (unstable.nerdfonts.override {
+        fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro"];
+      })
       roboto
       roboto-mono
       roboto-slab

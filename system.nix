@@ -47,6 +47,7 @@ in {
       (import ./overlays/pythonPackages.nix)
       (import ./overlays/git-heatmap)
       (import ./overlays/rocketchat)
+      # (import ./overlays/i3-gaps.nix)
     ];
   };
 
@@ -80,7 +81,6 @@ in {
     nox
     most
     ncdu
-    parallel
     peco
     sd
     unstable.termdown

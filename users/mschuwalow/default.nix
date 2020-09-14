@@ -69,7 +69,6 @@ in {
           }) files));
 
         packages = with pkgs; ([
-          vlc
           shutter
           rtv
 
@@ -174,7 +173,7 @@ in {
         "rofi.color-urgent" =
           [ "argb:2c1d1f21" "#cc6666" "argb:2c1d1f21" "#a54242" "#f9f9f9" ];
         "rofi.color-window" = [ "argb:f22d303b" "#7c8389" "#1d1f21" ];
-        "rofi.font" = "Fantasque Sans Mono 12";
+        "rofi.font" = "SauceCodePro Nerd Font SemiBold 9";
         "rofi.lines" = 19;
         "rofi.location" = 7;
         "rofi.modi" = "window,run,drun,ssh";

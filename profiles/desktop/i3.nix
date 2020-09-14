@@ -185,8 +185,9 @@ let
     # Your preferred terminal emulator
     set $term ${cmds.alacritty}
 
-    font pango:Roboto Mono 0
-    set $bar-font pango:Roboto Mono 12
+    # fonts
+    font pango:SauceCodePro Nerd Font Semibold 0
+    set $bar-font pango:SauceCodePro Nerd Font Semibold 10
 
     set $border_pixels 3
 
@@ -201,7 +202,7 @@ let
     # Basics:
     #
     # start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec --no-startup-id $term
 
     # kill focused window
     bindsym $mod+Shift+q kill
@@ -334,7 +335,7 @@ let
     bindsym XF86MonBrightnessDown exec --no-startup-id ${cmds.xbacklight} -dec 10
     bindsym XF86MonBrightnessUp exec --no-startup-id ${cmds.xbacklight} -inc 10
 
-    bindsym $mod+Shift+w exec $term -t "__nmtui" -e "nmtui"
+    bindsym $mod+Shift+w exec --no-startup-id $term -t "__nmtui" -e "nmtui"
     bindsym $mod+Shift+v exec ${cmds.pavucontrol}
 
     # screenshot
@@ -424,9 +425,7 @@ let
     exec --no-startup-id ${pkgs.fcitx}/bin/fcitx
 
     # set background
-    exec_always ${cmds.feh} --bg-tile --no-xinerama ${
-      pkgs.copyPathToStore ./wallpaper.png
-    }
+    exec_always --no-startup-id ${cmds.feh} --bg-tile --no-xinerama ${pkgs.copyPathToStore ./wallpaper.png}
 
     bar {
       status_command ${i3status}
