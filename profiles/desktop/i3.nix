@@ -51,8 +51,6 @@ let
 
     case "$1" in
       lock)
-        # when not using lightdm
-        # ${i3lock} lock
         dm-tool lock
         ;;
       logout)
@@ -425,7 +423,9 @@ let
     exec --no-startup-id ${pkgs.fcitx}/bin/fcitx
 
     # set background
-    exec_always --no-startup-id ${cmds.feh} --bg-tile --no-xinerama ${pkgs.copyPathToStore ./wallpaper.png}
+    exec_always --no-startup-id ${cmds.feh} --bg-tile --no-xinerama ${
+      pkgs.copyPathToStore ./wallpaper.jpg
+    }
 
     bar {
       status_command ${i3status}

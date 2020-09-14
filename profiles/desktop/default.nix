@@ -34,7 +34,7 @@ in {
     fonts = with pkgs; [
       font-awesome_5
       (unstable.nerdfonts.override {
-        fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro"];
+        fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
       })
       roboto
       roboto-mono
@@ -71,12 +71,13 @@ in {
       shadowOpacity = "0.7";
     };
 
-    dbus.packages = [ pkgs.gnome3.dconf ];
+    dbus = {
+      packages = [ pkgs.gnome3.dconf ];
+      socketActivated = true;
+    };
 
     flatpak.enable = true;
     gnome3.gnome-keyring.enable = true;
-
-    pipewire.enable = true;
 
     xserver = {
       enable = true;

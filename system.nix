@@ -48,6 +48,7 @@ in {
       (import ./overlays/git-heatmap)
       (import ./overlays/rocketchat)
       (import ./overlays/i3-gaps)
+      (import ./overlays/rover.nix)
     ];
   };
 
@@ -58,10 +59,11 @@ in {
     unstable.micro
     exa
     fzf
-    nnn
     tmux
+    rover
     gnupg
     gptfdisk
+    killall
     ripgrep
     zip
     unrar
