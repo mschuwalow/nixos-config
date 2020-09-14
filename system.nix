@@ -47,7 +47,7 @@ in {
       (import ./overlays/pythonPackages.nix)
       (import ./overlays/git-heatmap)
       (import ./overlays/rocketchat)
-      # (import ./overlays/i3-gaps.nix)
+      (import ./overlays/i3-gaps)
     ];
   };
 

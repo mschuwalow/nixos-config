@@ -431,7 +431,28 @@ let
       status_command ${i3status}
       i3bar_command i3bar
       position bottom
+      output primary
       tray_output primary
+      font $bar-font
+      strip_workspace_numbers yes
+      bindsym button4 nop
+      bindsym button5 nop
+      tray_padding 2
+      colors {
+        background #222222
+        statusline #dddddd
+        separator #666666
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #888888
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+      }
+    }
+
+    bar {
+      i3bar_command i3bar
+      position bottom
+      output nonprimary
       font $bar-font
       strip_workspace_numbers yes
       bindsym button4 nop
