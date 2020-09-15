@@ -5,6 +5,7 @@ in {
     # load modules
     ./modules/home-manager.nix
     ./modules/xcursor.nix
+    ./modules/vsliveshare.nix
 
     # load system specific configuration
     ./hardware-configuration.nix
@@ -130,8 +131,6 @@ in {
       allowedTCPPorts = [ 445 139 ];
       allowedUDPPorts = [ 137 138 ];
     };
-
-    hosts = { "127.0.0.1" = [ "www.sublimetext.com" "sublimetext.com" ]; };
   };
 
   users = {

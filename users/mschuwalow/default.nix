@@ -68,14 +68,7 @@ in {
             target = lib.strings.escapeShellArg "${homeDirectory}/${name}";
           }) files));
 
-        packages = with pkgs; ([
-          shutter
-          rtv
-
-          kubetail
-          kubectl
-          helm
-        ]);
+        packages = with pkgs; ([ shutter rtv ]);
 
         sessionVariables = {
           EDITOR = "${pkgs.micro}/bin/micro";
@@ -134,11 +127,17 @@ in {
               whitespace = "trailing-space,space-before-tab";
             };
             diff.tool = "Sublime Merge";
-            "difftool \"Sublime Merge\"".cmd = ''
-              ${pkgs.sublime-merge}/bin/smerge difftool "$LOCAL" "$REMOTE" -o "$MERGED"'';
+            difftool.prompt = false;
+            "difftool \"Sublime Merge\"" = {
+              cmd = ''
+                ${pkgs.unstable.sublime-merge}/bin/smerge difftool "$LOCAL" "$REMOTE" -o "$MERGED"'';
+            };
             merge.tool = "Sublime Merge";
-            "mergetool \"Sublime Merge\"".cmd = ''
-              ${pkgs.sublime-merge}/bin/smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'';
+            "mergetool \"Sublime Merge\"" = {
+              cmd = ''
+                ${pkgs.unstable.sublime-merge}/bin/smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'';
+              trustExitCode = true;
+            };
           };
         };
         home-manager.enable = true;
