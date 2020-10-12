@@ -1,5 +1,5 @@
-pkgs: oldPkgs: {
-  myPython = pkgs.python36.withPackages (ps:
+self: super: {
+  myPython = super.python36.withPackages (ps:
     with ps; [
       pyyaml
       click
@@ -13,5 +13,5 @@ pkgs: oldPkgs: {
       zalando-kubectl
       zmon-cli
     ]);
-  myR = pkgs.rWrapper.override { packages = with oldPkgs.rPackages; [ ]; };
+  myR = super.rWrapper.override { packages = with super.rPackages; [ ]; };
 }

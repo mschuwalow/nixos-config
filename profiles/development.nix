@@ -8,7 +8,7 @@
     meld
     kubetail
     kubectl
-    helm
+    kubernetes-helm
     unstable.sublime-merge
     nodePackages.node2nix
     git-heatmap

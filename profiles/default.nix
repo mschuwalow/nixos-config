@@ -5,8 +5,9 @@
     ./audio.nix
     ./desktop
     ./development.nix
-    ./jvm.nix
     ./docker.nix
+    ./jvm.nix
+    ./printing.nix
     ./tmux.nix
     ./vpn.nix
   ];

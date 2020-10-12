@@ -14,8 +14,8 @@ in {
     alacritty
     firefox
     google-chrome
-    spotify
-    spotify-tui
+    unstable.spotify
+    unstable.spotify-tui
     bitwarden
     seafile-client
     unstable.ferdi
@@ -27,6 +27,8 @@ in {
     nmap-graphical
     unstable.vlc
     zoom-us
+    unstable.catt
+    youtube-dl
   ];
 
   fonts = {

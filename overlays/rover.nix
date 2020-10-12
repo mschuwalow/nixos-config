@@ -1,12 +1,12 @@
-pkgs: oldPkgs:
-with oldPkgs; {
+self: super:
+with super; {
   rover = stdenv.mkDerivation rec {
     pname = "rover";
     version = "1.0.1";
     src = fetchFromGitHub {
-      rev = "2ec364f923b60b8b1e68ffe4c705b82d9a487056";
       owner = "lecram";
       repo = "rover";
+      rev = "2ec364f923b60b8b1e68ffe4c705b82d9a487056";
       sha256 = "00bd9j0wi36szq1zs3gqpljgznn39qh3d1yyqx25vx81jcvp357c";
     };
 

@@ -4,7 +4,7 @@
   boot = {
     # extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
     initrd.checkJournalingFS = false;
-    kernelParams = [ "idle=nomwait" ];
+    kernelParams = [ "idle=nomwait" "processor.max_cstate=5" "rcu_nocbs=0-11" ];
   };
 
   hardware.enableRedistributableFirmware = true;
@@ -19,8 +19,8 @@
   time.hardwareClockInLocalTime = true;
 
   services.xserver = {
-    displayManager.sessionCommands = ''
-      xrandr \
+    displayManager.setupCommands = ''
+      ${pkgs.xorg.xrandr}/bin/xrandr \
       --output HDMI-0 --off \
       --output HDMI-1 --off \
       --output HDMI-2 --mode 1920x1080 --pos 3640x0 --rotate right \

@@ -45,11 +45,13 @@ in {
     overlays = [
       (import ./overlays/unstable.nix)
       (import ./overlays/nur.nix)
-      (import ./overlays/pythonPackages.nix)
+      (import ./overlays/custom-envs.nix)
+      (import ./overlays/python-packages.nix)
       (import ./overlays/git-heatmap)
       (import ./overlays/rocketchat)
       (import ./overlays/i3-gaps)
       (import ./overlays/rover.nix)
+      (import ./overlays/catt.nix)
     ];
   };
 

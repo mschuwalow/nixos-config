@@ -71,6 +71,7 @@ in {
         packages = with pkgs; ([ shutter rtv ]);
 
         sessionVariables = {
+          PATH = "~/bin:\${PATH}";
           EDITOR = "${pkgs.micro}/bin/micro";
           VISUAL = "${pkgs.micro}/bin/micro";
           PAGER = "${pkgs.more}/bin/more";
