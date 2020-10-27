@@ -68,8 +68,6 @@ in {
             target = lib.strings.escapeShellArg "${homeDirectory}/${name}";
           }) files));
 
-        packages = with pkgs; ([ shutter rtv ]);
-
         sessionVariables = {
           PATH = "~/bin:\${PATH}";
           EDITOR = "${pkgs.micro}/bin/micro";
@@ -121,6 +119,9 @@ in {
               "log --graph --all --pretty=format:'%Cred%h%Creset - %C(yellow)%cd%Creset -%C(green)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
             news = "log --word-diff=color -p HEAD@{1}..HEAD@{0}";
             st = "status --short --branch";
+            my-branch = "branch --show-current";
+            reset-branch =
+              "!git reset $(git merge-base $REVIEW_BASE $(git my-branch))";
           };
           extraConfig = {
             core = {

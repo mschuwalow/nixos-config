@@ -29,6 +29,8 @@ in {
     zoom-us
     unstable.catt
     youtube-dl
+    ghostwriter
+    rtv
   ];
 
   fonts = {

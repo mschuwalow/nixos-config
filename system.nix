@@ -19,41 +19,32 @@ in {
     ./users/mschuwalow
   ];
 
-  nix = {
-    nixPath = [
-      "nixpkgs=${<nixpkgs>}"
-      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
-      "nixos-config=/etc/nixos/configuration.nix"
-    ];
-    binaryCaches = [ "https://cache.nixos.org/" "https://r-ryantm.cachix.org" ];
-    binaryCachePublicKeys =
-      [ "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c=" ];
-    autoOptimiseStore = true;
-    useSandbox = "relaxed";
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
+  boot = {
+    cleanTmpDir = true;
+    loader = {
+      grub = {
+        device = "nodev";
+        efiSupport = true;
+        enable = true;
+        memtest86.enable = true;
+        useOSProber = true;
+        version = 2;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+    kernel.sysctl = {
+      "fs.inotify.max_user_watches" = 1048576; # default:  8192
+      "fs.inotify.max_user_instances" = 1024; # default:   128
+      "fs.inotify.max_queued_events" = 32768; # default: 16384
     };
   };
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      oraclejdk.accept_license = true;
-    };
-    overlays = [
-      (import ./overlays/unstable.nix)
-      (import ./overlays/nur.nix)
-      (import ./overlays/custom-envs.nix)
-      (import ./overlays/python-packages.nix)
-      (import ./overlays/git-heatmap)
-      (import ./overlays/rocketchat)
-      (import ./overlays/i3-gaps)
-      (import ./overlays/rover.nix)
-      (import ./overlays/catt.nix)
-    ];
+  console = {
+    keyMap = "colemak/colemak";
+    font = "lat9w-16";
   };
+
+  # documentation.man.generateCaches = true;
 
   environment.systemPackages = with pkgs; [
     wget
@@ -93,34 +84,7 @@ in {
     tree
   ];
 
-  boot = {
-    cleanTmpDir = true;
-    loader = {
-      grub = {
-        device = "nodev";
-        efiSupport = true;
-        enable = true;
-        memtest86.enable = true;
-        useOSProber = true;
-        version = 2;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-    kernel.sysctl = {
-      "fs.inotify.max_user_watches" = 1048576; # default:  8192
-      "fs.inotify.max_user_instances" = 1024; # default:   128
-      "fs.inotify.max_queued_events" = 32768; # default: 16384
-    };
-  };
-
-  security = {
-    polkit.enable = true;
-
-    sudo = {
-      enable = true;
-      wheelNeedsPassword = false;
-    };
-  };
+  i18n = { defaultLocale = "en_US.UTF-8"; };
 
   networking = {
     networkmanager.enable = true;
@@ -135,18 +99,41 @@ in {
     };
   };
 
-  users = {
-    mutableUsers = false;
-    defaultUserShell = pkgs.zsh;
-    users.root = { hashedPassword = secrets.rootPassword; };
+  nix = {
+    nixPath = [
+      "nixpkgs=${<nixpkgs>}"
+      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+      "nixos-config=/etc/nixos/configuration.nix"
+    ];
+    binaryCaches = [ "https://cache.nixos.org/" "https://r-ryantm.cachix.org" ];
+    binaryCachePublicKeys =
+      [ "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c=" ];
+    autoOptimiseStore = true;
+    useSandbox = "relaxed";
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
   };
 
-  console = {
-    keyMap = "colemak/colemak";
-    font = "lat9w-16";
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      oraclejdk.accept_license = true;
+    };
+    overlays = [
+      (import ./overlays/unstable.nix)
+      (import ./overlays/nur.nix)
+      (import ./overlays/custom-envs.nix)
+      (import ./overlays/python-packages.nix)
+      (import ./overlays/git-heatmap)
+      (import ./overlays/rocketchat)
+      (import ./overlays/i3-gaps)
+      (import ./overlays/rover.nix)
+      (import ./overlays/catt.nix)
+    ];
   };
-
-  i18n = { defaultLocale = "en_US.UTF-8"; };
 
   programs = {
     command-not-found.enable = true;
@@ -157,9 +144,24 @@ in {
     };
   };
 
+  security = {
+    polkit.enable = true;
+
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = false;
+    };
+  };
+
   services = { dbus.enable = true; };
+  system = { autoUpgrade.enable = true; };
 
   time.timeZone = "Europe/Berlin";
 
-  system = { autoUpgrade.enable = true; };
+  users = {
+    mutableUsers = false;
+    defaultUserShell = pkgs.zsh;
+    users.root = { hashedPassword = secrets.rootPassword; };
+  };
+
 }

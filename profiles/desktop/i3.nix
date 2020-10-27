@@ -9,7 +9,6 @@ let
     feh = "${pkgs.feh}/bin/feh";
     i3lock = "${pkgs.i3lock}/bin/i3lock";
     killall = "${pkgs.killall}/bin/killall";
-    maim = "${pkgs.maim}/bin/maim";
     pacmd = "${pkgs.pulseaudio}/bin/pacmd";
     pactl = "${pkgs.pulseaudio}/bin/pactl";
     pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
@@ -336,9 +335,6 @@ let
     bindsym $mod+Shift+w exec --no-startup-id $term -t "__nmtui" -e "nmtui"
     bindsym $mod+Shift+v exec ${cmds.pavucontrol}
 
-    # screenshot
-    bindsym $mod+Print exec ${cmds.maim} $HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
-
     set $mode_resize resize
     bindsym $mod+Shift+r mode "$mode_resize"
     mode "$mode_resize" {
@@ -414,6 +410,9 @@ let
     for_window [class="^jetbrains-.+"][window_type=dialog] focus
     for_window [instance="sun-awt-X11-XWindowPeer"] border pixel 0
 
+    # flameshot
+    for_window [class="flameshot"][title="Configuration"] floating enable
+
     #
     # Autostart
     #
@@ -421,6 +420,7 @@ let
     exec --no-startup-id ${pkgs.seafile-client}/bin/seafile-applet
     exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet
     exec --no-startup-id ${pkgs.fcitx}/bin/fcitx
+    exec --no-startup-id ${pkgs.flameshot}/bin/flameshot
 
     # set background
     exec_always --no-startup-id ${cmds.feh} --bg-tile --no-xinerama ${
