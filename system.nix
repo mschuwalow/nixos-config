@@ -16,6 +16,7 @@ in {
     ./profiles
 
     # create users
+    ./users/root
     ./users/mschuwalow
   ];
 
@@ -161,7 +162,5 @@ in {
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
-    users.root = { hashedPassword = secrets.rootPassword; };
   };
-
 }

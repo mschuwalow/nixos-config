@@ -26,22 +26,6 @@ let
     // (listFiles userSecrets.files);
 
 in {
-  users.users.mschuwalow = {
-    isNormalUser = true;
-    uid = 1000;
-    extraGroups = [
-      "wheel"
-      "disk"
-      "audio"
-      "video"
-      "networkmanager"
-      "systemd-journal"
-      "docker"
-    ];
-    createHome = true;
-    home = homeDirectory;
-    hashedPassword = userSecrets.password;
-  };
 
   home-manager = {
     users.mschuwalow = {
@@ -189,4 +173,22 @@ in {
       };
     };
   };
+
+  users.users.mschuwalow = {
+    isNormalUser = true;
+    uid = 1000;
+    extraGroups = [
+      "wheel"
+      "disk"
+      "audio"
+      "video"
+      "networkmanager"
+      "systemd-journal"
+      "docker"
+    ];
+    createHome = true;
+    home = homeDirectory;
+    hashedPassword = userSecrets.password;
+  };
+
 }
