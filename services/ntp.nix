@@ -1,8 +1,6 @@
 { config, ... }:
 
 {
-  services.ntp.enable = false;
-
   services.chrony = {
     enable = true;
     servers =

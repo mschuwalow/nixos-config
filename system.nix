@@ -6,6 +6,7 @@ in {
     ./modules/home-manager.nix
     ./modules/xcursor.nix
     ./modules/vsliveshare.nix
+    ./modules/myLib.nix
 
     # load system specific configuration
     ./hardware-configuration.nix
@@ -65,7 +66,7 @@ in {
     unrar
     unzip
     htop
-    unstable.ytop
+    unstable.bottom
     powertop
     moreutils
     tree
@@ -81,7 +82,7 @@ in {
     ncdu
     peco
     sd
-    unstable.termdown
+    termdown
     tree
   ];
 

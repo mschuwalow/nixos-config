@@ -1,28 +1,10 @@
-{ config, pkgs, lib, secrets, rootDir, hmLib, ... }:
+{ config, pkgs, lib, hmLib, myLib, secrets, ... }:
 
 let
   homeDirectory = "/root";
   userSecrets = secrets.users.root;
 
-  recFiles = x:
-    if lib.pathIsDirectory x then
-      (lib.concatMap (y: recFiles (toString x + "/" + toString y))
-        (builtins.attrNames (builtins.readDir x)))
-    else
-      [ x ];
-
-  recDir = x:
-    if lib.pathIsDirectory x then
-      (map (y: lib.removePrefix (toString x + "/") y) (recFiles x))
-    else
-      [ ];
-
-  listFiles = dir:
-    lib.listToAttrs (map (name:
-      (lib.nameValuePair (toString name) ({ source = "${dir}/${name}"; })))
-      (recDir dir));
-
-  files = listFiles userSecrets.files;
+  files = myLib.listFiles userSecrets.files;
 
 in {
   home-manager = {
