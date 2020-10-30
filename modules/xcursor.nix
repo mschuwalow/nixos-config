@@ -14,7 +14,7 @@ in {
     };
     name = mkOption {
       default = "Premium";
-      type = types.string;
+      type = types.str;
       description = ''
         The X cursor theme to apply.
       '';

@@ -11,7 +11,6 @@ in {
     gparted
     polkit_gnome
     alacritty
-    firefox
     google-chrome
     unstable.spotify
     unstable.spotify-tui
@@ -45,7 +44,6 @@ in {
       roboto-slab
     ];
     fontconfig = {
-      penultimate.enable = true;
       defaultFonts = {
         monospace = [ "roboto-mono" ];
         sansSerif = [ "roboto" ];
@@ -68,14 +66,16 @@ in {
   programs.dconf.enable = true;
 
   services = {
-    compton = {
+    picom = {
       enable = true;
       fade = true;
       shadow = true;
-      shadowOpacity = "0.7";
+      shadowOpacity = 0.7;
+      vSync = true;
     };
 
     dbus = {
+      enable = true;
       packages = [ pkgs.gnome3.dconf ];
       socketActivated = true;
     };

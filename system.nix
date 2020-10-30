@@ -6,7 +6,7 @@ in {
     ./modules/home-manager.nix
     ./modules/xcursor.nix
     ./modules/vsliveshare.nix
-    ./modules/myLib.nix
+    ./modules/my-lib.nix
 
     # load system specific configuration
     ./hardware-configuration.nix
@@ -46,7 +46,7 @@ in {
     font = "lat9w-16";
   };
 
-  # documentation.man.generateCaches = true;
+  documentation.man.generateCaches = true;
 
   environment.systemPackages = with pkgs; [
     wget
@@ -87,19 +87,6 @@ in {
   ];
 
   i18n = { defaultLocale = "en_US.UTF-8"; };
-
-  networking = {
-    networkmanager.enable = true;
-
-    nameservers = [ "8.8.8.8" "8.8.4.4" ];
-
-    firewall = {
-      enable = false;
-      allowPing = true;
-      allowedTCPPorts = [ 445 139 ];
-      allowedUDPPorts = [ 137 138 ];
-    };
-  };
 
   nix = {
     nixPath = [
@@ -142,7 +129,6 @@ in {
     ssh.startAgent = true;
     zsh = {
       enable = true;
-      # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     };
   };
 
@@ -154,9 +140,6 @@ in {
       wheelNeedsPassword = false;
     };
   };
-
-  services = { dbus.enable = true; };
-  system = { autoUpgrade.enable = true; };
 
   time.timeZone = "Europe/Berlin";
 
