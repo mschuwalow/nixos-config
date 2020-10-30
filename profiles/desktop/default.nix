@@ -100,12 +100,12 @@ in {
               size = 16;
             };
             iconTheme = {
-              name = "Paper";
-              package = pkgs.paper-icon-theme;
+              name = "Papirus";
+              package = pkgs.papirus-icon-theme;
             };
             theme = {
-              name = "Adapta-Eta";
-              package = pkgs.adapta-gtk-theme;
+              name = "Plata";
+              package = pkgs.plata-theme;
             };
           };
           enable = true;

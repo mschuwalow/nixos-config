@@ -15,12 +15,12 @@ in {
       gtk = {
         enable = true;
         theme = {
-          package = pkgs.adapta-gtk-theme;
-          name = "Adapta-Eta";
+          name = "Plata";
+          package = pkgs.plata-theme;
         };
         iconTheme = {
-          package = pkgs.paper-icon-theme;
-          name = "Paper";
+          name = "Papirus";
+          package = pkgs.papirus-icon-theme;
         };
       };
 

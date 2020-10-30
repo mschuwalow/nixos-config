@@ -407,11 +407,14 @@ let
     for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down 34p 
 
     # jetbrains
-    for_window [class="^jetbrains-.+"][window_type=dialog] focus
+    for_window [class="^jetbrains-.+" window_type=dialog] focus
     for_window [instance="sun-awt-X11-XWindowPeer"] border pixel 0
 
     # flameshot
-    for_window [class="flameshot"][title="Configuration"] floating enable
+    for_window [class="flameshot" title="Configuration"] floating enable
+
+    # goldendict
+    for_window [class="GoldenDict" title=".* - GoldenDict"] floating enable
 
     #
     # Autostart
@@ -422,6 +425,7 @@ let
     exec --no-startup-id ${pkgs.fcitx}/bin/fcitx
     exec --no-startup-id ${pkgs.flameshot}/bin/flameshot
     exec --no-startup-id ${pkgs.goldendict}/bin/goldendict
+    exec --no-startup-id ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
 
     # set background
     exec_always --no-startup-id ${cmds.feh} --bg-tile --no-xinerama ${

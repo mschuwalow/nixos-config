@@ -8,10 +8,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    apulse
     pavucontrol
-
-    audacity
-    ardour
   ];
 }
