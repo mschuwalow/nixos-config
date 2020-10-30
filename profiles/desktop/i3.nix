@@ -421,6 +421,7 @@ let
     exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet
     exec --no-startup-id ${pkgs.fcitx}/bin/fcitx
     exec --no-startup-id ${pkgs.flameshot}/bin/flameshot
+    exec --no-startup-id ${pkgs.goldendict}/bin/goldendict
 
     # set background
     exec_always --no-startup-id ${cmds.feh} --bg-tile --no-xinerama ${

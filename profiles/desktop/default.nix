@@ -7,7 +7,6 @@ in {
     gnome3.gnome-font-viewer
     gnome3.nautilus
     gnome3.eog
-    gnome3.evince
     arandr
     gparted
     polkit_gnome
@@ -21,6 +20,7 @@ in {
     unstable.ferdi
     screenkey
     mupdf
+    okular
     usbutils
     xclip
     transmission-gtk

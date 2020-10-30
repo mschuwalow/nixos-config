@@ -1,10 +1,9 @@
 { pkgs, ... }:
-
 {
   environment.systemPackages = with pkgs; [
     awscli
     cabal2nix
-    vscode
+    unstable.vscode
     meld
     kubetail
     kubectl
@@ -12,7 +11,14 @@
     unstable.sublime-merge
     nodePackages.node2nix
     git-heatmap
-    (python3.withPackages (ps: with ps; [ ]))
+    (python3.withPackages (ps: with ps; [
+      numpy
+      pandas
+      pendulum
+      pillow
+      jupyterlab
+      pylint
+    ]))
     gnumake
     nixfmt
     nodejs-10_x
