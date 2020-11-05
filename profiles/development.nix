@@ -1,27 +1,45 @@
 { pkgs, ... }:
-{
+let
+  vscode' = pkgs.vscode-with-extensions.override {
+    vscodeExtensions = (with pkgs.vscode-extensions;
+      [
+        aaron-bond.better-comments
+        alefragnani.project-manager
+        arrterian.nix-env-selector
+        bbenoist.Nix
+        christian-kohler.path-intellisense
+        codezombiech.gitignore
+        coenraads.bracket-pair-colorizer
+        equinusocio.vsc-community-material-theme
+        equinusocio.vsc-material-theme-icons
+        formulahendry.auto-close-tag
+        formulahendry.auto-rename-tag
+        gruntfuggly.todo-tree
+        llvm-org.lldb-vscode
+        matklad.rust-analyzer
+        ms-azuretools.vscode-docker
+        ms-python.vscode-pylance
+        sleistner.vscode-fileutils
+        wmaurer.vscode-jumpy
+        vscodevim.vim
+      ] ++ sets.scala ++ sets.haskell);
+  };
+in {
   environment.systemPackages = with pkgs; [
     awscli
     cabal2nix
-    unstable.vscode
-    meld
+    direnv
+    vscode'
     kubetail
     kubectl
     kubernetes-helm
-    unstable.sublime-merge
-    nodePackages.node2nix
+    sublime-merge
     git-heatmap
-    (python3.withPackages (ps: with ps; [
-      numpy
-      pandas
-      pendulum
-      pillow
-      jupyterlab
-      pylint
-    ]))
+    (python3.withPackages
+      (ps: with ps; [ numpy pandas pendulum pillow jupyterlab pylint ]))
     gnumake
+    niv
     nixfmt
-    nodejs-10_x
     postman
     sshfs
     ghq
@@ -39,5 +57,8 @@
     "127.0.0.1" = [ "www.sublimetext.com" "sublimetext.com" ];
   };
 
-  services.vsliveshare.enable = true;
+  services = {
+    lorri.enable = true;
+    # vsliveshare.enable = true;
+  };
 }

@@ -9,6 +9,7 @@ let
     feh = "${pkgs.feh}/bin/feh";
     i3lock = "${pkgs.i3lock}/bin/i3lock";
     killall = "${pkgs.killall}/bin/killall";
+    nmtui = "${pkgs.networkmanager}/bin/nmtui";
     pacmd = "${pkgs.pulseaudio}/bin/pacmd";
     pactl = "${pkgs.pulseaudio}/bin/pactl";
     pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
@@ -332,7 +333,7 @@ let
     bindsym XF86MonBrightnessDown exec --no-startup-id ${cmds.xbacklight} -dec 10
     bindsym XF86MonBrightnessUp exec --no-startup-id ${cmds.xbacklight} -inc 10
 
-    bindsym $mod+Shift+w exec --no-startup-id $term -t "__nmtui" -e "nmtui"
+    bindsym $mod+Shift+w exec --no-startup-id $term -t "__nmtui" -e ${cmds.nmtui}
     bindsym $mod+Shift+v exec ${cmds.pavucontrol}
 
     set $mode_resize resize
@@ -399,9 +400,7 @@ let
 
     for_window [class="(?i)Skype"] layout stacking 
 
-    for_window [instance="__scratchpad"] floating enable
-    for_window [instance="__nmtui"] floating enable
-    for_window [instance="__cmst"] floating enable
+    for_window [title="__nmtui"] floating enable
 
     for_window [class="(?i)pavucontrol"] floating enable, resize set 1000 700, move position mouse
     for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down 34p 

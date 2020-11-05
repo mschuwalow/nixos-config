@@ -62,10 +62,6 @@ in {
       programs = {
         direnv.enable = true;
         git = {
-          package = pkgs.gitAndTools.gitFull;
-          enable = true;
-          userName = "Maxim Schuwalow";
-          userEmail = "maxim.schuwalow@gmail.com";
           aliases = {
             files = "diff --name-only $(git merge-base HEAD $REVIEW_BASE)";
             stat = "diff --stat $(git merge-base HEAD $REVIEW_BASE)";
@@ -89,11 +85,17 @@ in {
             reset-branch =
               "!git reset $(git merge-base $REVIEW_BASE $(git my-branch))";
           };
+          delta = {
+            options = { dark = true; };
+            enable = true;
+          };
+          enable = true;
           extraConfig = {
             core = {
               editor = "micro";
               whitespace = "trailing-space,space-before-tab";
             };
+            diff.colorMoved = "default";
             diff.tool = "Sublime Merge";
             difftool.prompt = false;
             "difftool \"Sublime Merge\"" = {
@@ -106,7 +108,12 @@ in {
                 ${pkgs.unstable.sublime-merge}/bin/smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'';
               trustExitCode = true;
             };
+            pull = { ff = "only"; };
           };
+          package = pkgs.gitAndTools.gitFull;
+          userName = "Maxim Schuwalow";
+          userEmail = "maxim.schuwalow@gmail.com";
+
         };
         home-manager.enable = true;
         zsh = {

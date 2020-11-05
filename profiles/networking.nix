@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     etherape
     ettercap
+    networkmanager
     tcpdump
     wireshark
   ];
@@ -13,7 +14,7 @@
     nameservers = [ "8.8.8.8" "8.8.4.4" ];
 
     firewall = {
-      enable = false;
+      enable = true;
       allowPing = true;
       allowedTCPPorts = [ 445 139 ];
       allowedUDPPorts = [ 137 138 ];

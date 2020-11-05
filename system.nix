@@ -121,15 +121,14 @@ in {
       (import ./overlays/i3-gaps)
       (import ./overlays/rover.nix)
       (import ./overlays/catt.nix)
+      (import ./overlays/vscode-extensions)
     ];
   };
 
   programs = {
     command-not-found.enable = true;
     ssh.startAgent = true;
-    zsh = {
-      enable = true;
-    };
+    zsh = { enable = true; };
   };
 
   security = {
