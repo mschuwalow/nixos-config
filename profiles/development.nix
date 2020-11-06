@@ -15,14 +15,11 @@ let
         formulahendry.auto-close-tag
         formulahendry.auto-rename-tag
         gruntfuggly.todo-tree
-        llvm-org.lldb-vscode
-        matklad.rust-analyzer
         ms-azuretools.vscode-docker
-        ms-python.vscode-pylance
         sleistner.vscode-fileutils
         wmaurer.vscode-jumpy
         vscodevim.vim
-      ] ++ sets.scala ++ sets.haskell);
+      ] ++ sets.scala ++ sets.haskell ++ sets.python ++ sets.rust);
   };
 in {
   environment.systemPackages = with pkgs; [

@@ -1,25 +1,23 @@
 self: super:
 let
-  mp = extension: super.vscode-utils.buildVscodeMarketplaceExtension {
-    mktplcRef = extension;
-    meta = {
-      license = super.stdenv.lib.licenses.mit;
+  mp = extension:
+    super.vscode-utils.buildVscodeMarketplaceExtension {
+      mktplcRef = extension;
+      meta = { license = super.stdenv.lib.licenses.mit; };
     };
-  };
-in
-rec {
+in rec {
   vscode-extensions = super.lib.recursiveUpdate super.vscode-extensions {
     alanz.vscode-hie-server = mp {
       name = "vscode-hie-server";
       publisher = "alanz";
       version = "0.2.1";
-      sha256 = "1ql3ynar7fm1dhsf6kb44bw5d9pi1d8p9fmjv5p96iz8x7n3w47x";      
+      sha256 = "1ql3ynar7fm1dhsf6kb44bw5d9pi1d8p9fmjv5p96iz8x7n3w47x";
     };
     alefragnani.project-manager = mp {
       name = "project-manager";
       publisher = "alefragnani";
       version = "10.12.0";
-      sha256 = "0i8rx8gcrppshgz97d6p9widfnwwwzq7g5hgkrz1g5cg2fl34ic3";      
+      sha256 = "0i8rx8gcrppshgz97d6p9widfnwwwzq7g5hgkrz1g5cg2fl34ic3";
     };
     formulahendry.auto-rename-tag = mp {
       name = "auto-rename-tag";
@@ -57,13 +55,13 @@ rec {
         publisher = "equinusocio";
         version = "1.4.2";
         sha256 = "1xll3dqicsssjw0b8was7jw43n1mdrlx5vcl15hq1va19rwyj28n";
-      };      
+      };
       vsc-material-theme-icons = mp {
         name = "vsc-material-theme-icons";
         publisher = "equinusocio";
         version = "1.2.0";
         sha256 = "0wh295ncm8cbxmw9i3pvg703sn1gw7vp3slbklwjxskb4zivvfk4";
-      };    
+      };
     };
     sleistner.vscode-fileutils = mp {
       name = "vscode-fileutils";
@@ -71,7 +69,7 @@ rec {
       version = "3.3.3";
       sha256 = "18a3zbb80gb57xss9921jnzl38kw5jab6jjajnwyv0k0kjca0440";
     };
-    arrterian.nix-env-selector =  mp {
+    arrterian.nix-env-selector = mp {
       name = "nix-env-selector";
       publisher = "arrterian";
       version = "0.1.2";
@@ -83,17 +81,25 @@ rec {
       version = "2.3.0";
       sha256 = "1wyp3k4gci1i64nrry12il6yflhki18gq2498z3nlsx4yi36jb3l";
     };
-    ms-python.vscode-pylance = mp {
-      name = "vscode-pylance";
-      publisher = "ms-python";
-      version = "2020.10.3";
-      sha256 = "13n5pk3zj7c0l442qpzgirx23m0jliwwkr9drzm84193rbgm6kl8";      
+    ms-python = {
+      python = mp {
+        name = "python";
+        publisher = "ms-python";
+        version = "2020.10.332292344";
+        sha256 = "0c43njzbbg6hgv7cppiilvq77vlvd9kcr7fzl88g7f2y7xczy2ma";
+      };
+      vscode-pylance = mp {
+        name = "vscode-pylance";
+        publisher = "ms-python";
+        version = "2020.10.3";
+        sha256 = "13n5pk3zj7c0l442qpzgirx23m0jliwwkr9drzm84193rbgm6kl8";
+      };
     };
     gruntfuggly.todo-tree = mp {
       name = "todo-tree";
       publisher = "gruntfuggly";
       version = "0.0.186";
-      sha256 = "0frnfimvv2862bb85jgyvbky90xpxx584mir9k2fsgii1rxmv6dr";       
+      sha256 = "0frnfimvv2862bb85jgyvbky90xpxx584mir9k2fsgii1rxmv6dr";
     };
     mksafi.find-jump = mp {
       name = "find-jump";
@@ -111,7 +117,7 @@ rec {
       name = "scala";
       publisher = "scala-lang";
       version = "0.4.5";
-      sha256 = "0nrj32a7a86vwc9gfh748xs3mmfwbc304dp7nks61f0lx8b4wzxw";      
+      sha256 = "0nrj32a7a86vwc9gfh748xs3mmfwbc304dp7nks61f0lx8b4wzxw";
     };
     justusadam.language-haskell = mp {
       name = "language-haskell";
@@ -125,16 +131,11 @@ rec {
       version = "0.0.1";
       sha256 = "0mgyj7kxsx4acxc9nx63pwcwp9ckvrawj9pjln8wrnj5w9cdvbcv";
     };
-    sets = ( with vscode-extensions; {
-      haskell = [
-        alanz.vscode-hie-server
-        justusadam.language-haskell
-      ];
-      scala = [
-        sabieber.hocon
-        scala-lang.scala
-        scalameta.metals
-      ];
+    sets = (with vscode-extensions; {
+      haskell = [ alanz.vscode-hie-server justusadam.language-haskell ];
+      python = [ ms-python.python ms-python.vscode-pylance ];
+      rust = [ matklad.rust-analyzer ms-vscode.cpptools ];
+      scala = [ sabieber.hocon scala-lang.scala scalameta.metals ];
     });
   };
 }
