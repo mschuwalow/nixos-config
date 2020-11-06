@@ -41,6 +41,9 @@ in {
       programs.git = {
         package = pkgs.gitAndTools.gitFull;
         enable = true;
+        extraConfig = {
+          pull = { ff = "only"; };
+        };
         userName = "Maxim Schuwalow";
         userEmail = "maxim.schuwalow@gmail.com";
       };
