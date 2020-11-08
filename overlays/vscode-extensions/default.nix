@@ -75,6 +75,12 @@ in rec {
       version = "0.1.2";
       sha256 = "1n5ilw1k29km9b0yzfd32m8gvwa2xhh6156d4dys6l8sbfpp2cv9";
     };
+    brettm12345.nixfmt-vscode = mp {
+      name = "nixfmt-vscode";
+      publisher = "brettm12345";
+      version = "0.0.1";
+      sha256 = "07w35c69vk1l6vipnq3qfack36qcszqxn8j3v332bl0w6m02aa7k";
+    };
     christian-kohler.path-intellisense = mp {
       name = "path-intellisense";
       publisher = "christian-kohler";

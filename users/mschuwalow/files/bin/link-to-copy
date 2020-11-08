@@ -1,8 +1,0 @@
-#!/bin/sh
-set -e
-for link; do
-    cp -r -L $link /tmp/ 
-    rm -r $link
-    cp -r /tmp/$link .	    
-done
-

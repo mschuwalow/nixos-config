@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     alacritty
     google-chrome
@@ -50,8 +49,8 @@
   };
 
   imports = [
-      # ./i3
-      ./gnome.nix
+    # ./i3
+    ./gnome.nix
   ];
 
   services = {

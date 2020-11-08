@@ -7,6 +7,7 @@ let
         alefragnani.project-manager
         arrterian.nix-env-selector
         bbenoist.Nix
+        brettm12345.nixfmt-vscode
         christian-kohler.path-intellisense
         codezombiech.gitignore
         coenraads.bracket-pair-colorizer

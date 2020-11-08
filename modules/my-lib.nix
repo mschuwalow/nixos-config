@@ -1,6 +1,6 @@
-{ lib, hmLib, ... }:
+{ config, lib, ... }:
 let
-
+  hmLib = config.vars.hmLib;
   listFiles = let
     goFiles = x:
       if lib.pathIsDirectory x then
@@ -18,4 +18,4 @@ let
   lib.listToAttrs (map
     (name: (lib.nameValuePair (toString name) ({ source = "${dir}/${name}"; })))
     (goDir dir));
-in { _module.args.myLib = { inherit listFiles; }; }
+in { vars.myLib = { inherit listFiles; }; }
