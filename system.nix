@@ -19,6 +19,7 @@ in {
     # create users
     ./users/root
     ./users/mschuwalow
+    ./users/pzhang
   ];
 
   boot = {
@@ -74,6 +75,7 @@ in {
     whois
     ncdu
     nix-prefetch-git
+    nix-index
     httpstat
     mawk
     fd
@@ -86,7 +88,13 @@ in {
     tree
   ];
 
-  i18n = { defaultLocale = "en_US.UTF-8"; };
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    inputMethod = {
+      enabled = "ibus";
+      ibus.engines = with pkgs.ibus-engines; [ m17n ];
+    };
+  };
 
   nix = {
     nixPath = [

@@ -1,0 +1,10 @@
+project/metals.sbt
+.metals/
+.bloop/
+.idea/
+.vscode/
+.ensime/
+stack.yaml.lock
+metals.sbt
+.DS_Store
+.gcroots/

@@ -2,6 +2,18 @@
 let i3-config = import ./i3.nix { inherit pkgs; };
 in {
 
+  environment.systemPackages = with pkgs; [
+    gnome3.gnome-disk-utility
+    gnome3.gnome-system-monitor
+    gnome3.gnome-font-viewer
+    gnome3.nautilus
+    gnome3.eog
+    arandr
+    gparted
+    polkit_gnome
+    okular
+  ];
+
   i18n.inputMethod = {
     enabled = "fcitx";
     fcitx.engines = with pkgs.fcitx-engines; [ chewing ];

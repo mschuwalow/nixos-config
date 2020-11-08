@@ -8,7 +8,6 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-
   networking.hostName = "mschuwalow-desktop";
 
   nix = {
@@ -34,5 +33,5 @@
     videoDrivers = [ "nvidia" ];
   };
 
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
 }

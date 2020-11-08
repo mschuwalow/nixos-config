@@ -1,24 +1,15 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    gnome3.gnome-disk-utility
-    gnome3.gnome-system-monitor
-    gnome3.gnome-font-viewer
-    gnome3.nautilus
-    gnome3.eog
-    arandr
-    gparted
-    polkit_gnome
     alacritty
     google-chrome
     spotify
     spotify-tui
     bitwarden
     seafile-client
-    unstable.ferdi
+    ferdi
     screenkey
     mupdf
-    okular
     usbutils
     xclip
     transmission-gtk
@@ -29,6 +20,7 @@
     youtube-dl
     ghostwriter
     rtv
+    okular
   ];
 
   fonts = {
@@ -58,7 +50,8 @@
   };
 
   imports = [
-      ./i3
+      # ./i3
+      ./gnome.nix
   ];
 
   services = {
@@ -66,7 +59,7 @@
     xserver = {
       enable = true;
       layout = "us";
-      xkbVariant = "colemak";
+      # xkbVariant = "colemak";
       enableCtrlAltBackspace = true;
     };
   };

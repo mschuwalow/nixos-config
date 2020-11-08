@@ -17,7 +17,6 @@ let
         gruntfuggly.todo-tree
         ms-azuretools.vscode-docker
         sleistner.vscode-fileutils
-        wmaurer.vscode-jumpy
         vscodevim.vim
       ] ++ sets.scala ++ sets.haskell ++ sets.python ++ sets.rust);
   };

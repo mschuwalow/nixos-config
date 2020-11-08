@@ -1,16 +1,15 @@
 { config, pkgs, lib, hmLib, myLib, secrets, rootDir, ... }:
 
 let
-  homeDirectory = "/home/mschuwalow";
-  userSecrets = secrets.users.mschuwalow;
+  homeDirectory = "/home/pzhang";
+  userSecrets = secrets.users.pzhang;
 
-  files = (myLib.listFiles "${rootDir}/users/mschuwalow/files")
-    // (myLib.listFiles userSecrets.files);
+  files = myLib.listFiles "${rootDir}/users/pzhang/files";
 
 in {
 
   home-manager = {
-    users.mschuwalow = {
+    users.pzhang = {
 
       gtk = {
         enable = true;
@@ -111,8 +110,8 @@ in {
             pull = { ff = "only"; };
           };
           package = pkgs.gitAndTools.gitFull;
-          userName = "Maxim Schuwalow";
-          userEmail = "maxim.schuwalow@gmail.com";
+          userName = "Peixun Zhang";
+          userEmail = "max317backup@gmail.com";
 
         };
         home-manager.enable = true;
@@ -124,10 +123,6 @@ in {
             ll = "${pkgs.exa}/bin/exa -lhg --git";
             la = "${pkgs.exa}/bin/exa -lahg --git";
             dc = "${pkgs.docker-compose}/bin/docker-compose";
-            se = "sudo -E";
-            nixedit = "sudo ${pkgs.vscode}/bin/code --user-data-dir $(mktemp -d) /etc/nixos";
-            nixrebuild =
-              "sudo nixos-rebuild -I nixpkgs=/etc/nixos/nixpkgs -I nixpkgs-overlays=/etc/nixos/overlays/";
           };
         };
       };
@@ -136,38 +131,13 @@ in {
         enable = true;
         platformTheme = "gtk";
       };
-
-      xresources.properties = {
-        "rofi.bw" = 0;
-        "rofi.color-active" =
-          [ "argb:2c1d1f21" "#65acff" "argb:2c1d1f21" "#4491ed" "#f9f9f9" ];
-        "rofi.color-enabled" = true;
-
-        "rofi.color-normal" =
-          [ "argb:96404552" "#c4cbd4" "argb:96404552" "#4084d6" "#f9f9f9" ];
-        "rofi.color-urgent" =
-          [ "argb:2c1d1f21" "#cc6666" "argb:2c1d1f21" "#a54242" "#f9f9f9" ];
-        "rofi.color-window" = [ "argb:f22d303b" "#7c8389" "#1d1f21" ];
-        "rofi.font" = "SauceCodePro Nerd Font SemiBold 9";
-        "rofi.lines" = 19;
-        "rofi.location" = 7;
-        "rofi.modi" = "window,run,drun,ssh";
-        "rofi.opacity" = 95;
-        "rofi.padding" = 5;
-        "rofi.seperator-style" = "solid";
-        "rofi.sidebar-mode" = true;
-        "rofi.ssh-command" = "{terminal} -e {ssh-client} {host}";
-        "rofi.terminal" = "${pkgs.alacritty}/bin/alacritty";
-        "rofi.width" = 720;
-      };
     };
   };
 
-  users.users.mschuwalow = {
+  users.users.pzhang = {
     isNormalUser = true;
-    uid = 1000;
+    uid = 1001;
     extraGroups = [
-      "wheel"
       "disk"
       "audio"
       "video"
