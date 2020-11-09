@@ -18,6 +18,6 @@ in {
     createHome = true;
     home = "/home/mschuwalow";
     initialHashedPassword = userSecrets.password;
-    packages = [ (home-manager-script { username = "mschuwalow"; }) ];
+    packages = with pkgs; [ home-manager ];
   };
 }
