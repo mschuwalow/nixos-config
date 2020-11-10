@@ -31,21 +31,6 @@ in {
       '';
     };
 
-    flags = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      example = [
-        "-I"
-        "stuff=/home/alice/nixos-stuff"
-        "--option"
-        "extra-binary-caches"
-        "http://my-cache.example.org/"
-      ];
-      description = ''
-        Any additional flags passed to <command>nixos-rebuild</command>.
-      '';
-    };
-
     dates = mkOption {
       default = "04:40";
       type = types.str;
@@ -100,6 +85,7 @@ in {
         gitMinimal
         openssh
         config.nix.package.out
+        config.system.build.nixos-rebuild
       ];
 
       script = let
@@ -116,17 +102,16 @@ in {
           git -C ${cfg.repoPath} commit -am "autoupgrade - $(date -u --rfc-3339=seconds)" || echo "No changes to commit"
           git -C ${cfg.repoPath} push
         '';
-        nixos-rebuild =
-          "${config.system.build.nixos-rebuild}/bin/nixos-rebuild";
+        nixos-rebuild = "${cfg.repoPath}/nixos-rebuild";
         rebuild-with-reboot = ''
           ${setup-ssh}
           ${update-checkout}
-          ${nixos-rebuild} boot ${toString cfg.flags}
+          ${nixos-rebuild} boot
           ${commit-changes}
           booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
           built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
           if [ "$booted" = "$built" ]; then
-            ${nixos-rebuild} switch ${toString cfg.flags}
+            ${nixos-rebuild} switch
           else
             /run/current-system/sw/bin/shutdown -r +1
           fi
@@ -134,7 +119,7 @@ in {
         rebuild-without-reboot = ''
           ${setup-ssh}
           ${update-checkout}
-          ${nixos-rebuild} switch ${toString cfg.flags}
+          ${nixos-rebuild} switch
           ${commit-changes}
         '';
 

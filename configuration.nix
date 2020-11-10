@@ -100,7 +100,7 @@ in {
 
   nix = {
     nixPath = [
-      "nixpkgs=${<nixpkgs>}"
+      "nixpkgs=/etc/nixos/checkouts/nixpkgs"
       "nixpkgs-overlays=/etc/nixos/overlays-compat/"
       "nixos-config=/etc/nixos/configuration.nix"
     ];
@@ -152,12 +152,6 @@ in {
 
   system.autoUpgradeCheckout = {
     enable = true;
-    flags = [
-      "-I"
-      "nixpkgs=${<nixpkgs>}"
-      "-I"
-      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
-    ];
     sshKey = secrets.git.sshKey;
   };
 
@@ -167,6 +161,4 @@ in {
     mutableUsers = true;
     defaultUserShell = pkgs.zsh;
   };
-
-  vars.rootDir = "/etc/nixos";
 }

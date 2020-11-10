@@ -1,8 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let checkout = ../checkouts/home-manager;
+in {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
   };
-  imports = [ ./home-manager/nixos ];
-  vars.hmLib = import ./home-manager/modules/lib { inherit lib; };
+  imports = [ "${checkout}/nixos" ];
+  vars.hmLib = import "${checkout}/modules/lib" { inherit lib; };
 }
