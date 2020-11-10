@@ -152,7 +152,12 @@ in {
 
   system.autoUpgradeCheckout = {
     enable = true;
-    flags = [ "-I" "nixpkgs-overlays=/etc/nixos/overlays-compat/" ];
+    flags = [
+      "-I"
+      "nixpkgs=${<nixpkgs>}"
+      "-I"
+      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+    ];
     sshKey = secrets.git.sshKey;
   };
 

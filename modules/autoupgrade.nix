@@ -17,7 +17,7 @@ in {
 
     repoPath = mkOption {
       type = types.str;
-      default = "/etc/nixos/nixpkgs";
+      default = "/etc/nixos";
       description = "Path to the local checkout";
     };
 
@@ -109,13 +109,20 @@ in {
         '' else
           "";
         update-checkout = ''
-          ${setup-ssh}
-          git -C ${cfg.repoPath} pull'';
+          git -C ${cfg.repoPath} pull
+          git -C ${cfg.repoPath} submodule update --recursive --remote  
+        '';
+        commit-changes = ''
+          git -C ${cfg.repoPath} commit -am "autoupgrade - $(date -u --rfc-3339=seconds)" || echo "No changes to commit"
+          git -C ${cfg.repoPath} push
+        '';
         nixos-rebuild =
-          "${config.system.build.nixos-rebuild}/bin/nixos-rebuild -I nixpkgs=${cfg.repoPath}";
+          "${config.system.build.nixos-rebuild}/bin/nixos-rebuild";
         rebuild-with-reboot = ''
+          ${setup-ssh}
           ${update-checkout}
           ${nixos-rebuild} boot ${toString cfg.flags}
+          ${commit-changes}
           booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
           built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
           if [ "$booted" = "$built" ]; then
@@ -125,8 +132,10 @@ in {
           fi
         '';
         rebuild-without-reboot = ''
+          ${setup-ssh}
           ${update-checkout}
           ${nixos-rebuild} switch ${toString cfg.flags}
+          ${commit-changes}
         '';
 
       in if cfg.allowReboot then
