@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
-  rev = "a98ec6ec158686387d66654ea96153ec06be33d7";
-  sha256 = "05yvpywhpnnsr55asp6m1chrfd6yf0njy49j3wc9d6qm3dipgwmc";
+  rev = "4cc1b77c3fc4f4b3bc61921dda72663eea962fa3";
+  sha256 = "02y6bjakcbfc0wvf9b5qky792y9abyf1kgnk8r30f1advn3x69nc";
   home-manager = fetchTarball {
     inherit sha256;
     url = "https://github.com/rycee/home-manager/archive/${rev}.tar.gz";

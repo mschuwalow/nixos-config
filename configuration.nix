@@ -10,6 +10,7 @@ in {
     ./modules/xcursor.nix
     ./modules/vsliveshare.nix
     ./modules/my-lib.nix
+    ./modules/autoupgrade.nix
 
     # load system specific configuration
     ./hardware-configuration.nix
@@ -147,6 +148,12 @@ in {
       enable = true;
       wheelNeedsPassword = false;
     };
+  };
+
+  system.autoUpgradeCheckout = {
+    enable = true;
+    flags = [ "-I" "nixpkgs-overlays=/etc/nixos/overlays-compat/" ];
+    sshKey = secrets.git.sshKey;
   };
 
   time.timeZone = "Europe/Berlin";

@@ -3,7 +3,7 @@ let
   src = super.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
-    rev = "b52da4e64108eb1496c037b4ca0f347624e50d51";
-    sha256 = "13gn8ahjl7ykavvk4d657mlxn5zdkdzld0rk8s3x5bd7v2vfpwpy";
+    rev = "9ed8e03a09a127e4dfdbd00524ede239b94cac78";
+    sha256 = "0n0n83sydkzg4c1vrmz3ma25bka4n583d7ji40dvfkydxckg4qx7";
   };
 in { unstable = import src { config = super.config; }; }

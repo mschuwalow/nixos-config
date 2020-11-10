@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   hmLib = config.vars.hmLib;
   listFiles = let
@@ -18,4 +18,14 @@ let
   lib.listToAttrs (map
     (name: (lib.nameValuePair (toString name) ({ source = "${dir}/${name}"; })))
     (goDir dir));
-in { vars.myLib = { inherit listFiles; }; }
+in {
+  vars.myLib = {
+    inherit listFiles;
+    outOfStore = path:
+      let
+        pathStr = toString path;
+        name = hmLib.strings.storeFileName (baseNameOf pathStr);
+      in pkgs.runCommandLocal name { }
+      "ln -s ${lib.escapeShellArg pathStr} $out";
+  };
+}

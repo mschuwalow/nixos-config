@@ -1,12 +1,9 @@
 { config, pkgs, lib, secrets, ... }:
 
 let
-  hmLib = config.vars.hmLib;
-  myLib = config.vars.myLib;
   homeDirectory = "/root";
+  secrets = config.vars.secrets;
   userSecrets = config.vars.secrets.users.root;
-  files = myLib.listFiles userSecrets.files;
-
 in {
   home-manager = {
     users.root = {
@@ -42,7 +39,7 @@ in {
             "github.com" = {
               hostname = "github.com";
               user = "git";
-              identityFile = toString userSecrets.ssh.gitIdentityFile;
+              identityFile = secrets.git.sshKey;
             };
           };
         };
