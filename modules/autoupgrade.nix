@@ -78,6 +78,7 @@ in {
       } // config.networking.proxy.envVars;
 
       path = with pkgs; [
+        bash
         coreutils
         gnutar
         xz.bin
@@ -102,7 +103,7 @@ in {
           git -C ${cfg.repoPath} commit -am "autoupgrade - $(date -u --rfc-3339=seconds)" || echo "No changes to commit"
           git -C ${cfg.repoPath} push
         '';
-        nixos-rebuild = "${cfg.repoPath}/nixos-rebuild";
+        nixos-rebuild = "${cfg.repoPath}/nixos-rebuild.sh";
         rebuild-with-reboot = ''
           ${setup-ssh}
           ${update-checkout}
