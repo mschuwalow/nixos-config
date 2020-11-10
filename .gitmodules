@@ -2,3 +2,8 @@
 	path = nixpkgs
 	url = git@github.com:NixOS/nixpkgs.git
 	branch = nixos-20.09
+[submodule "modules/home-manager"]
+	path = modules/home-manager
+	url = git@github.com:nix-community/home-manager.git
+[submodule "home-manager"]
+	branch = release-20.09
