@@ -1,13 +1,12 @@
-[submodule "nixpkgs"]
+[submodule "checkouts/nixpkgs"]
 	path = checkouts/nixpkgs
 	url = git@github.com:NixOS/nixpkgs.git
 	branch = nixos-20.09
-[submodule "modules/home-manager"]
+[submodule "checkouts/nixpkgs-unstable"]
+	path = checkouts/nixpkgs-unstable
+	url = git@github.com:NixOS/nixpkgs.git
+	branch = nixos-unstable
+[submodule "checkouts/home-manager"]
 	path = checkouts/home-manager
 	url = git@github.com:nix-community/home-manager.git
-[submodule "home-manager"]
-	branch = release-20.09
-[submodule "checkouts/nixpkgs"]
-	branch = nixos-20.09
-[submodule "checkouts/home-manager"]
 	branch = release-20.09
