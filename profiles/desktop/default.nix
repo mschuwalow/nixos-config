@@ -23,21 +23,23 @@
   ];
 
   fonts = {
+    enableDefaultFonts = true;
     enableFontDir = true;
     fonts = with pkgs; [
-      font-awesome_5
       (nerdfonts.override {
         fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
       })
       roboto
       roboto-mono
       roboto-slab
+      twitter-color-emoji
     ];
     fontconfig = {
       defaultFonts = {
-        monospace = [ "roboto-mono" ];
-        sansSerif = [ "roboto" ];
-        serif = [ "roboto-slab" ];
+        emoji = [ "Twitter Color Emoji" ];
+        monospace = [ "Roboto Mono" ];
+        sansSerif = [ "Roboto" ];
+        serif = [ "Roboto Slab" ];
       };
     };
   };

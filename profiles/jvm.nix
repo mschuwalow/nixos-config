@@ -17,6 +17,7 @@
     coursier
     idea.idea-community
     jd-gui
+    visualvm
   ];
 
 }

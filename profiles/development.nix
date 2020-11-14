@@ -19,12 +19,14 @@ let
         ms-azuretools.vscode-docker
         sleistner.vscode-fileutils
         vscodevim.vim
+        pkgs.unstable.vscode-extensions.ms-vsliveshare.vsliveshare
       ] ++ sets.scala ++ sets.haskell ++ sets.python ++ sets.rust);
   };
 in {
   environment.systemPackages = with pkgs; [
     awscli
     cabal2nix
+    coz
     direnv
     vscode'
     kubetail
@@ -37,6 +39,7 @@ in {
     gnumake
     niv
     nixfmt
+    httpstat
     postman
     sshfs
     ghq

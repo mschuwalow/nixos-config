@@ -61,9 +61,8 @@ in {
     gnupg
     gptfdisk
     htop
-    httpstat
     killall
-    mawk
+    gawk
     mkpasswd
     moreutils
     most
@@ -138,7 +137,19 @@ in {
   programs = {
     command-not-found.enable = true;
     ssh.startAgent = true;
-    zsh = { enable = true; };
+    zsh = { 
+      enable = true; 
+      enableBashCompletion = true;
+      promptInit = ''
+        eval $(${pkgs.starship}/bin/starship init zsh)
+      '';
+      setOptions = [
+        "HIST_IGNORE_ALL_DUPS"
+        "HIST_IGNORE_SPACE"
+        "SHARE_HISTORY"
+        "HIST_FCNTL_LOCK"
+      ];
+    };
   };
 
   security = {
