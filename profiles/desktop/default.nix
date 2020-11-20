@@ -20,6 +20,10 @@
     ghostwriter
     rtv
     okular
+    hunspell
+    hunspellDicts.de-de
+    hunspellDicts.en-us
+    xdotool
   ];
 
   fonts = {

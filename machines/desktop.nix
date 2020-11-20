@@ -2,12 +2,14 @@
 
 {
   boot = {
-    # extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
     initrd.checkJournalingFS = false;
-    kernelParams = [ "idle=nomwait" "processor.max_cstate=5" "rcu_nocbs=0-11" ];
+    kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-15" ];
   };
 
-  hardware.enableRedistributableFirmware = true;
+  hardware = {
+    enableRedistributableFirmware = true;
+    cpu.amd.updateMicrocode = true;
+  };
   networking.hostName = "mschuwalow-desktop";
 
   nix = {

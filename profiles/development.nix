@@ -28,7 +28,7 @@ in {
     cabal2nix
     coz
     direnv
-    vscode'
+    vscode
     kubetail
     kubectl
     kubernetes-helm

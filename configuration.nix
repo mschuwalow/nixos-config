@@ -47,7 +47,7 @@ in {
 
   console = {
     keyMap = "colemak/colemak";
-    font = "lat9w-16";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   };
 
   documentation.man.generateCaches = true;
