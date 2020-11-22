@@ -137,8 +137,8 @@ in {
   programs = {
     command-not-found.enable = true;
     ssh.startAgent = true;
-    zsh = { 
-      enable = true; 
+    zsh = {
+      enable = true;
       enableBashCompletion = true;
       promptInit = ''
         eval $(${pkgs.starship}/bin/starship init zsh)
