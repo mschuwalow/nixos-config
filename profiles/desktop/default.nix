@@ -8,7 +8,6 @@
     seafile-client
     ferdi
     screenkey
-    mupdf
     usbutils
     xclip
     transmission-gtk
@@ -24,6 +23,7 @@
     hunspellDicts.de-de
     hunspellDicts.en-us
     xdotool
+    libreoffice-fresh
   ];
 
   fonts = {
