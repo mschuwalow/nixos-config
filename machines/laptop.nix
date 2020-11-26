@@ -10,7 +10,8 @@ let
 in {
   imports = [ ../profiles/bluetooth.nix ];
 
-  environment.systemPackages = [ nvidia-offload ];
+  environment.systemPackages = [ nvidia-offload ]
+    ++ (with pkgs; [ thunderbolt ]);
 
   networking.hostName = "mschuwalow-laptop";
 
