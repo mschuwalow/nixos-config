@@ -24,7 +24,6 @@ in {
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    #kernelParams = [ "acpi_backlight=native" ];
   };
 
   hardware = {
@@ -37,6 +36,7 @@ in {
       intel-media-driver
     ];
     nvidia.prime.offload.enable = true;
+    firmware = with pkgs; [ sof-firmware ];
   };
 
   services = {
@@ -45,6 +45,8 @@ in {
     tlp.enable = true;
     fstrim.enable = true;
     throttled.enable = true;
+    fprintd.enable = true;
+    hardware.bolt.enable = true;
   };
 
   system.stateVersion = "20.09";
