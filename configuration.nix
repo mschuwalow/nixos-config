@@ -76,6 +76,8 @@ in {
     wget
     whois
     zip
+    usbutils
+    pciutils
   ];
 
   i18n = {

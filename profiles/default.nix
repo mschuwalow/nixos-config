@@ -6,7 +6,6 @@
     ./desktop
     ./development.nix
     ./docker.nix
-    ./fstrim.nix
     ./jvm.nix
     ./networking.nix
     ./ntp.nix

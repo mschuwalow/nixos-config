@@ -1,20 +1,17 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   boot = {
     initrd.checkJournalingFS = false;
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-15" ];
-    kernelPatches = [
-      {
-        name = "ryzen";
-        patch = null;
-        extraConfig = ''
-          CPU_ISOLATION y
-          RCU_EXPERT y
-          RCU_NOCB_CPU y
-        '';
-      }
-    ];
+    kernelPatches = [{
+      name = "ryzen";
+      patch = null;
+      extraConfig = ''
+        CPU_ISOLATION y
+        RCU_EXPERT y
+        RCU_NOCB_CPU y
+      '';
+    }];
     loader = {
       grub = {
         device = "nodev";
@@ -32,7 +29,7 @@
     enableRedistributableFirmware = true;
     cpu.amd.updateMicrocode = true;
   };
-  
+
   networking.hostName = "mschuwalow-desktop";
 
   nix = {
