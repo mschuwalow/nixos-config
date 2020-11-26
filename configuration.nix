@@ -155,6 +155,11 @@ in {
     sshKey = secrets.git.sshKey;
   };
 
+  systemd.services = {
+    systemd-udev-settle.enable = false;
+    NetworkManager-wait-online.enable = false;
+  };
+
   time.timeZone = "Europe/Berlin";
 
   users = {
