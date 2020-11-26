@@ -27,17 +27,6 @@ in {
 
   boot = {
     cleanTmpDir = true;
-    loader = {
-      grub = {
-        device = "nodev";
-        efiSupport = true;
-        enable = true;
-        memtest86.enable = true;
-        useOSProber = true;
-        version = 2;
-      };
-      efi.canTouchEfiVariables = true;
-    };
     kernel.sysctl = {
       "fs.inotify.max_user_watches" = 1048576; # default:  8192
       "fs.inotify.max_user_instances" = 1024; # default:   128
@@ -47,7 +36,7 @@ in {
 
   console = {
     keyMap = "colemak/colemak";
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+    # font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   };
 
   documentation.man.generateCaches = true;
