@@ -8,7 +8,7 @@ let
     exec -a "$0" "$@"
   '';
 in {
-  imports = [ ./profiles/bluetooth.nix ];
+  imports = [ ../profiles/bluetooth.nix ];
 
   environment.systemPackages = [ nvidia-offload ];
 
@@ -27,7 +27,7 @@ in {
   };
 
   hardware = {
-    bluetooth.enable = true;
+    trackpoint.enable = true;
     cpu.intel.updateMicrocode = true;
     opengl.extraPackages = with pkgs; [
       vaapiIntel

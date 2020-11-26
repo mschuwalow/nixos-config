@@ -7,6 +7,7 @@
     gnomeExtensions.gsconnect
     unstable.gnomeExtensions.material-shell
     gnome3.gnome-tweak-tool
+    gnome-firmware-updater
   ];
 
   services.xserver = {

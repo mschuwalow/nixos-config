@@ -143,6 +143,8 @@ in {
     };
   };
 
+  services.fwupd.enable = true;
+
   security = {
     polkit.enable = true;
 
