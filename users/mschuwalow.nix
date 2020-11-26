@@ -14,6 +14,7 @@ in {
       "networkmanager"
       "systemd-journal"
       "docker"
+      "wireshark"
     ];
     createHome = true;
     home = "/home/mschuwalow";

@@ -10,7 +10,7 @@
     ./jvm.nix
     ./networking.nix
     ./ntp.nix
-    ./printing.nix
+    # ./printing.nix
     ./sshd.nix
     ./tmux.nix
     ./vpn.nix
