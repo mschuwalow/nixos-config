@@ -80,9 +80,7 @@ in {
     pciutils
   ];
 
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
+  i18n = { defaultLocale = "en_US.UTF-8"; };
 
   nix = {
     nixPath = [
@@ -118,11 +116,11 @@ in {
       (import ./overlays/rover.nix)
       (import ./overlays/catt.nix)
       (import ./overlays/vscode-extensions)
+      (import ./overlays/joplin.nix)
     ];
   };
 
   programs = {
-    command-not-found.enable = true;
     ssh.startAgent = true;
     zsh = {
       enable = true;
