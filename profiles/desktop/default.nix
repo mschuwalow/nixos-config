@@ -24,6 +24,7 @@
     hunspellDicts.en-us
     xdotool
     libreoffice-fresh
+    appimage-run
   ];
 
   fonts = {

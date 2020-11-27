@@ -50,6 +50,7 @@ in {
     watch
     wget
     httpie
+    binutils-unwrapped
   ];
 
   # disable sublime asking for license

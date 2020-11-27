@@ -82,10 +82,6 @@ in {
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    inputMethod = {
-      enabled = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [ m17n ];
-    };
   };
 
   nix = {

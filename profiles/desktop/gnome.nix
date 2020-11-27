@@ -10,6 +10,13 @@
     gnome-firmware-updater
   ];
 
+  i18n = {
+    inputMethod = {
+      enabled = "ibus";
+      ibus.engines = with pkgs.ibus-engines; [ m17n uniemoji ];
+    };
+  };
+
   services.xserver = {
     desktopManager.gnome3.enable = true;
     displayManager.gdm.enable = true;
