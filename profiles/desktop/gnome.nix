@@ -8,7 +8,6 @@
     unstable.gnomeExtensions.material-shell
     gnome3.gnome-tweak-tool
     gnome-firmware-updater
-    joplin-desktop
   ];
 
   i18n = {

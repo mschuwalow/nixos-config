@@ -16,7 +16,7 @@ in {
   joplin-desktop = super.makeDesktopItem {
     name = pname;
     desktopName = "Joplin";
-    icon = "${appimageContents}/joplinapp-desktop.png";
+    icon = "${appimageContents}/@joplinapp-desktop.png";
     exec = launcher;
   };
 }
