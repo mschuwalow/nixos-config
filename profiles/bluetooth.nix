@@ -1,4 +1,5 @@
 { pkgs, ... }: {
   hardware.bluetooth.enable = true;
-  environment.systemPackages = with pkgs; [ blueman obexftp obexfs bluedevil ];
+  # services.blueman.enable = true;
+  # environment.systemPackages = with pkgs; [ obexftp obexfs bluedevil ];
 }
