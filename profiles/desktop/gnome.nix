@@ -13,7 +13,7 @@
   i18n = {
     inputMethod = {
       enabled = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [ m17n uniemoji rime ];
+      ibus.engines = with pkgs.ibus-engines; [ uniemoji rime ];
     };
   };
 
