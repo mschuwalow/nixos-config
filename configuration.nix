@@ -117,6 +117,7 @@ in {
       (import ./overlays/catt.nix)
       (import ./overlays/vscode-extensions)
       (import ./overlays/joplin.nix)
+      (import ./overlays/ibus-rime)
     ];
   };
 
