@@ -26,7 +26,6 @@ in {
   ];
 
   boot = {
-    cleanTmpDir = true;
     kernel.sysctl = {
       "fs.inotify.max_user_watches" = 1048576; # default:  8192
       "fs.inotify.max_user_instances" = 1024; # default:   128
@@ -35,8 +34,10 @@ in {
   };
 
   console = {
+    earlySetup = true;
+    font = "ter-i16b";
     keyMap = "colemak/colemak";
-    # font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
   };
 
   documentation.man.generateCaches = true;
@@ -115,7 +116,6 @@ in {
       (import ./overlays/rocketchat)
       (import ./overlays/i3-gaps)
       (import ./overlays/rover.nix)
-      (import ./overlays/catt.nix)
       (import ./overlays/vscode-extensions)
       (import ./overlays/joplin.nix)
       (import ./overlays/ibus-rime)
