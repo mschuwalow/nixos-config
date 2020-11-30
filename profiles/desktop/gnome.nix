@@ -7,6 +7,7 @@
     gnomeExtensions.gsconnect
     unstable.gnomeExtensions.material-shell
     gnome3.gnome-tweak-tool
+    gnome3.dconf-editor
     gnome-firmware-updater
   ];
 
@@ -17,8 +18,10 @@
     };
   };
 
-  services.xserver = {
-    desktopManager.gnome3.enable = true;
-    displayManager.gdm.enable = true;
+  services = {
+    xserver = {
+      desktopManager.gnome3.enable = true;
+      displayManager.gdm.enable = true;
+    };
   };
 }

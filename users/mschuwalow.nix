@@ -15,6 +15,7 @@ in {
       "systemd-journal"
       "docker"
       "wireshark"
+      "input"
     ];
     createHome = true;
     home = "/home/mschuwalow";

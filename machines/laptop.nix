@@ -11,7 +11,7 @@ in {
   imports = [ ../profiles/bluetooth.nix ];
 
   environment.systemPackages = [ nvidia-offload ]
-    ++ (with pkgs; [ thunderbolt libinput ]);
+    ++ (with pkgs; [ thunderbolt libinput fusuma powertop ]);
 
   networking.hostName = "mschuwalow-laptop";
 
@@ -43,18 +43,18 @@ in {
   services = {
     xserver.libinput.enable = true;
     xserver.videoDrivers = [ "nvidia" ];
-    tlp.enable = false;
+    upower.enable = true;
     fstrim.enable = true;
-    throttled.enable = false;
-    fprintd.enable = true;
+    throttled.enable = true;
+    #fprintd.enable = true;
     hardware.bolt.enable = true;
     udev.extraHwdb = ''
-      libinput:name:*SynPS/2 Synaptics TouchPad:dmi:*svnLENOVO*:pvrThinkPadP15sGen1*
-        LIBINPUT_ATTR_PRESSURE_RANGE=15:10
-        LIBINPUT_ATTR_PALM_PRESSURE_THRESHOLD=150
-        ID_INPUT_WIDTH_MM=100
-        ID_INPUT_HEIGHT_MM=68
-        LIBINPUT_ATTR_SIZE_HINT=100x68
+      libinput:name:*SynPS/2 Synaptics TouchPad:dmi:*svnLENOVO:*:pvrThinkPadP15s*
+       LIBINPUT_ATTR_PRESSURE_RANGE=15:10
+       LIBINPUT_ATTR_PALM_PRESSURE_THRESHOLD=150
+       ID_INPUT_WIDTH_MM=100
+       ID_INPUT_HEIGHT_MM=68
+       LIBINPUT_ATTR_SIZE_HINT=100x68
     '';
   };
 

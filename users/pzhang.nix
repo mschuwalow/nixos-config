@@ -7,7 +7,7 @@ in {
     isNormalUser = true;
     uid = 1001;
     extraGroups =
-      [ "disk" "audio" "video" "networkmanager" "systemd-journal" "docker" ];
+      [ "disk" "audio" "video" "networkmanager" "systemd-journal" "docker" "input" ];
     createHome = true;
     home = "/home/pzhang";
     initialHashedPassword = userSecrets.password;
