@@ -11,7 +11,7 @@ in {
         Whether to periodically upgrade NixOS to the latest
         version. If enabled, a systemd timer will run
         <literal>nixos-rebuild switch --upgrade</literal> once a
-        day. The checkout out repo will be pulled before rebuilding.
+        day. The checked out repo will be pulled before rebuilding.
       '';
     };
 
