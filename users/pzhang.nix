@@ -6,8 +6,15 @@ in {
   users.users.pzhang = {
     isNormalUser = true;
     uid = 1001;
-    extraGroups =
-      [ "disk" "audio" "video" "networkmanager" "systemd-journal" "docker" "input" ];
+    extraGroups = [
+      "disk"
+      "audio"
+      "video"
+      "networkmanager"
+      "systemd-journal"
+      "docker"
+      "input"
+    ];
     createHome = true;
     home = "/home/pzhang";
     initialHashedPassword = userSecrets.password;
