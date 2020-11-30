@@ -3,6 +3,6 @@
 {
   services.printing = {
     enable = true;
-    drivers = [ pkgs.cups-kyodialog3 ];
+    drivers = with pkgs; [ cups-kyodialog3 ];
   };
 }

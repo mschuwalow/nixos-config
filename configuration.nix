@@ -104,6 +104,7 @@ in {
     config = {
       allowUnfree = true;
       oraclejdk.accept_license = true;
+      trusted-users = "@wheel";
     };
     overlays = [
       (import ./overlays/unstable.nix)

@@ -51,6 +51,7 @@ in {
     wget
     httpie
     binutils-unwrapped
+    nixpkgs-review
   ];
 
   # disable sublime asking for license
@@ -60,6 +61,6 @@ in {
 
   services = {
     lorri.enable = true;
-    # vsliveshare.enable = true;
+    vsliveshare.enable = true;
   };
 }
