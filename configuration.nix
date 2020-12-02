@@ -107,7 +107,6 @@ in {
   nixpkgs = {
     config = {
       allowUnfree = true;
-      oraclejdk.accept_license = true;
       trusted-users = "@wheel";
     };
     overlays = [
