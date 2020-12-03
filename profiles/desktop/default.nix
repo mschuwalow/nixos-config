@@ -6,7 +6,7 @@
     spotify-tui
     bitwarden
     seafile-client
-    ferdi
+    unstable.ferdi
     screenkey
     usbutils
     xclip
