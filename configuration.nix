@@ -81,9 +81,9 @@ in {
     pciutils
   ];
 
-  i18n = { 
+  i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = ["en_US.UTF-8/UTF-8"];
+    supportedLocales = [ "en_US.UTF-8/UTF-8" ];
   };
 
   nix = {
@@ -121,6 +121,7 @@ in {
       (import ./overlays/vscode-extensions)
       (import ./overlays/joplin.nix)
       (import ./overlays/ibus-rime)
+      (import ./overlays/cups-kyodialog3-fix.nix)
     ];
   };
 
