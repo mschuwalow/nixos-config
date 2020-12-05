@@ -50,12 +50,12 @@ in {
         START_CHARGE_THRESH_BAT0 = 75;
         STOP_CHARGE_THRESH_BAT0 = 80;
 
-        CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
-        CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
+        CPU_SCALING_GOVERNOR_ON_AC = "ondemand";
+        CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
 
-        CPU_SCALING_MIN_FREQ_ON_AC = 400000;
+        CPU_SCALING_MIN_FREQ_ON_AC = 0;
         CPU_SCALING_MAX_FREQ_ON_AC = 4900000;
-        CPU_SCALING_MIN_FREQ_ON_BAT = 400000;
+        CPU_SCALING_MIN_FREQ_ON_BAT = 0;
         CPU_SCALING_MAX_FREQ_ON_BAT = 3500000;
 
         # Enable audio power saving for Intel HDA, AC97 devices (timeout in secs).
