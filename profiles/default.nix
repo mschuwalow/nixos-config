@@ -10,6 +10,7 @@
     ./networking.nix
     ./ntp.nix
     ./printing.nix
+    ./ssd.nix
     ./sshd.nix
     ./tmux.nix
     ./vpn.nix

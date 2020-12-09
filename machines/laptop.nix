@@ -77,7 +77,6 @@ in {
       };
     };
     upower.enable = true;
-    fstrim.enable = true;
     throttled.enable = true;
     #fprintd.enable = true;
     hardware.bolt.enable = true;

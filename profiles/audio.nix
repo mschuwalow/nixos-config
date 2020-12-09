@@ -1,12 +1,12 @@
-{ pkgs, ... }:
-
+{ pkgs, config, ... }:
 {
-  sound.enable = true;
+  environment.systemPackages = with pkgs; [ spotifyd spotify-tui ];
+
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
     support32Bit = true;
   };
 
-  environment.systemPackages = with pkgs; [ pavucontrol ];
+  sound.enable = true;
 }

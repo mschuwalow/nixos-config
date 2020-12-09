@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     alacritty
-    google-chrome
-    spotify
+    unstable.google-chrome
+    unstable.spotify
     spotify-tui
     bitwarden
     seafile-client
@@ -59,6 +59,8 @@
     # ./i3
     ./gnome.nix
   ];
+
+  networking.firewall.allowedTCPPorts = [ 57621 ]; # spotify
 
   services = {
     flatpak.enable = true;
