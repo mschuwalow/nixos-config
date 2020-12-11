@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    alacritty
+    unstable.alacritty
     unstable.google-chrome
     unstable.spotify
     spotify-tui
