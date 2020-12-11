@@ -61,6 +61,6 @@ in {
 
   services = {
     lorri.enable = true;
-    vsliveshare.enable = true;
+    # vsliveshare.enable = true;
   };
 }
