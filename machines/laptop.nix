@@ -16,16 +16,16 @@ in {
   networking.hostName = "mschuwalow-laptop";
 
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    #extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     initrd = {
       checkJournalingFS = false;
       kernelModules = [ "i915" ];
     };
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelModules = [ "acpi_call" ];
+    #kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "intel_pstate=disable" ];
+    kernelParams = [ "lsm=capability,yama,selinux" "msr.allow_writes=on" ];
   };
 
   hardware = {
@@ -50,43 +50,114 @@ in {
         START_CHARGE_THRESH_BAT0 = 75;
         STOP_CHARGE_THRESH_BAT0 = 80;
 
-        CPU_SCALING_GOVERNOR_ON_AC = "ondemand";
-        CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
-
-        CPU_SCALING_MIN_FREQ_ON_AC = 0;
-        CPU_SCALING_MAX_FREQ_ON_AC = 4900000;
-        CPU_SCALING_MIN_FREQ_ON_BAT = 0;
-        CPU_SCALING_MAX_FREQ_ON_BAT = 3500000;
-
-        # Enable audio power saving for Intel HDA, AC97 devices (timeout in secs).
-        # A value of 0 disables, >=1 enables power saving (recommended: 1).
-        # Default: 0 (AC), 1 (BAT)
-        SOUND_POWER_SAVE_ON_AC = 0;
-        SOUND_POWER_SAVE_ON_BAT = 1;
-
-        # Runtime Power Management for PCI(e) bus devices: on=disable, auto=enable.
-        # Default: on (AC), auto (BAT)
-        RUNTIME_PM_ON_AC = "on";
-        RUNTIME_PM_ON_BAT = "auto";
-
-        # Battery feature drivers: 0=disable, 1=enable
-        # Default: 1 (all)
-        NATACPI_ENABLE = 1;
-        TPACPI_ENABLE = 1;
-        TPSMAPI_ENABLE = 1;
+        CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
       };
     };
     upower.enable = true;
-    throttled.enable = true;
+    throttled = {
+      enable = true;
+      extraConfig = ''
+        [GENERAL]
+        # Enable or disable the script execution
+        Enabled: True
+        # SYSFS path for checking if the system is running on AC power
+        Sysfs_Power_Path: /sys/class/power_supply/AC*/online
+        # Auto reload config on changes
+        Autoreload: True
+
+        ## Settings to apply while connected to Battery power
+        [BATTERY]
+        # Update the registers every this many seconds
+        Update_Rate_s: 30
+        # Max package power for time window #1
+        PL1_Tdp_W: 29
+        # Time window #1 duration
+        PL1_Duration_s: 28
+        # Max package power for time window #2
+        PL2_Tdp_W: 44
+        # Time window #2 duration
+        PL2_Duration_S: 0.002
+        # Max allowed temperature before throttling
+        Trip_Temp_C: 85
+        # Set cTDP to normal=0, down=1 or up=2 (EXPERIMENTAL)
+        cTDP: 0
+        # Disable BDPROCHOT (EXPERIMENTAL)
+        Disable_BDPROCHOT: False
+
+        ## Settings to apply while connected to AC power
+        [AC]
+        # Update the registers every this many seconds
+        Update_Rate_s: 5
+        # Max package power for time window #1
+        PL1_Tdp_W: 44
+        # Time window #1 duration
+        PL1_Duration_s: 28
+        # Max package power for time window #2
+        PL2_Tdp_W: 44
+        # Time window #2 duration
+        PL2_Duration_S: 0.002
+        # Max allowed temperature before throttling
+        Trip_Temp_C: 95
+        # Set HWP energy performance hints to 'performance' on high load (EXPERIMENTAL)
+        HWP_Mode: True
+        # Set cTDP to normal=0, down=1 or up=2 (EXPERIMENTAL)
+        cTDP: 0
+        # Disable BDPROCHOT (EXPERIMENTAL)
+        Disable_BDPROCHOT: False
+
+        # All voltage values are expressed in mV and *MUST* be negative (i.e. undervolt)! 
+        [UNDERVOLT.BATTERY]
+        # CPU core voltage offset (mV)
+        CORE: 0
+        # Integrated GPU voltage offset (mV)
+        GPU: 0
+        # CPU cache voltage offset (mV)
+        CACHE: 0
+        # System Agent voltage offset (mV)
+        UNCORE: 0
+        # Analog I/O voltage offset (mV)
+        ANALOGIO: 0
+
+        # All voltage values are expressed in mV and *MUST* be negative (i.e. undervolt)!
+        [UNDERVOLT.AC]
+        # CPU core voltage offset (mV)
+        CORE: 0
+        # Integrated GPU voltage offset (mV)
+        GPU: 0
+        # CPU cache voltage offset (mV)
+        CACHE: 0
+        # System Agent voltage offset (mV)
+        UNCORE: 0
+        # Analog I/O voltage offset (mV)
+        ANALOGIO: 0
+
+        # [ICCMAX.AC]
+        # # CPU core max current (A)
+        # CORE: 
+        # # Integrated GPU max current (A)
+        # GPU: 
+        # # CPU cache max current (A)
+        # CACHE: 
+
+        # [ICCMAX.BATTERY]
+        # # CPU core max current (A)
+        # CORE: 
+        # # Integrated GPU max current (A)
+        # GPU: 
+        # # CPU cache max current (A)
+        # CACHE: 
+      '';
+    };
     #fprintd.enable = true;
     hardware.bolt.enable = true;
     udev.extraHwdb = ''
       libinput:name:*SynPS/2 Synaptics TouchPad:dmi:*svnLENOVO:*:pvrThinkPadP15s*
-       LIBINPUT_ATTR_PRESSURE_RANGE=15:10
-       LIBINPUT_ATTR_PALM_PRESSURE_THRESHOLD=150
-       ID_INPUT_WIDTH_MM=100
-       ID_INPUT_HEIGHT_MM=68
-       LIBINPUT_ATTR_SIZE_HINT=100x68
+      LIBINPUT_ATTR_PRESSURE_RANGE=15:10
+      LIBINPUT_ATTR_PALM_PRESSURE_THRESHOLD=150
+      ID_INPUT_WIDTH_MM=100
+      ID_INPUT_HEIGHT_MM=68
+      LIBINPUT_ATTR_SIZE_HINT=100x68
     '';
   };
 
