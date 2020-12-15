@@ -2,7 +2,7 @@
   boot = {
     initrd.checkJournalingFS = false;
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "processor.max_cstate=1" "rcu_nocbs=0-15" "iommu=soft" ];
+    kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-7" "iommu=soft" ];
     kernelPatches = [{
       name = "ryzen";
       patch = null;
