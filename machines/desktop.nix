@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   boot = {
     initrd.checkJournalingFS = false;
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
     kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-15" ];
     kernelPatches = [{
       name = "ryzen";
