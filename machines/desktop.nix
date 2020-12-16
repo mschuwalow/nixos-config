@@ -1,8 +1,11 @@
 { config, pkgs, ... }: {
   boot = {
     initrd.checkJournalingFS = false;
+    kernel.sysctl = {
+      "kernel.randomize_va_space" = 0; 
+    };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-7" "iommu=soft" ];
+    kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-15" ];
     kernelPatches = [{
       name = "ryzen";
       patch = null;
