@@ -43,6 +43,7 @@ in {
   documentation.man.generateCaches = true;
 
   environment.systemPackages = with pkgs; [
+    vim
     bc
     exa
     fd
@@ -122,6 +123,7 @@ in {
       (import ./overlays/joplin.nix)
       (import ./overlays/ibus-rime)
       (import ./overlays/cups-kyodialog3-fix.nix)
+      (import ./overlays/sshuttle-fix.nix)
     ];
   };
 

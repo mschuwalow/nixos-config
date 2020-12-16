@@ -1,9 +1,7 @@
 { config, pkgs, ... }: {
   boot = {
     initrd.checkJournalingFS = false;
-    kernel.sysctl = {
-      "kernel.randomize_va_space" = 0; 
-    };
+    kernel.sysctl = { "kernel.randomize_va_space" = 0; };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-15" ];
     kernelPatches = [{
@@ -36,7 +34,7 @@
   networking.hostName = "mschuwalow-desktop";
 
   nix = {
-    maxJobs = 8;
+    maxJobs = 16;
     buildCores = 16;
   };
 
