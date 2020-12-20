@@ -16,16 +16,24 @@ in {
   networking.hostName = "mschuwalow-laptop";
 
   boot = {
-    #extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call rtl8192eu ];
     initrd = {
       checkJournalingFS = false;
       kernelModules = [ "i915" ];
     };
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
-    #kernelModules = [ "acpi_call" ];
+    kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "lsm=capability,yama,selinux" "msr.allow_writes=on" ];
+    kernelParams = [ "lsm=capability,yama,selinux" "msr.allow_writes=on" "intel_pstate=disable" ];
+    kernelPatches = [{
+      name = "hotplug";
+      patch = null;
+      extraConfig = ''
+        HOTPLUG_PCI y
+        HOTPLUG_PCI_ACPI y
+      '';
+    }];
   };
 
   hardware = {
@@ -43,7 +51,7 @@ in {
 
   services = {
     xserver.libinput.enable = true;
-    xserver.videoDrivers = [ "nvidia" ];
+    xserver.videoDrivers = [ "displaylink" "modesetting" "nvidia" ];
     tlp = {
       enable = true;
       settings = {
@@ -149,7 +157,7 @@ in {
         # CACHE: 
       '';
     };
-    #fprintd.enable = true;
+    # fprintd.enable = true;
     hardware.bolt.enable = true;
     udev.extraHwdb = ''
       libinput:name:*SynPS/2 Synaptics TouchPad:dmi:*svnLENOVO:*:pvrThinkPadP15s*
