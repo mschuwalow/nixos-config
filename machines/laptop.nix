@@ -16,7 +16,10 @@ in {
   networking.hostName = "mschuwalow-laptop";
 
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call rtl8192eu ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      acpi_call
+      rtl8192eu
+    ];
     initrd = {
       checkJournalingFS = false;
       kernelModules = [ "i915" ];
@@ -25,7 +28,11 @@ in {
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "lsm=capability,yama,selinux" "msr.allow_writes=on" "intel_pstate=disable" ];
+    kernelParams = [
+      "lsm=capability,yama,selinux"
+      "msr.allow_writes=on"
+      "intel_pstate=disable"
+    ];
     kernelPatches = [{
       name = "hotplug";
       patch = null;
