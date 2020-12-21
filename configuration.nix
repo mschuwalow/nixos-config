@@ -163,8 +163,8 @@ in {
   };
 
   systemd.services = {
-    systemd-udev-settle.enable = false;
-    NetworkManager-wait-online.enable = false;
+    #systemd-udev-settle.enable = false;
+    #NetworkManager-wait-online.enable = false;
   };
 
   time.timeZone = "Europe/Berlin";

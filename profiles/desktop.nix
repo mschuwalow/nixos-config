@@ -25,6 +25,7 @@
     xdotool
     libreoffice-fresh
     appimage-run
+    gnome3.gnome-system-monitor
   ];
 
   fonts = {
@@ -55,20 +56,25 @@
     driSupport = true;
   };
 
-  imports = [
-    # ./i3
-    ./gnome.nix
-  ];
+  i18n = {
+    inputMethod = {
+      enabled = "ibus";
+      ibus.engines = with pkgs.ibus-engines; [ uniemoji rime ];
+    };
+  };
 
   networking.firewall.allowedTCPPorts = [ 57621 ]; # spotify
 
   services = {
     flatpak.enable = true;
+    pantheon.contractor.enable = true;
     xserver = {
+      desktopManager.pantheon.enable = true;
+      displayManager.lightdm.enable = true;
       enable = true;
+      enableCtrlAltBackspace = true;
       layout = "us";
       # xkbVariant = "colemak";
-      enableCtrlAltBackspace = true;
     };
   };
 
