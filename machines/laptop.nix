@@ -17,7 +17,6 @@ in {
 
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [
-      acpi_call
       rtl8192eu
     ];
     initrd = {
@@ -26,12 +25,10 @@ in {
     };
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "lsm=capability,yama,selinux"
       "msr.allow_writes=on"
-      "intel_pstate=disable"
     ];
     kernelPatches = [{
       name = "hotplug";
@@ -164,7 +161,7 @@ in {
         # CACHE: 
       '';
     };
-    # fprintd.enable = true;
+    #fprintd.enable = true;
     hardware.bolt.enable = true;
     udev.extraHwdb = ''
       libinput:name:*SynPS/2 Synaptics TouchPad:dmi:*svnLENOVO:*:pvrThinkPadP15s*

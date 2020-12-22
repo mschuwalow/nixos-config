@@ -1,31 +1,32 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    unstable.alacritty
-    unstable.google-chrome
-    unstable.spotify
-    spotify-tui
+    appimage-run
     bitwarden
-    seafile-client
-    unstable.ferdi
-    screenkey
-    usbutils
-    xclip
-    transmission-gtk
-    nmap-graphical
-    vlc
-    zoom-us
     catt
-    youtube-dl
     ghostwriter
-    rtv
-    okular
+    gnome3.gnome-disk-utility
+    gnome3.gnome-system-monitor
     hunspell
     hunspellDicts.de-de
     hunspellDicts.en-us
-    xdotool
     libreoffice-fresh
-    appimage-run
-    gnome3.gnome-system-monitor
+    nmap-graphical
+    okular
+    rtv
+    screenkey
+    seafile-client
+    spotify-tui
+    transmission-gtk
+    unstable.alacritty
+    unstable.ferdi
+    unstable.google-chrome
+    unstable.spotify
+    usbutils
+    vlc
+    xclip
+    xdotool
+    youtube-dl
+    zoom-us
   ];
 
   fonts = {
