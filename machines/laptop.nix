@@ -38,12 +38,15 @@ in {
   hardware = {
     trackpoint.enable = true;
     cpu.intel.updateMicrocode = true;
-    opengl.extraPackages = with pkgs; [
-      vaapiIntel
-      vaapiVdpau
-      libvdpau-va-gl
-      intel-media-driver
-    ];
+    opengl = {
+      enable = true;
+      extraPackages = with pkgs; [
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+        intel-media-driver
+      ];
+    };
     nvidia.prime.offload.enable = true;
     firmware = with pkgs; [ sof-firmware ];
   };
