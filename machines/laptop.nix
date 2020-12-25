@@ -16,7 +16,7 @@ in {
   networking.hostName = "mschuwalow-laptop";
 
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ rtl8192eu ];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call rtl8192eu ];
     initrd = {
       checkJournalingFS = false;
       kernelModules = [ "i915" ];
@@ -24,7 +24,7 @@ in {
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "lsm=capability,yama,selinux" "msr.allow_writes=on" ];
+    kernelParams = [ "lsm=capability,yama,selinux" "msr.allow_writes=on" "intel_pstate=disable" ];
     kernelPatches = [{
       name = "hotplug";
       patch = null;
@@ -159,7 +159,7 @@ in {
         # CACHE: 
       '';
     };
-    #fprintd.enable = true;
+    # fprintd.enable = true;
     hardware.bolt.enable = true;
     udev.extraHwdb = ''
       libinput:name:*SynPS/2 Synaptics TouchPad:dmi:*svnLENOVO:*:pvrThinkPadP15s*
