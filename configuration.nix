@@ -130,15 +130,11 @@ in {
   };
 
   programs = {
-    ssh.startAgent = true;
     zsh = {
       enable = true;
       enableBashCompletion = true;
-      promptInit = ''
-        eval $(${pkgs.starship}/bin/starship init zsh)
-      '';
       setOptions = [
-        "HIST_IGNORE_ALL_DUPS"
+        "HIST_FIND_NO_DUPS"
         "HIST_IGNORE_SPACE"
         "SHARE_HISTORY"
         "HIST_FCNTL_LOCK"
@@ -160,11 +156,6 @@ in {
   system.autoUpgradeCheckout = {
     enable = true;
     sshKey = secrets.git.sshKey;
-  };
-
-  systemd.services = {
-    #systemd-udev-settle.enable = false;
-    #NetworkManager-wait-online.enable = false;
   };
 
   time.timeZone = "Europe/Berlin";

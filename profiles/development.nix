@@ -26,8 +26,6 @@ in {
   environment.systemPackages = with pkgs; [
     awscli
     cabal2nix
-    coz
-    direnv
     vscode
     kubetail
     kubectl

@@ -29,4 +29,5 @@
       ];
     };
   };
+  programs.ssh.startAgent = true;
 }
