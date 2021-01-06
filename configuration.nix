@@ -137,6 +137,8 @@ in {
         "HIST_FIND_NO_DUPS"
         "HIST_IGNORE_SPACE"
         "SHARE_HISTORY"
+        "INC_APPEND_HISTORY"
+        "HIST_VERIFY"
         "HIST_FCNTL_LOCK"
       ];
     };

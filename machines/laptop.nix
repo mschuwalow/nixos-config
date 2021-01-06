@@ -16,7 +16,10 @@ in {
   networking.hostName = "mschuwalow-laptop";
 
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call rtl8192eu ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      acpi_call
+      rtl8192eu
+    ];
     initrd = {
       checkJournalingFS = false;
       kernelModules = [ "i915" ];
@@ -24,15 +27,7 @@ in {
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "lsm=capability,yama,selinux" "msr.allow_writes=on" ];
-    kernelPatches = [{
-      name = "hotplug";
-      patch = null;
-      extraConfig = ''
-        HOTPLUG_PCI y
-        HOTPLUG_PCI_ACPI y
-      '';
-    }];
+    kernelParams = [ "intel_iommu=false" "msr.allow_writes=on" ];
   };
 
   hardware = {
@@ -52,18 +47,8 @@ in {
   };
 
   services = {
-    xserver.libinput.enable = true;
-    xserver.videoDrivers = [ "displaylink" "modesetting" "nvidia" ];
-    tlp = {
-      enable = true;
-      settings = {
-        START_CHARGE_THRESH_BAT0 = 75;
-        STOP_CHARGE_THRESH_BAT0 = 80;
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      };
-    };
-    upower.enable = true;
+    # fprintd.enable = true;
+    hardware.bolt.enable = true;
     throttled = {
       enable = true;
       extraConfig = ''
@@ -158,17 +143,20 @@ in {
         # CACHE: 
       '';
     };
-    # fprintd.enable = true;
-    hardware.bolt.enable = true;
-    udev.extraHwdb = ''
-      libinput:name:*SynPS/2 Synaptics TouchPad:dmi:*svnLENOVO:*:pvrThinkPadP15s*
-      LIBINPUT_ATTR_PRESSURE_RANGE=15:10
-      LIBINPUT_ATTR_PALM_PRESSURE_THRESHOLD=150
-      ID_INPUT_WIDTH_MM=100
-      ID_INPUT_HEIGHT_MM=68
-      LIBINPUT_ATTR_SIZE_HINT=100x68
-    '';
+    tlp = {
+      enable = true;
+      settings = {
+        START_CHARGE_THRESH_BAT0 = 75;
+        STOP_CHARGE_THRESH_BAT0 = 80;
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      };
+    };
+    xserver.libinput.enable = true;
+    xserver.videoDrivers = [ "nvidia" ];
   };
+
+  powerManagement.enable = true;
 
   system.stateVersion = "20.09";
 

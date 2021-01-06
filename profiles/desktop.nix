@@ -15,7 +15,6 @@
     rtv
     screenkey
     seafile-client
-    spotify-tui
     transmission-gtk
     unstable.alacritty
     unstable.ferdi

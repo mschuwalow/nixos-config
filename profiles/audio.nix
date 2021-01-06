@@ -1,5 +1,4 @@
 { pkgs, config, ... }: {
-  environment.systemPackages = with pkgs; [ spotifyd spotify-tui ];
 
   hardware.pulseaudio = {
     enable = true;
