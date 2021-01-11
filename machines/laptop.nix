@@ -27,7 +27,7 @@ in {
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "intel_iommu=false" "msr.allow_writes=on" ];
+    kernelParams = [ "msr.allow_writes=on" ];
   };
 
   hardware = {
