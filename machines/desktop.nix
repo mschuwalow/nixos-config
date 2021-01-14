@@ -39,6 +39,8 @@
 
   time.hardwareClockInLocalTime = true;
 
+  powerManagement.enable = true;
+
   services.xserver = {
     displayManager.setupCommands = ''
       ${pkgs.xorg.xrandr}/bin/xrandr \
