@@ -65,7 +65,6 @@ in {
     peco
     powertop
     ripgrep
-    rover
     sd
     tealdeer
     termdown
@@ -113,19 +112,13 @@ in {
     overlays = [
       (import ./overlays/unstable.nix)
       (import ./overlays/nur.nix)
-      (import ./overlays/custom-envs.nix)
       (import ./overlays/python-packages.nix)
       (import ./overlays/git-heatmap)
-      (import ./overlays/rocketchat)
-      (import ./overlays/i3-gaps)
-      (import ./overlays/rover.nix)
       (import ./overlays/vscode-extensions)
       (import ./overlays/joplin.nix)
       (import ./overlays/ibus-rime)
       (import ./overlays/cups-kyodialog3-fix.nix)
       (import ./overlays/sshuttle-fix.nix)
-      (import ./overlays/update-nvidia.nix)
-      (import ./overlays/unbreak-evdi.nix)
     ];
   };
 
