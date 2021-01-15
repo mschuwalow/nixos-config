@@ -10,9 +10,7 @@
   networking = {
     nameservers = [ "8.8.8.8" "8.8.4.4" ];
 
-    firewall = {
-      enable = true;
-    };
+    firewall = { enable = true; };
   };
   programs.ssh.startAgent = true;
   services.avahi.enable = true;

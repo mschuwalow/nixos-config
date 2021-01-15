@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   boot = {
     initrd.checkJournalingFS = false;
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-15" ];
     kernelPatches = [{
       name = "ryzen";
@@ -41,21 +41,7 @@
 
   powerManagement.enable = true;
 
-  services.xserver = {
-    displayManager.setupCommands = ''
-      ${pkgs.xorg.xrandr}/bin/xrandr \
-      --output HDMI-0 --off \
-      --output HDMI-1 --off \
-      --output HDMI-2 --mode 1920x1080 --pos 3640x0 --rotate right \
-      --output DP-0 --primary --mode 2560x1440 --pos 1080x0 --rotate normal \
-      --output DP-1 --off \
-      --output DP-2 --off \
-      --output DP-3 --off \
-      --output DP-4 --mode 1920x1080 --pos 0x0 --rotate left \
-      --output DP-5 --off
-    '';
-    videoDrivers = [ "nvidia" ];
-  };
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   system.stateVersion = "20.09";
 }
