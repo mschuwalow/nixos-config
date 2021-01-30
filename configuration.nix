@@ -79,6 +79,7 @@ in {
     zip
     usbutils
     pciutils
+    pmutils
   ];
 
   i18n = {
