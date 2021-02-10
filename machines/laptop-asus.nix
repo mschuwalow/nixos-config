@@ -21,9 +21,7 @@
     };
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "acpi_osi='!Windows 2012'"
-    ];
+    kernelParams = [ "acpi_osi='!Windows 2012'" ];
   };
 
   hardware = {
