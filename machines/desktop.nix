@@ -2,16 +2,7 @@
   boot = {
     initrd.checkJournalingFS = false;
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-15" ];
-    kernelPatches = [{
-      name = "ryzen";
-      patch = null;
-      extraConfig = ''
-        CPU_ISOLATION y
-        RCU_EXPERT y
-        RCU_NOCB_CPU y
-      '';
-    }];
+    kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-11" ];
     loader = {
       grub = {
         device = "nodev";

@@ -11,6 +11,7 @@ in {
     ./modules/vsliveshare.nix
     ./modules/my-lib.nix
     ./modules/autoupgrade.nix
+    ./modules/bloop-system.nix
 
     # load system specific configuration
     ./hardware-configuration.nix
@@ -120,6 +121,7 @@ in {
       (import ./overlays/ibus-rime)
       (import ./overlays/cups-kyodialog3-fix.nix)
       (import ./overlays/sshuttle-fix.nix)
+      (import ./overlays/bloop-version.nix)
     ];
   };
 
