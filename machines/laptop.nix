@@ -26,7 +26,7 @@ in {
     };
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
     kernelParams = [ "msr.allow_writes=on" ];
   };
 
@@ -42,7 +42,10 @@ in {
         intel-media-driver
       ];
     };
-    nvidia.prime.offload.enable = true;
+    nvidia = {
+      powerManagement.enable = true;
+      prime.offload.enable = true;
+    };
     firmware = with pkgs; [ sof-firmware ];
   };
 
