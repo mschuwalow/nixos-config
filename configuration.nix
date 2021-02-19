@@ -121,7 +121,6 @@ in {
       (import ./overlays/ibus-rime)
       (import ./overlays/cups-kyodialog3-fix.nix)
       (import ./overlays/sshuttle-fix.nix)
-      (import ./overlays/bloop-version.nix)
     ];
   };
 
