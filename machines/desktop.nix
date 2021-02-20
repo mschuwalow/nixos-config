@@ -1,8 +1,7 @@
 { config, pkgs, ... }: {
   boot = {
     initrd.checkJournalingFS = false;
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "processor.max_cstate=5" "rcu_nocbs=0-11" ];
+    kernelPackages = pkgs.linuxPackages;
     loader = {
       grub = {
         device = "nodev";
@@ -24,8 +23,8 @@
   networking.hostName = "mschuwalow-desktop";
 
   nix = {
-    maxJobs = 16;
-    buildCores = 16;
+    maxJobs = 12;
+    buildCores = 12;
   };
 
   time.hardwareClockInLocalTime = true;

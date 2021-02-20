@@ -60,7 +60,7 @@ in {
     most
     ncdu
     nix-index
-    nix-prefetch-git
+    nix-prefetch
     nnn
     nox
     peco
@@ -81,6 +81,7 @@ in {
     usbutils
     pciutils
     pmutils
+    nixFlakes
   ];
 
   i18n = {
@@ -119,7 +120,7 @@ in {
       (import ./overlays/vscode-extensions)
       (import ./overlays/joplin.nix)
       (import ./overlays/ibus-rime)
-      (import ./overlays/cups-kyodialog3-fix.nix)
+      (import ./overlays/cups-kyocera-ecosys)
       (import ./overlays/sshuttle-fix.nix)
     ];
   };
