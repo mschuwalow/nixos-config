@@ -90,21 +90,25 @@ in {
   };
 
   nix = {
-    nixPath = [
-      "nixpkgs=/etc/nixos/checkouts/nixpkgs"
-      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
-      "nixos-config=/etc/nixos/configuration.nix"
-    ];
+    autoOptimiseStore = true;
     binaryCaches = [ "https://cache.nixos.org/" "https://r-ryantm.cachix.org" ];
     binaryCachePublicKeys =
       [ "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c=" ];
-    autoOptimiseStore = true;
-    useSandbox = "relaxed";
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
+    nixPath = [
+      "nixpkgs=/etc/nixos/checkouts/nixpkgs"
+      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+      "nixos-config=/etc/nixos/configuration.nix"
+    ];
+    package = pkgs.nixFlakes;
+    useSandbox = "relaxed";
   };
 
   nixpkgs = {
