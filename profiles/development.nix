@@ -50,6 +50,8 @@ in {
     httpie
     binutils-unwrapped
     nixpkgs-review
+    patchelf
+    steam-run
   ];
 
   # disable sublime asking for license
