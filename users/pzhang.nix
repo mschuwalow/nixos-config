@@ -14,6 +14,7 @@ in {
       "systemd-journal"
       "docker"
       "input"
+      "wheel"
     ];
     createHome = true;
     home = "/home/pzhang";

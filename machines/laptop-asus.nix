@@ -20,8 +20,10 @@
       efi.canTouchEfiVariables = true;
     };
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "acpi_osi='!Windows 2012'" ];
+    kernelPackages = pkgs.linuxPackages;
+    kernelParams = [
+      "acpi_osi='!Windows 2012'"
+    ];
   };
 
   hardware = {
@@ -40,7 +42,7 @@
   powerManagement = {
     enable = true;
     powerDownCommands = ''
-      ${pkgs.kmod}/bin/lsmod | ${pkgs.gnugrep}/bin/grep -q "^iwlwifi" && ${pkgs.kmod}/bin/rmmod -f -v iwlwifi
+      ${pkgs.kmod}/bin/lsmod | ${pkgs.gnugrep}/bin/grep -q "^iwlwifi" && ${pkgs.kmod}/bin/modprobe -r -v iwlwifi
     '';
     resumeCommands = ''
       ${pkgs.kmod}/bin/modprobe -v iwlwifi
