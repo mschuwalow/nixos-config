@@ -27,7 +27,10 @@ in {
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages;
-    kernelParams = [ "msr.allow_writes=on" ];
+    kernelParams = [ 
+      "mem_sleep_default=deep"
+      "msr.allow_writes=on"
+    ];
   };
 
   hardware = {
@@ -59,7 +62,7 @@ in {
         # Enable or disable the script execution
         Enabled: True
         # SYSFS path for checking if the system is running on AC power
-        Sysfs_Power_Path: /sys/class/power_supply/AC*/online
+        Sysfs_Power_Path: /sys/class/power_supply/AC/online
         # Auto reload config on changes
         Autoreload: True
 
