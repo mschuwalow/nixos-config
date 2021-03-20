@@ -81,7 +81,6 @@ in {
     usbutils
     pciutils
     pmutils
-    nixFlakes
   ];
 
   i18n = {
@@ -134,10 +133,9 @@ in {
       enable = true;
       enableBashCompletion = true;
       setOptions = [
-        "HIST_FIND_NO_DUPS"
+        "HIST_IGNORE_ALL_DUPS"
         "HIST_IGNORE_SPACE"
         "SHARE_HISTORY"
-        "INC_APPEND_HISTORY"
         "HIST_VERIFY"
         "HIST_FCNTL_LOCK"
       ];
