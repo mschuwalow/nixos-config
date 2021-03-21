@@ -138,6 +138,7 @@ in {
         "SHARE_HISTORY"
         "HIST_VERIFY"
         "HIST_FCNTL_LOCK"
+        "HIST_REDUCE_BLANKS"
       ];
     };
   };
