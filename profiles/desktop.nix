@@ -14,7 +14,6 @@
     okular
     rtv
     screenkey
-    seafile-client
     transmission-gtk
     unstable.alacritty
     unstable.ferdi

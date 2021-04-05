@@ -2,9 +2,7 @@
   boot = {
     initrd.checkJournalingFS = false;
     kernelPackages = pkgs.linuxPackages;
-    kernelParams = [
-      "mem_sleep_default=deep"
-    ];
+    kernelParams = [ "mem_sleep_default=deep" ];
     loader = {
       grub = {
         device = "nodev";

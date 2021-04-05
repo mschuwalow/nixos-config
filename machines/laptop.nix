@@ -27,10 +27,7 @@ in {
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages;
-    kernelParams = [ 
-      "mem_sleep_default=deep"
-      "msr.allow_writes=on"
-    ];
+    kernelParams = [ "mem_sleep_default=deep" "msr.allow_writes=on" ];
   };
 
   hardware = {

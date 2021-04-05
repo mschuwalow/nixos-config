@@ -81,6 +81,7 @@ in {
     usbutils
     pciutils
     pmutils
+    nfs-utils
   ];
 
   i18n = {
