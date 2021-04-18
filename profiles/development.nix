@@ -51,6 +51,7 @@ in {
     binutils-unwrapped
     nixpkgs-review
     patchelf
+    rnix-lsp
   ];
 
   # disable sublime asking for license
