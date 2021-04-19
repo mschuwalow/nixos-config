@@ -1,11 +1,13 @@
 { config, pkgs, ... }: {
-  age.secrets = {
-    "purevpn.key".file = ./secrets/vpn/purevpn.key.age;
-    "purevpn.ovpn".file = ./secrets/vpn/purevpn.ovpn.age;
-    "pw-mschuwalow".file = ./secrets/users/mschuwalow.age;
-    "pw-pzhang".file = ./secrets/users/pzhang.age;
-    "pw-root".file = ./secrets/users/root.age;
-    "github_rsa".file = ./secrets/ssh/github_rsa.age;
+  age = {
+    secrets = {
+      "purevpn.key".file = ./secrets/vpn/purevpn.key.age;
+      "purevpn.ovpn".file = ./secrets/vpn/purevpn.ovpn.age;
+      "pw-mschuwalow".file = ./secrets/users/mschuwalow.age;
+      "pw-pzhang".file = ./secrets/users/pzhang.age;
+      "pw-root".file = ./secrets/users/root.age;
+      "github_rsa".file = ./secrets/ssh/github_rsa.age;
+    };
   };
 
   imports = [
@@ -70,8 +72,8 @@
     tmux
     tree
     unrar
-    unstable.bottom
-    unstable.micro
+    bottom
+    micro
     unzip
     wget
     whois

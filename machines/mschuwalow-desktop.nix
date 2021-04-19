@@ -8,7 +8,7 @@
       kernelModules = [ ];
     };
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     # kernelParams = [ "mem_sleep_default=deep" "initcall_debug" ];
     loader = {
       grub = {
@@ -37,6 +37,7 @@
   hardware = {
     enableRedistributableFirmware = true;
     cpu.amd.updateMicrocode = true;
+    nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   networking.hostName = "mschuwalow-desktop";

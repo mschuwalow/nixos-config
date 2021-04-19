@@ -2,7 +2,7 @@
   inputs = {
     agenix.url = "github:ryantm/agenix";
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-head.url = "nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       flake = true;
@@ -10,7 +10,7 @@
     };
   };
 
-  outputs = { self, agenix, nixpkgs, nixpkgs-head, home-manager }@inputs: {
+  outputs = { self, agenix, nixpkgs, nixpkgs-unstable, home-manager }@inputs: {
     nixosConfigurations = {
       mschuwalow-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -25,10 +25,16 @@
           ({ ... }:
             let
               overlay-unstable = (self: super: {
-                unstable =
-                  import nixpkgs-head { config = { allowUnfree = true; }; };
+                unstable = import nixpkgs-unstable {
+                  system = "x86_64-linux";
+
+                  config.allowUnfree = true;
+                };
               });
-            in { nixpkgs.overlays = [ overlay-unstable ]; })
+            in {
+              nix.registry.nixpkgs.flake = nixpkgs;
+              nixpkgs.overlays = [ overlay-unstable ];
+            })
           ./configuration.nix
           ./machines/mschuwalow-desktop.nix
         ];
