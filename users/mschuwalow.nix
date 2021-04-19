@@ -19,7 +19,7 @@ in {
     ];
     createHome = true;
     home = "/home/mschuwalow";
-    initialHashedPassword = userSecrets.password;
+    passwordFile = "/run/secrets/pw-mschuwalow";
     packages = with pkgs; [ home-manager ];
   };
 }

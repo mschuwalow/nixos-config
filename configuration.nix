@@ -1,21 +1,24 @@
 { config, pkgs, ... }:
-let secrets = config.vars.secrets;
-in {
-  imports = [
-    ./secrets
+{
+  age.secrets = {
+    "purevpn.key".file = ./secrets/vpn/purevpn.key.age;
+    "purevpn.ovpn".file = ./secrets/vpn/purevpn.ovpn.age;
+    "pw-mschuwalow".file = ./secrets/users/mschuwalow.age;
+    "pw-pzhang".file = ./secrets/users/pzhang.age;
+    "pw-root".file = ./secrets/users/root.age;
+  };
 
+  imports = [
     # load modules
     ./modules/variables.nix
     ./modules/home-manager.nix
     ./modules/xcursor.nix
     ./modules/vsliveshare.nix
     ./modules/my-lib.nix
-    ./modules/autoupgrade.nix
     ./modules/bloop-system.nix
 
     # load system specific configuration
     ./hardware-configuration.nix
-    ./machine-configuration.nix
 
     # load default services & profiles
     ./profiles
@@ -154,11 +157,6 @@ in {
       enable = true;
       wheelNeedsPassword = false;
     };
-  };
-
-  system.autoUpgradeCheckout = {
-    enable = true;
-    sshKey = secrets.git.sshKey;
   };
 
   time.timeZone = "Europe/Berlin";
