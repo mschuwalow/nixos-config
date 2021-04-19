@@ -15,10 +15,10 @@
     rtv
     screenkey
     transmission-gtk
-    unstable.alacritty
-    unstable.ferdi
-    unstable.google-chrome
-    unstable.spotify
+    alacritty
+    ferdi
+    google-chrome
+    spotify
     usbutils
     vlc
     xclip
