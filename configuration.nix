@@ -1,24 +1,19 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   age.secrets = {
     "purevpn.key".file = ./secrets/vpn/purevpn.key.age;
     "purevpn.ovpn".file = ./secrets/vpn/purevpn.ovpn.age;
     "pw-mschuwalow".file = ./secrets/users/mschuwalow.age;
     "pw-pzhang".file = ./secrets/users/pzhang.age;
     "pw-root".file = ./secrets/users/root.age;
+    "github_rsa".file = ./secrets/ssh/github_rsa.age;
   };
 
   imports = [
     # load modules
     ./modules/variables.nix
-    ./modules/home-manager.nix
     ./modules/xcursor.nix
     ./modules/vsliveshare.nix
-    ./modules/my-lib.nix
     ./modules/bloop-system.nix
-
-    # load system specific configuration
-    ./hardware-configuration.nix
 
     # load default services & profiles
     ./profiles
@@ -109,7 +104,7 @@
       "nixpkgs-overlays=/etc/nixos/overlays-compat/"
       "nixos-config=/etc/nixos/configuration.nix"
     ];
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
     useSandbox = "relaxed";
   };
 
@@ -118,6 +113,15 @@
       allowUnfree = true;
       trusted-users = "@wheel";
     };
+    overlays = [
+      (import ./overlays/nur.nix)
+      (import ./overlays/python-packages.nix)
+      (import ./overlays/vscode-extensions)
+      (import ./overlays/joplin.nix)
+      (import ./overlays/ibus-rime)
+      (import ./overlays/cups-kyocera-ecosys)
+      (import ./overlays/sshuttle-fix.nix)
+    ];
   };
 
   programs = {

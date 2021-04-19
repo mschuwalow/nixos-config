@@ -4,7 +4,7 @@
   services = {
     openvpn.servers = {
       pureVPN = {
-        config = "config ${config.vars.secrets.vpn.pureVPNConfig}";
+        config = "config /run/secrets/purevpn.ovpn";
         autoStart = false;
         updateResolvConf = false;
       };

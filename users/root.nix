@@ -39,7 +39,7 @@ in {
             "github.com" = {
               hostname = "github.com";
               user = "git";
-              identityFile = secrets.git.sshKey;
+              identityFile = "/run/secrets/ssh_github";
             };
           };
         };
