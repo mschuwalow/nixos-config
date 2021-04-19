@@ -37,7 +37,7 @@
   hardware = {
     enableRedistributableFirmware = true;
     cpu.amd.updateMicrocode = true;
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
+    nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   networking.hostName = "mschuwalow-desktop";
