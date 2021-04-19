@@ -106,7 +106,6 @@
       options = "--delete-older-than 30d";
     };
     nixPath = [
-      "nixpkgs=/etc/nixos/checkouts/nixpkgs"
       "nixpkgs-overlays=/etc/nixos/overlays-compat/"
       "nixos-config=/etc/nixos/configuration.nix"
     ];
@@ -119,18 +118,6 @@
       allowUnfree = true;
       trusted-users = "@wheel";
     };
-    overlays = [
-      (import ./overlays/master.nix)
-      (import ./overlays/unstable.nix)
-      (import ./overlays/nur.nix)
-      (import ./overlays/python-packages.nix)
-      (import ./overlays/git-heatmap)
-      (import ./overlays/vscode-extensions)
-      (import ./overlays/joplin.nix)
-      (import ./overlays/ibus-rime)
-      (import ./overlays/cups-kyocera-ecosys)
-      (import ./overlays/sshuttle-fix.nix)
-    ];
   };
 
   programs = {
