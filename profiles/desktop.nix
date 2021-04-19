@@ -29,7 +29,7 @@
 
   fonts = {
     enableDefaultFonts = true;
-    enableFontDir = true;
+    fontDir.enable = true;
     fonts = with pkgs; [
       (nerdfonts.override {
         fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];

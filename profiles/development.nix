@@ -31,7 +31,6 @@ in {
     kubectl
     kubernetes-helm
     sublime-merge
-    git-heatmap
     (python3.withPackages
       (ps: with ps; [ numpy pandas pendulum pillow jupyterlab pylint ]))
     gnumake
