@@ -1,5 +1,6 @@
 {
     inputs = {
+        agenix.url = "github:ryantm/agenix";
         nixpkgs.url = "nixpkgs/release-20.09";
         nixpkgs-head.url = "nixpkgs/master";
         home-manager = {
@@ -9,19 +10,21 @@
         };
     };
 
-    outputs = {self, nixpkgs, nixpkgs-head, home-manager}: {
+    outputs = {self, agenix, nixpkgs, nixpkgs-head, home-manager}: {
         nixosModules = [
+            (import ./hardware-configuration.nix)
+            agenix.nixosModules.age
             nixpkgs.nixosModules.notDetected
             home-manager.nixosModules.home-manager
         ];
         nixosConfigurations = {
-            mschuwalow-destkop = nixpkgs.lib.nixosSystem {
+            mschuwalow-desktop = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 modules = [
                     ./configuration.nix
                     ./machines/desktop.nix
-                ]
+                ];
             };
-        }
+        };
     };
 }

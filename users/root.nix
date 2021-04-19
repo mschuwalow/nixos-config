@@ -52,5 +52,5 @@ in {
     };
   };
 
-  users.users.root = { hashedPassword = userSecrets.password; };
+  users.users.root = { passwordFile = "/run/secrets/pw-root"; };
 }

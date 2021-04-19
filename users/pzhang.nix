@@ -18,7 +18,7 @@ in {
     ];
     createHome = true;
     home = "/home/pzhang";
-    initialHashedPassword = userSecrets.password;
+    passwordFile = "/run/secrets/pw-pzhang";
     packages = with pkgs; [ home-manager ];
   };
 }
