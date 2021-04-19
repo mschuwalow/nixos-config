@@ -10,3 +10,6 @@
 	path = checkouts/home-manager
 	url = git@github.com:nix-community/home-manager.git
 	branch = release-20.09
+[submodule "checkouts/nixpkgs-master"]
+	path = checkouts/nixpkgs-master
+	url = git@github.com:NixOS/nixpkgs.git

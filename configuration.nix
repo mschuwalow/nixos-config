@@ -117,6 +117,7 @@ in {
       trusted-users = "@wheel";
     };
     overlays = [
+      (import ./overlays/master.nix)
       (import ./overlays/unstable.nix)
       (import ./overlays/nur.nix)
       (import ./overlays/python-packages.nix)

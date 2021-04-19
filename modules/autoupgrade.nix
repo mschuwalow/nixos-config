@@ -97,7 +97,7 @@ in {
           "";
         update-checkout = ''
           git -C ${cfg.repoPath} pull
-          git -C ${cfg.repoPath} submodule update --recursive --remote  
+          git -C ${cfg.repoPath} submodule update --recursive --remote --merge
         '';
         commit-changes = ''
           git -C ${cfg.repoPath} commit -am "autoupgrade - $(date -u --rfc-3339=seconds)" || echo "No changes to commit"

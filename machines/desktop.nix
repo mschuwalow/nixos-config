@@ -2,7 +2,7 @@
   boot = {
     initrd.checkJournalingFS = false;
     kernelPackages = pkgs.linuxPackages;
-    kernelParams = [ "mem_sleep_default=deep" ];
+    # kernelParams = [ "mem_sleep_default=deep" "initcall_debug" ];
     loader = {
       grub = {
         device = "nodev";
@@ -30,7 +30,7 @@
 
   time.hardwareClockInLocalTime = true;
 
-  powerManagement.enable = true;
+  powerManagement.enable = false;
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
