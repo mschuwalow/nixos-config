@@ -1,8 +1,4 @@
-{ config, pkgs, lib, rootDir, ... }:
-let
-  userSecrets = config.vars.secrets.users.pzhang;
-  home-manager-script = config.vars.home-manager-script;
-in {
+{ config, pkgs, lib, ... }: {
   users.users.pzhang = {
     isNormalUser = true;
     uid = 1001;
