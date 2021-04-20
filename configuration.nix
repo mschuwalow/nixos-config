@@ -68,6 +68,7 @@
     pciutils
     pmutils
     nfs-utils
+    agenix
   ];
 
   i18n = {
