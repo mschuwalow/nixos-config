@@ -1,10 +1,6 @@
-{ config, pkgs, lib, secrets, ... }:
+{ config, pkgs, lib, ... }:
 
-let
-  homeDirectory = "/root";
-  secrets = config.vars.secrets;
-  userSecrets = config.vars.secrets.users.root;
-in {
+{
   home-manager = {
     users.root = {
       gtk = {

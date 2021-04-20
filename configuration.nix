@@ -1,17 +1,8 @@
-{ config, pkgs, ... }: {
-  age = {
-    secrets = {
-      "purevpn.key".file = ./secrets/vpn/purevpn.key.age;
-      "purevpn.ovpn".file = ./secrets/vpn/purevpn.ovpn.age;
-      "pw-mschuwalow".file = ./secrets/users/mschuwalow.age;
-      "pw-pzhang".file = ./secrets/users/pzhang.age;
-      "pw-root".file = ./secrets/users/root.age;
-      "github_rsa".file = ./secrets/ssh/github_rsa.age;
-    };
-  };
+{ config, pkgs, inputs, ... }: {
 
   imports = [
     # load modules
+    ./secrets/module.nix
     ./modules/variables.nix
     ./modules/xcursor.nix
     ./modules/vsliveshare.nix
@@ -82,6 +73,7 @@
     pciutils
     pmutils
     nfs-utils
+    inputs.agenix.defaultPackage."${system}"
   ];
 
   i18n = {
@@ -103,6 +95,7 @@
       options = "--delete-older-than 30d";
     };
     nixPath = [
+      "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs-overlays=${./overlays-compat}/"
     ];
     package = pkgs.nixUnstable;
@@ -115,7 +108,6 @@
       trusted-users = "@wheel";
     };
     overlays = [
-      (import ./overlays/nur.nix)
       (import ./overlays/python-packages.nix)
       (import ./overlays/vscode-extensions)
       (import ./overlays/joplin.nix)
