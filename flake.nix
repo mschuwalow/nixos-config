@@ -15,7 +15,7 @@
   };
 
   outputs =
-    { self, agenix, nixpkgs, nixpkgs-unstable, nur, home-manager }@inputs: 
+    { self, agenix, nixpkgs, nixpkgs-unstable, nur, home-manager }@inputs:
     let
       overlays = {
         "x86_64-linux" = [
@@ -30,39 +30,39 @@
           (import ./overlays/joplin.nix)
           (import ./overlays/ibus-rime)
           (import ./overlays/cups-kyocera-ecosys)
-          # (import ./overlays/sshuttle-fix.nix)
+          (import ./overlays/sshuttle-fix.nix)
+          (import ./overlays/git-heatmap.nix)
         ];
       };
-      nixosModules = [
+      allModules = [
         agenix.nixosModules.age
         nixpkgs.nixosModules.notDetected
         home-manager.nixosModules.home-manager
-        # ./modules/variables.nix
+        ./modules/variables.nix
         ./modules/xcursor.nix
-        # ./modules/vsliveshare.nix
-        # ./modules/bloop-system.nix
-        ./modules/bloop.nix
+        ./modules/vsliveshare.nix
+        ./modules/bloop-system.nix
       ];
-    in
-    {
-      inherit overlays nixosModules;
+    in {
+      inherit overlays;
+      nixosModules.all = { ... }: { imports = allModules; };
       nixosConfigurations = {
-        mschuwalow-desktop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+        mschuwalow-desktop = let system = "x86_64-linux";
+        in nixpkgs.lib.nixosSystem {
+          inherit system;
           modules = [
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              imports = nixosModules;
+              imports = allModules;
               nix = {
-                nixPath = [ "nixpkgs=${nixpkgs}" ];
                 registry = {
                   nixpkgs.flake = nixpkgs;
-                  sys.flake = self;
                   home-manager.flake = home-manager;
+                  sys.flake = self;
                 };
               };
-              nixpkgs.overlays = overlays."x86_64-linux";
+              nixpkgs.overlays = overlays."${system}";
             }
             ./configuration.nix
             ./machines/mschuwalow-desktop.nix

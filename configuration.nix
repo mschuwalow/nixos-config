@@ -89,9 +89,6 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-    nixPath = [
-      "nixpkgs-overlays=${./overlays-compat}/"
-    ];
     package = pkgs.nixUnstable;
     useSandbox = "relaxed";
   };

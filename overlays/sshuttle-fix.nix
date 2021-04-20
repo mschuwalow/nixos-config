@@ -4,5 +4,8 @@ let
   pkgs = import (builtins.fetchTarball {
     url = "https://github.com/nixos/nixpkgs-channels/archive/${rev}.tar.gz";
     sha256 = "1428qilgk9h9w0lka0xmjnrkllyz16kny1afz3asr0qnr63wyzdk";
-  }) { config = super.config; };
+  }) {
+    system = super.system;
+    config = super.config;
+  };
 in { sshuttle-old = pkgs.sshuttle; }
