@@ -8,18 +8,14 @@ let
     exec -a "$0" "$@"
   '';
 in {
-  imports = [ ../profiles/bluetooth.nix ];
-
-  environment.systemPackages = [ nvidia-offload ]
-    ++ (with pkgs; [ thunderbolt libinput fusuma powertop ]);
-
-  networking.hostName = "mschuwalow-laptop";
 
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [
       acpi_call
     ];
     initrd = {
+      availableKernelModules =
+        [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       checkJournalingFS = false;
       kernelModules = [ "i915" "acpi_call" ];
     };
@@ -71,12 +67,17 @@ in {
     };
   };
 
-  powerManagement.enable = true;
+  swapDevices = [{
+    device = "/dev/disk/by-uuid/c601ecaa-698f-45e0-8dfd-c946860db8c7";
+    encrypted = {
+      enable = true;
+      keyFile = "/mnt-root/root/swap.key";
+      label = "luksswap";
+      blkDev = "/dev/disk/by-uuid/4f32d452-0e33-476e-b90c-cba4dfa90ad0";
+    };
+  }];
+
+  powerManagement.enable = false;
 
   system.stateVersion = "20.09";
-
-  nix = {
-    maxJobs = 16;
-    buildCores = 8;
-  };
 }
