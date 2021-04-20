@@ -23,6 +23,7 @@
             inherit (super) system config;
           };
           home-manager = home-manager.defaultPackage."${super.system}";
+          agenix = agenix.defaultPackage."${super.system}";
         })
         (import ./overlays/python-packages.nix)
         (import ./overlays/vscode-extensions)
