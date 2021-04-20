@@ -1,6 +1,9 @@
 {
   inputs = {
-    agenix.url = "github:ryantm/agenix";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "nixpkgs/master";
     nixpkgs-unstable.url = "nixpkgs/master";
     nur.url = "github:nix-community/NUR";
@@ -27,17 +30,18 @@
           (import ./overlays/joplin.nix)
           (import ./overlays/ibus-rime)
           (import ./overlays/cups-kyocera-ecosys)
-          (import ./overlays/sshuttle-fix.nix)
+          # (import ./overlays/sshuttle-fix.nix)
         ];
       };
       nixosModules = [
         agenix.nixosModules.age
         nixpkgs.nixosModules.notDetected
         home-manager.nixosModules.home-manager
-        ./modules/variables.nix
+        # ./modules/variables.nix
         ./modules/xcursor.nix
-        ./modules/vsliveshare.nix
-        ./modules/bloop-system.nix
+        # ./modules/vsliveshare.nix
+        # ./modules/bloop-system.nix
+        ./modules/bloop.nix
       ];
     in
     {
@@ -45,10 +49,11 @@
       nixosConfigurations = {
         mschuwalow-desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = nixosModules ++ [
+          modules = [
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              imports = nixosModules;
               nix = {
                 nixPath = [ "nixpkgs=${nixpkgs}" ];
                 registry = {
