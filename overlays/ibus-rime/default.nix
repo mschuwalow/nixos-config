@@ -44,7 +44,7 @@ self: super: {
             --replace '/usr/share' $out/share
         '';
 
-        meta = with stdenv.lib; {
+        meta = with lib; {
           isIbusEngine = true;
           description = "IBus interface to the libpinyin input method";
           license = licenses.gpl2;
