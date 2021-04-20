@@ -3,7 +3,7 @@ let
   mp = extension:
     super.vscode-utils.buildVscodeMarketplaceExtension {
       mktplcRef = extension;
-      meta = { license = super.stdenv.lib.licenses.mit; };
+      meta = { license = super.lib.licenses.mit; };
     };
 in rec {
   vscode-extensions = super.lib.recursiveUpdate super.vscode-extensions {

@@ -36,7 +36,7 @@ self: super: {
           ln -s cmake-fedora/Modules ./
         '';
 
-        meta = with stdenv.lib; {
+        meta = with lib; {
           isIbusEngine = true;
           description = "IBus interface to the libpinyin input method";
           license = licenses.gpl2;
