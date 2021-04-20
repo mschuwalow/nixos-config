@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }: {
+{ config, pkgs, ... }: {
 
   imports = [
     ./secrets
@@ -68,7 +68,6 @@
     pciutils
     pmutils
     nfs-utils
-    inputs.agenix.defaultPackage."${system}"
   ];
 
   i18n = {

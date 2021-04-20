@@ -24,6 +24,7 @@
               system = "x86_64-linux";
               config.allowUnfree = true;
             };
+            home-manager = home-manager.defaultPackage."x86_64-linux";
           })
           (import ./overlays/python-packages.nix)
           (import ./overlays/vscode-extensions)
@@ -32,9 +33,21 @@
           (import ./overlays/cups-kyocera-ecosys)
           (import ./overlays/sshuttle-fix.nix)
           (import ./overlays/git-heatmap)
+          agenix.overlay
         ];
       };
       allModules = [
+        ({ ... }: {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          nix = {
+            registry = {
+              nixpkgs.flake = nixpkgs;
+              home-manager.flake = home-manager;
+              sys.flake = self;
+            };
+          };
+        })
         agenix.nixosModules.age
         nixpkgs.nixosModules.notDetected
         home-manager.nixosModules.home-manager
@@ -43,7 +56,7 @@
         ./modules/vsliveshare.nix
         ./modules/bloop-system.nix
       ];
-    in {
+    in rec {
       inherit overlays;
       nixosModules.all = { ... }: { imports = allModules; };
       nixosConfigurations = {
@@ -52,22 +65,12 @@
           inherit system;
           modules = [
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
               imports = allModules;
-              nix = {
-                registry = {
-                  nixpkgs.flake = nixpkgs;
-                  home-manager.flake = home-manager;
-                  sys.flake = self;
-                };
-              };
               nixpkgs.overlays = overlays."${system}";
             }
             ./configuration.nix
             ./machines/mschuwalow-desktop.nix
           ];
-          specialArgs = { inherit inputs; };
         };
       };
     };

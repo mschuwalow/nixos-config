@@ -1,6 +1,7 @@
-{ stdenv, nodejs-10_x }:
+{ pkgs, system, stdenv, nodejs-10_x }:
 let
   bars = (import ./node {
+    inherit pkgs system;
     nodejs = nodejs-10_x;
   })."bars-jez/bars#6f5cde29afce17dbf6b28e9b33f7c8e8c28166f9";
   rev = "258cb7979e364483d6910acef474377decc9fcb8";

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }: {
+{ config, pkgs, lib, ... }: {
   users.users.mschuwalow = {
     isNormalUser = true;
     uid = 1000;
@@ -16,6 +16,6 @@
     createHome = true;
     home = "/home/mschuwalow";
     passwordFile = "/run/secrets/pw-mschuwalow";
-    packages = with pkgs; [ inputs.home-manager.defaultPackage."${system}" ];
+    packages = with pkgs; [ home-manager ];
   };
 }
