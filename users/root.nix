@@ -24,7 +24,7 @@
             "github.com" = {
               hostname = "github.com";
               user = "git";
-              identityFile = "/run/secrets/ssh_github";
+              identityFile = "/run/secrets/github_rsa";
             };
           };
         };

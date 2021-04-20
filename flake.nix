@@ -19,9 +19,7 @@
     let
       overlays = [
         (self: super: {
-          unstable = import nixpkgs-unstable {
-            inherit (super) system config;
-          };
+          unstable = import nixpkgs-unstable { inherit (super) system config; };
           home-manager = home-manager.defaultPackage."${super.system}";
           agenix = agenix.defaultPackage."${super.system}";
         })
@@ -60,19 +58,11 @@
       nixosModules.base = baseModule;
       nixosConfigurations = {
         mschuwalow-desktop = nixpkgs.lib.nixosSystem {
-          modules = [
-            baseModule
-            ./configuration.nix
-            ./machines/desktop.nix
-          ];
+          modules = [ baseModule ./configuration.nix ./machines/desktop.nix ];
           system = "x86_64-linux";
         };
         mschuwalow-laptop = nixpkgs.lib.nixosSystem {
-          modules = [
-            baseModule
-            ./configuration.nix
-            ./machines/laptop.nix
-          ];
+          modules = [ baseModule ./configuration.nix ./machines/laptop.nix ];
           system = "x86_64-linux";
         };
       };
