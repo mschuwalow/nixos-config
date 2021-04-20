@@ -17,60 +17,62 @@
   outputs =
     { self, agenix, nixpkgs, nixpkgs-unstable, nur, home-manager }@inputs:
     let
-      overlays = {
-        "x86_64-linux" = [
-          (self: super: {
-            unstable = import nixpkgs-unstable {
-              system = "x86_64-linux";
-              config.allowUnfree = true;
-            };
-            home-manager = home-manager.defaultPackage."x86_64-linux";
-          })
-          (import ./overlays/python-packages.nix)
-          (import ./overlays/vscode-extensions)
-          (import ./overlays/joplin.nix)
-          (import ./overlays/ibus-rime)
-          (import ./overlays/cups-kyocera-ecosys)
-          (import ./overlays/sshuttle-fix.nix)
-          (import ./overlays/git-heatmap)
-          agenix.overlay
-        ];
-      };
-      allModules = [
-        ({ ... }: {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          nix = {
-            registry = {
-              nixpkgs.flake = nixpkgs;
-              home-manager.flake = home-manager;
-              sys.flake = self;
-            };
+      overlays = [
+        (self: super: {
+          unstable = import nixpkgs-unstable {
+            inherit (super) system config;
           };
+          home-manager = home-manager.defaultPackage."${super.system}";
         })
-        agenix.nixosModules.age
-        nixpkgs.nixosModules.notDetected
-        home-manager.nixosModules.home-manager
-        ./modules/variables.nix
-        ./modules/xcursor.nix
-        ./modules/vsliveshare.nix
-        ./modules/bloop-system.nix
+        (import ./overlays/python-packages.nix)
+        (import ./overlays/vscode-extensions)
+        (import ./overlays/joplin.nix)
+        (import ./overlays/ibus-rime)
+        (import ./overlays/cups-kyocera-ecosys)
+        (import ./overlays/sshuttle-fix.nix)
+        (import ./overlays/git-heatmap)
+        agenix.overlay
       ];
+      baseModule = {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        imports = [
+          agenix.nixosModules.age
+          nixpkgs.nixosModules.notDetected
+          home-manager.nixosModules.home-manager
+          ./modules/variables.nix
+          ./modules/xcursor.nix
+          ./modules/vsliveshare.nix
+          ./modules/bloop-system.nix
+        ];
+        nix = {
+          registry = {
+            nixpkgs.flake = nixpkgs;
+            home-manager.flake = home-manager;
+            sys.flake = self;
+          };
+        };
+        nixpkgs.overlays = overlays;
+      };
     in rec {
       inherit overlays;
-      nixosModules.all = { ... }: { imports = allModules; };
+      nixosModules.base = baseModule;
       nixosConfigurations = {
-        mschuwalow-desktop = let system = "x86_64-linux";
-        in nixpkgs.lib.nixosSystem {
-          inherit system;
+        mschuwalow-desktop = nixpkgs.lib.nixosSystem {
           modules = [
-            {
-              imports = allModules;
-              nixpkgs.overlays = overlays."${system}";
-            }
+            baseModule
             ./configuration.nix
-            ./machines/mschuwalow-desktop.nix
+            ./machines/desktop.nix
           ];
+          system = "x86_64-linux";
+        };
+        mschuwalow-laptop = nixpkgs.lib.nixosSystem {
+          modules = [
+            baseModule
+            ./configuration.nix
+            ./machines/laptop.nix
+          ];
+          system = "x86_64-linux";
         };
       };
     };
