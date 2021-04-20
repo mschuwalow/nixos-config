@@ -3,22 +3,11 @@
 {
   home-manager = {
     users.root = {
-      gtk = {
-        enable = true;
-        theme = {
-          package = pkgs.adapta-gtk-theme;
-          name = "Adapta-Eta";
-        };
-        iconTheme = {
-          package = pkgs.paper-icon-theme;
-          name = "Paper";
-        };
-      };
 
       home.sessionVariables = {
         EDITOR = "${pkgs.micro}/bin/micro";
         VISUAL = "${pkgs.micro}/bin/micro";
-        PAGER = "${pkgs.more}/bin/more";
+        PAGER = "${pkgs.less}/bin/less";
       };
 
       programs = {
