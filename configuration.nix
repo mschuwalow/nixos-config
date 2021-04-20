@@ -1,12 +1,7 @@
 { config, pkgs, inputs, ... }: {
 
   imports = [
-    # load modules
-    ./secrets/module.nix
-    ./modules/variables.nix
-    ./modules/xcursor.nix
-    ./modules/vsliveshare.nix
-    ./modules/bloop-system.nix
+    ./secrets
 
     # load default services & profiles
     ./profiles
@@ -95,7 +90,6 @@
       options = "--delete-older-than 30d";
     };
     nixPath = [
-      "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs-overlays=${./overlays-compat}/"
     ];
     package = pkgs.nixUnstable;
@@ -107,14 +101,6 @@
       allowUnfree = true;
       trusted-users = "@wheel";
     };
-    overlays = [
-      (import ./overlays/python-packages.nix)
-      (import ./overlays/vscode-extensions)
-      (import ./overlays/joplin.nix)
-      (import ./overlays/ibus-rime)
-      (import ./overlays/cups-kyocera-ecosys)
-      (import ./overlays/sshuttle-fix.nix)
-    ];
   };
 
   programs = {
@@ -146,7 +132,7 @@
   time.timeZone = "Europe/Berlin";
 
   users = {
-    mutableUsers = true;
+    mutableUsers = false;
     defaultUserShell = pkgs.zsh;
   };
 }
