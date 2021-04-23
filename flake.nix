@@ -49,6 +49,7 @@
             nixpkgs.flake = nixpkgs;
             home-manager.flake = home-manager;
             sys.flake = self;
+            nur.flake = nur;
           };
         };
         nixpkgs.overlays = overlays;
@@ -63,6 +64,11 @@
         };
         mschuwalow-laptop = nixpkgs.lib.nixosSystem {
           modules = [ baseModule ./configuration.nix ./machines/laptop.nix ];
+          system = "x86_64-linux";
+        };
+        mschuwalow-laptop-asus = nixpkgs.lib.nixosSystem {
+          modules =
+            [ baseModule ./configuration.nix ./machines/laptop-asus.nix ];
           system = "x86_64-linux";
         };
       };
