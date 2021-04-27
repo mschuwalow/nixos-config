@@ -47,7 +47,6 @@
     ncdu
     nix-index
     nix-prefetch
-    nnn
     nox
     peco
     powertop
