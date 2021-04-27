@@ -30,9 +30,8 @@ in {
     kubetail
     kubectl
     kubernetes-helm
+    k9s
     sublime-merge
-    (python3.withPackages
-      (ps: with ps; [ numpy pandas pendulum pillow jupyterlab pylint ]))
     gnumake
     niv
     nixfmt

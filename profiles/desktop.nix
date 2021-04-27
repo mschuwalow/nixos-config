@@ -6,6 +6,7 @@
     ghostwriter
     gnome3.gnome-disk-utility
     gnome3.gnome-system-monitor
+    gnome3.gnome-tweak-tool
     hunspell
     hunspellDicts.de-de
     hunspellDicts.en-us
