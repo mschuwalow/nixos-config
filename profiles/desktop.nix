@@ -7,6 +7,7 @@
     gnome3.gnome-disk-utility
     gnome3.gnome-system-monitor
     gnome3.gnome-tweak-tool
+    gnome3.gnome-session
     hunspell
     hunspellDicts.de-de
     hunspellDicts.en-us
@@ -25,6 +26,7 @@
     xdotool
     youtube-dl
     zoom-us
+    gnomeExtensions.unite
   ];
 
   fonts = {
@@ -34,10 +36,6 @@
       (nerdfonts.override {
         fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
       })
-      roboto
-      roboto-mono
-      roboto-slab
-      twitter-color-emoji
     ];
     fontconfig = {
       defaultFonts = {
@@ -66,25 +64,17 @@
 
   services = {
     flatpak.enable = true;
-    pantheon.contractor.enable = true;
     xserver = {
-      desktopManager.pantheon.enable = true;
-      displayManager.lightdm.enable = true;
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
       enable = true;
-      enableCtrlAltBackspace = true;
       layout = "us";
       # xkbVariant = "colemak";
     };
   };
 
-  xcursor = {
-    name = "Vanilla-DMZ";
-    package = pkgs.vanilla-dmz;
-    size = 16;
-  };
-
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    gtkUsePortal = true;
   };
 }
