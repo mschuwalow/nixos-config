@@ -19,7 +19,6 @@
     alacritty
     ferdi
     google-chrome
-    spotify
     usbutils
     vlc
     xclip
