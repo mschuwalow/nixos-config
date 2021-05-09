@@ -30,6 +30,7 @@
         (import ./overlays/cups-kyocera-ecosys)
         (import ./overlays/sshuttle-fix.nix)
         (import ./overlays/git-heatmap)
+        (import ./overlays/gdm-initial-vt.nix)
         agenix.overlay
       ];
       baseModule = {
@@ -67,8 +68,7 @@
           system = "x86_64-linux";
         };
         mschuwalow-laptop-asus = nixpkgs.lib.nixosSystem {
-          modules =
-            [ baseModule ./configuration.nix ./machines/laptop-asus.nix ];
+          modules = [ baseModule ./configuration.nix ./machines/laptop-asus.nix ];
           system = "x86_64-linux";
         };
       };
