@@ -46,18 +46,7 @@
     };
   };
 
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-    opengl = {
-      enable = true;
-      extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-        intel-media-driver
-      ];
-    };
-  };
+  hardware.cpu.intel.updateMicrocode = true;
 
   powerManagement.enable = true;
 
