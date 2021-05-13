@@ -32,11 +32,12 @@
   fonts = {
     enableDefaultFonts = true;
     fontDir.enable = true;
-    fonts = with pkgs; [
-      (nerdfonts.override {
-        fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
-      })
-    ];
+    fonts = with pkgs;
+      [
+        (nerdfonts.override {
+          fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
+        })
+      ];
     fontconfig = {
       defaultFonts = {
         emoji = [ "Twitter Color Emoji" ];
@@ -64,6 +65,10 @@
 
   services = {
     flatpak.enable = true;
+    gnome = {
+      gnome-online-accounts.enable = true;
+      gnome-online-miners.enable = true;
+    };
     xserver = {
       desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
