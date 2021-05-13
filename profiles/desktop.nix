@@ -4,10 +4,6 @@
     bitwarden
     catt
     ghostwriter
-    gnome3.gnome-disk-utility
-    gnome3.gnome-system-monitor
-    gnome3.gnome-tweak-tool
-    gnome3.gnome-session
     hunspell
     hunspellDicts.de-de
     hunspellDicts.en-us
@@ -17,7 +13,6 @@
     rtv
     screenkey
     transmission-gtk
-    alacritty
     ferdi
     google-chrome
     usbutils
@@ -27,6 +22,11 @@
     youtube-dl
     zoom-us
     yaru-theme
+    gnome3.gnome-disk-utility
+    gnome3.gnome-system-monitor
+    gnome3.gnome-tweak-tool
+    gnome3.gnome-session
+    gnome3.dconf-editor
     gnomeExtensions.unite
   ];
 
@@ -71,7 +71,28 @@
       gnome-online-miners.enable = true;
     };
     xserver = {
-      desktopManager.gnome.enable = true;
+      desktopManager.gnome = {
+        enable = true;
+        extraGSettingsOverrides = ''
+          [org/gnome/desktop/interface]
+          cursor-theme='Yaru'
+          gtk-theme='Yaru-dark'
+          icon-theme='Yaru'
+
+          [org/gnome/desktop/sound]
+          theme-name='Yaru'
+
+          [org/gnome/shell]
+          enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'unite@hardpixel.eu']
+
+          [org/gnome/shell/extensions/unite]
+          greyscale-tray-icons=true
+          window-buttons-theme='materia-dark'
+
+          [org/gnome/shell/extensions/user-theme]
+          name='Yaru'
+        '';
+      };
       displayManager.gdm.enable = true;
       enable = true;
       layout = "us";
