@@ -26,6 +26,7 @@
     xdotool
     youtube-dl
     zoom-us
+    yaru-theme
     gnomeExtensions.unite
   ];
 
