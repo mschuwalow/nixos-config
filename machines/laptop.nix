@@ -46,7 +46,7 @@ in {
   };
 
   services = {
-    # fprintd.enable = true;
+    fprintd.enable = true;
     hardware.bolt.enable = true;
     throttled.enable = true;
     fstrim.enable = true;
@@ -75,7 +75,7 @@ in {
     };
   }];
 
-  powerManagement.enable = false;
+  powerManagement.enable = true;
 
   system.stateVersion = "20.09";
 }
