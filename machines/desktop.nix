@@ -7,9 +7,9 @@
       checkJournalingFS = false;
       kernelModules = [ ];
     };
+    kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    # kernelParams = [ "mem_sleep_default=deep" "initcall_debug" ];
     loader = {
       grub = {
         device = "nodev";
@@ -37,7 +37,6 @@
   hardware = {
     enableRedistributableFirmware = true;
     cpu.amd.updateMicrocode = true;
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   networking.hostName = "mschuwalow-desktop";

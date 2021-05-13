@@ -15,6 +15,7 @@
     transmission-gtk
     ferdi
     google-chrome
+    alacritty
     usbutils
     vlc
     xclip
@@ -22,11 +23,11 @@
     youtube-dl
     zoom-us
     yaru-theme
-    gnome3.gnome-disk-utility
-    gnome3.gnome-system-monitor
-    gnome3.gnome-tweak-tool
-    gnome3.gnome-session
-    gnome3.dconf-editor
+    gnome.gnome-disk-utility
+    gnome.gnome-system-monitor
+    gnome.gnome-tweak-tool
+    gnome.gnome-session
+    gnome.dconf-editor
     gnomeExtensions.unite
   ];
 
