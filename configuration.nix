@@ -13,6 +13,7 @@
   ];
 
   boot = {
+    cleanTmpDir = true;
     kernel.sysctl = {
       "fs.inotify.max_user_watches" = 1048576; # default:  8192
       "fs.inotify.max_user_instances" = 1024; # default:   128
@@ -54,7 +55,6 @@
     sd
     tealdeer
     termdown
-    tmux
     tree
     unrar
     bottom
@@ -111,6 +111,11 @@
         "HIST_FCNTL_LOCK"
         "HIST_REDUCE_BLANKS"
       ];
+    };
+    tmux = {
+      enable = true;
+      newSession = true;
+      clock24 = true;
     };
   };
 

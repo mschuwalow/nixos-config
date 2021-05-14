@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   environment.systemPackages = with pkgs; [
     appimage-run
     bitwarden
@@ -65,34 +65,48 @@
 
   networking.firewall.allowedTCPPorts = [ 57621 ]; # spotify
 
+  programs.gpaste.enable = true;
+
   services = {
-    flatpak.enable = true;
-    gnome = {
-      gnome-online-accounts.enable = true;
-      gnome-online-miners.enable = true;
+    flatpak = {
+      enable = true;
+      guiPackages = lib.mkForce [ ];
     };
     xserver = {
-      desktopManager.gnome = {
-        enable = true;
-        extraGSettingsOverrides = ''
-          [org/gnome/desktop/interface]
-          cursor-theme='Yaru'
-          gtk-theme='Yaru-dark'
-          icon-theme='Yaru'
+      desktopManager = {
+        gnome = {
+          enable = true;
+          extraGSettingsOverridePackages = with pkgs; [
+            gsettings-desktop-schemas
+            gnome.gnome-shell
+            germinal
+          ];
+          extraGSettingsOverrides = ''
+            [org/gnome/desktop/interface]
+            cursor-theme='Yaru'
+            gtk-theme='Yaru-dark'
+            icon-theme='Yaru'
 
-          [org/gnome/desktop/sound]
-          theme-name='Yaru'
+            [org/gnome/desktop/sound]
+            theme-name='Yaru'
 
-          [org/gnome/shell]
-          enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'unite@hardpixel.eu']
+            [org/gnome/shell]
+            enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'unite@hardpixel.eu']
 
-          [org/gnome/shell/extensions/unite]
-          greyscale-tray-icons=true
-          window-buttons-theme='materia-dark'
+            [org/gnome/shell/extensions/unite]
+            greyscale-tray-icons=true
+            window-buttons-theme='materia-dark'
 
-          [org/gnome/shell/extensions/user-theme]
-          name='Yaru'
-        '';
+            [org/gnome/shell/extensions/user-theme]
+            name='Yaru'
+
+            [org/gnome/Germinal]
+            decorated=true
+            font='FiraCode Nerd Font 10'
+          '';
+          sessionPath = with pkgs; [ germinal ];
+        };
+        xterm.enable = false;
       };
       displayManager.gdm.enable = true;
       enable = true;
