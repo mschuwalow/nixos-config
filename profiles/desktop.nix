@@ -29,6 +29,7 @@
     gnome.gnome-session
     gnome.dconf-editor
     gnomeExtensions.unite
+    gnomeExtensions.clipboard-indicator
   ];
 
   fonts = {
@@ -65,8 +66,6 @@
 
   networking.firewall.allowedTCPPorts = [ 57621 ]; # spotify
 
-  programs.gpaste.enable = true;
-
   services = {
     flatpak = {
       enable = true;
@@ -91,7 +90,7 @@
             theme-name='Yaru'
 
             [org/gnome/shell]
-            enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'unite@hardpixel.eu']
+            enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'unite@hardpixel.eu', 'clipboard-indicator@tudmotu.com']  
 
             [org/gnome/shell/extensions/unite]
             greyscale-tray-icons=true
