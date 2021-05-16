@@ -21,7 +21,6 @@
         (self: super: {
           unstable = import nixpkgs-unstable { inherit (super) system config; };
           home-manager = home-manager.defaultPackage."${super.system}";
-          agenix = agenix.defaultPackage."${super.system}";
         })
         (import ./overlays/python-packages.nix)
         (import ./overlays/vscode-extensions)
@@ -31,6 +30,7 @@
         (import ./overlays/sshuttle-fix.nix)
         (import ./overlays/git-heatmap)
         (import ./overlays/clipboard-indicator-fix.nix)
+        (import ./overlays/gtktitlebar)
         agenix.overlay
       ];
       baseModule = {
