@@ -16,6 +16,7 @@
     ferdi
     google-chrome
     alacritty
+    germinal
     usbutils
     vlc
     xclip
@@ -30,6 +31,7 @@
     gnome.dconf-editor
     gnomeExtensions.unite
     gnomeExtensions.clipboard-indicator
+    gnomeExtensions.gtktitlebar
   ];
 
   fonts = {
@@ -75,35 +77,23 @@
       desktopManager = {
         gnome = {
           enable = true;
-          extraGSettingsOverridePackages = with pkgs; [
-            gsettings-desktop-schemas
-            gnome.gnome-shell
-            germinal
-          ];
+          extraGSettingsOverridePackages = with pkgs; [ germinal ];
           extraGSettingsOverrides = ''
-            [org/gnome/desktop/interface]
+            [org.gnome.desktop.interface]
             cursor-theme='Yaru'
             gtk-theme='Yaru-dark'
             icon-theme='Yaru'
 
-            [org/gnome/desktop/sound]
+            [org.gnome.desktop.sound]
             theme-name='Yaru'
 
-            [org/gnome/shell]
-            enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'unite@hardpixel.eu', 'clipboard-indicator@tudmotu.com']  
-
-            [org/gnome/shell/extensions/unite]
-            greyscale-tray-icons=true
-            window-buttons-theme='materia-dark'
-
-            [org/gnome/shell/extensions/user-theme]
-            name='Yaru'
-
-            [org/gnome/Germinal]
+            [org.gnome.Germinal]
             decorated=true
             font='FiraCode Nerd Font 10'
+            forecolor='#eff0eb'
+            backcolor='#16171d'
+            palette=['#282a36', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#f1f1f0', '#686868', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#eff0eb']
           '';
-          sessionPath = with pkgs; [ germinal ];
         };
         xterm.enable = false;
       };
