@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }: {
   users.users.mschuwalow = {
+    description = "Maxim Schuwalow";
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
