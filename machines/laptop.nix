@@ -62,6 +62,7 @@ in {
     xserver = {
       libinput.enable = true;
       videoDrivers = [ "nvidia" ];
+      displayManager.gdm.nvidiaWayland = true;
     };
   };
 
