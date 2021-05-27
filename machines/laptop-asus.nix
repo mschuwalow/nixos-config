@@ -30,7 +30,6 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages;
     kernelParams = [ "acpi_osi='!Windows 2012'" ];
   };
