@@ -44,6 +44,7 @@
           ./modules/xcursor.nix
           ./modules/vsliveshare.nix
           ./modules/bloop-system.nix
+          ./modules/cachix.nix
         ];
         nix = {
           registry = {

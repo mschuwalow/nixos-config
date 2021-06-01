@@ -15,4 +15,5 @@ in {
   "users/pzhang.age".publicKeys = all;
   "users/root.age".publicKeys = all;
   "ssh/github_rsa.age".publicKeys = all;
+  "cachix.dhall.age".publicKeys = all;
 }

@@ -71,10 +71,7 @@
   networking.firewall.allowedTCPPorts = [ 57621 ]; # spotify
 
   services = {
-    flatpak = {
-      enable = true;
-      guiPackages = lib.mkForce [ ];
-    };
+    flatpak.enable = true;
     xserver = {
       desktopManager = {
         gnome = {

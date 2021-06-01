@@ -7,6 +7,7 @@
       "pw-pzhang".file = ./users/pzhang.age;
       "pw-root".file = ./users/root.age;
       "github_rsa".file = ./ssh/github_rsa.age;
+      "cachix.dhall".file = ./cachix.dhall.age;
     };
   };
 }

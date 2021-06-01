@@ -39,6 +39,8 @@
     cpu.amd.updateMicrocode = true;
   };
 
+  imports = [ ../profiles/gaming.nix ];
+
   networking.hostName = "mschuwalow-desktop";
 
   nix = {

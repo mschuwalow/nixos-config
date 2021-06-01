@@ -77,10 +77,14 @@
 
   nix = {
     autoOptimiseStore = true;
-    binaryCaches = [ "https://cache.nixos.org/" "https://r-ryantm.cachix.org" ];
-    binaryCachePublicKeys =
-      [ "r-ryantm.cachix.org-1:gkUbLkouDAyvBdpBX0JOdIiD2/DP1ldF3Z3Y6Gqcc4c=" ];
+    cachix-hook = {
+      enable = true;
+      cacheName = "mschuwalow-nixos-systems";
+      cachePublicKey =
+        "mschuwalow-nixos-systems.cachix.org-1:yE2aPTt48ovOna+s52CklrygkFXcMLIXmrTu6aB6cSU=";
+    };
     extraOptions = ''
+      builders-use-substitutes = true
       experimental-features = nix-command flakes
     '';
     gc = {
