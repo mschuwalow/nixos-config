@@ -15,21 +15,32 @@ in {
       availableKernelModules =
         [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       checkJournalingFS = false;
-      kernelModules = [ "i915" "acpi_call" ];
+      kernelModules = [ "i915" "kvm-intel" "acpi_call" ];
+      luks.devices."luks-7030d337-7c75-47ec-903c-1a141f7d46e3".device =
+        "/dev/disk/by-uuid/7030d337-7c75-47ec-903c-1a141f7d46e3";
     };
     loader.systemd-boot.enable = true;
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelPackages = pkgs.linuxPackages;
-    kernelParams = [ "msr.allow_writes=on" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "msr.allow_writes=on" "psmouse.synaptics_intertouch=0" ];
+  };
+
+  environment.systemPackages = [ nvidia-offload ]
+    ++ (with pkgs; [ thunderbolt libinput powertop ]);
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/2032b77d-7a05-45d5-b20f-aa8d9fafdd0d";
+      fsType = "f2fs";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/D8F7-9D4A";
+      fsType = "vfat";
+    };
   };
 
   hardware = {
     cpu.intel.updateMicrocode = true;
-    # firmware = with pkgs; [ sof-firmware ];
-    nvidia = {
-      powerManagement.enable = false;
-      prime.offload.enable = true;
-    };
     opengl = {
       enable = true;
       extraPackages = with pkgs; [
@@ -39,26 +50,29 @@ in {
         intel-media-driver
       ];
     };
-    trackpoint = {
-      enable = true;
-      emulateWheel = true;
+    nvidia = {
+      modesetting.enable = true;
+      prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:45:0:0";
+        offload.enable = true;
+      };
     };
+  };
+
+  imports = [ ../profiles/bluetooth.nix ];
+
+  networking.hostName = "mschuwalow-laptop";
+
+  nix = {
+    maxJobs = 16;
+    buildCores = 8;
   };
 
   services = {
     fprintd.enable = true;
     hardware.bolt.enable = true;
     throttled.enable = true;
-    fstrim.enable = true;
-    tlp = {
-      enable = false;
-      settings = {
-        START_CHARGE_THRESH_BAT0 = 75;
-        STOP_CHARGE_THRESH_BAT0 = 80;
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      };
-    };
     xserver = {
       libinput.enable = true;
       videoDrivers = [ "nvidia" ];
