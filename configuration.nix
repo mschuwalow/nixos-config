@@ -1,4 +1,7 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }:
+
+let inherit (lib) hiPrio;
+in {
 
   imports = [
     ./secrets
@@ -44,6 +47,7 @@
     gawk
     mkpasswd
     moreutils
+    (hiPrio parallel)
     most
     ncdu
     nix-index
