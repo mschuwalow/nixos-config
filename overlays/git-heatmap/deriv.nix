@@ -1,19 +1,23 @@
-{ pkgs, system, stdenv, nodejs-10_x }:
+{ pkgs, system, stdenv, fetchFromGitHub, lib, nodejs-10_x }:
 let
+  inherit (stdenv) mkDerivation;
+
   bars = (import ./node {
     inherit pkgs system;
     nodejs = nodejs-10_x;
-  })."bars-jez/bars#6f5cde29afce17dbf6b28e9b33f7c8e8c28166f9";
-  rev = "258cb7979e364483d6910acef474377decc9fcb8";
-  sha256 = "1gffyw2na680apfw22df77phmwcaq01y4aqx197vyawvli2l2zv5";
-  src = fetchTarball {
-    url = "https://github.com/jez/git-heatmap/archive/${rev}.tar.gz";
-    sha256 = sha256;
-  };
-in stdenv.mkDerivation rec {
-  version = "0.10.3-dev";
+  })."bars-git://github.com/jez/bars.git";
+
+in mkDerivation rec {
   name = "git-heatmap";
-  inherit src;
+  version = "0.10.3";
+
+  src = fetchFromGitHub {
+    owner = "jez";
+    repo = name;
+    rev = version;
+    sha256 = "ZX9BRaSbK79PCh0r4gPAivEK7zmuCcHdVQAZZQX3zr0=";
+  };
+
   buildInputs = [ bars ];
 
   postBuild = ''
