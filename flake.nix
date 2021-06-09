@@ -31,6 +31,7 @@
         (import ./overlays/git-heatmap)
         (import ./overlays/clipboard-indicator-fix.nix)
         (import ./overlays/gtktitlebar)
+        (import ./overlays/nix-direnv-flake-support.nix)
         agenix.overlay
       ];
       baseModule = {

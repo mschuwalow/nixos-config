@@ -88,6 +88,8 @@ in {
         "mschuwalow-nixos-systems.cachix.org-1:yE2aPTt48ovOna+s52CklrygkFXcMLIXmrTu6aB6cSU=";
     };
     extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
       builders-use-substitutes = true
       experimental-features = nix-command flakes
     '';
