@@ -22,7 +22,7 @@
           unstable = import nixpkgs-unstable { inherit (super) system config; };
           home-manager = home-manager.defaultPackage."${super.system}";
         })
-        (import ./overlays/python-packages.nix)
+        (import ./overlays/python-packages)
         (import ./overlays/vscode-extensions)
         (import ./overlays/joplin.nix)
         (import ./overlays/ibus-rime)
