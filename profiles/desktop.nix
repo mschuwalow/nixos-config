@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     appimage-run
     bitwarden
     catt
@@ -23,15 +23,19 @@
     youtube-dl
     zoom-us
     yaru-theme
-    gnome.gnome-disk-utility
-    gnome.gnome-system-monitor
-    gnome.gnome-tweak-tool
-    gnome.gnome-session
-    gnome.dconf-editor
-    gnomeExtensions.unite
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.gtktitlebar
-  ];
+  ]) ++ (with pkgs.gnome; [
+    gnome-disk-utility
+    gnome-system-monitor
+    gnome-tweak-tool
+    gnome-session
+    dconf-editor
+  ]) ++ (with pkgs.gnomeExtensions; [
+    unite
+    clipboard-indicator
+    gtk-title-bar
+    gsconnect
+    caffeine
+  ]);
 
   fonts = {
     enableDefaultFonts = true;
@@ -68,7 +72,17 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 57621 ]; # spotify
+  networking.firewall = {
+    allowedTCPPorts = [ 57621 ]; # spotify
+    allowedTCPPortRanges = [{
+      from = 1714;
+      to = 1764;
+    }]; # kde-connect
+    allowedUDPPortRanges = [{
+      from = 1714;
+      to = 1764;
+    }]; # kde-connect
+  };
 
   services = {
     flatpak.enable = true;
