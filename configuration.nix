@@ -34,44 +34,55 @@ in {
   documentation.man.generateCaches = true;
 
   environment.systemPackages = with pkgs; [
-    vim
+    (hiPrio parallel)
+    agenix
+    bat
     bc
+    bottom
+    broot
+    cheat
+    choose
+    curlie
+    duf
+    dust
     exa
     fd
     fzf
-    git
-    gnupg
-    gptfdisk
-    htop
-    killall
     gawk
+    git
+    glances
+    gnupg
+    gping
+    gptfdisk
+    httpie
+    hyperfine
+    killall
+    micro
     mkpasswd
     moreutils
-    (hiPrio parallel)
     most
     ncdu
+    nfs-utils
     nix-index
     nix-prefetch
     nox
+    pciutils
     peco
+    pmutils
     powertop
+    procs
     ripgrep
     sd
     tealdeer
     termdown
     tree
     unrar
-    bottom
-    micro
     unzip
+    usbutils
+    vim
     wget
     whois
     zip
-    usbutils
-    pciutils
-    pmutils
-    nfs-utils
-    agenix
   ];
 
   i18n = {

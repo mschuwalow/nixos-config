@@ -15,6 +15,7 @@
     transmission-gtk
     ferdi
     google-chrome
+    brave
     alacritty
     usbutils
     vlc
@@ -23,6 +24,7 @@
     youtube-dl
     zoom-us
     yaru-theme
+    germinal
   ]) ++ (with pkgs.gnome; [
     gnome-disk-utility
     gnome-system-monitor
@@ -39,12 +41,12 @@
 
   fonts = {
     enableDefaultFonts = true;
-    fontDir.enable = true;
     fonts = with pkgs; [
       twitter-color-emoji
       roboto
       roboto-slab
       roboto-mono
+      ubuntu_font_family
       (nerdfonts.override {
         fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
       })
@@ -74,14 +76,12 @@
 
   networking.firewall = {
     allowedTCPPorts = [ 57621 ]; # spotify
-    allowedTCPPortRanges = [{
-      from = 1714;
-      to = 1764;
-    }]; # kde-connect
-    allowedUDPPortRanges = [{
-      from = 1714;
-      to = 1764;
-    }]; # kde-connect
+    allowedTCPPortRanges = [
+      { from = 1714; to = 1764; } # kde-connect
+    ];
+    allowedUDPPortRanges = [
+      { from = 1714; to = 1764; } # kde-connect
+    ];
   };
 
   services = {
@@ -93,12 +93,19 @@
           extraGSettingsOverridePackages = with pkgs; [ germinal ];
           extraGSettingsOverrides = ''
             [org.gnome.desktop.interface]
-            cursor-theme='Yaru'
             gtk-theme='Yaru-dark'
             icon-theme='Yaru'
+            cursor-theme='Yaru'
 
+            font-name='Ubuntu 11'                                                                                                                 
+            document-font-name='Sans 11'                                                                                                          
+            monospace-font-name='Ubuntu Mono 10'                                                                                                  
+            
             [org.gnome.desktop.sound]
             theme-name='Yaru'
+
+            [org/gnome/desktop/wm/preferences]
+            titlebar-font='Ubuntu Bold 11'
 
             [org.gnome.Germinal]
             decorated=true

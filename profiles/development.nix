@@ -34,7 +34,7 @@ in {
     sublime-merge
     gnumake
     niv
-    nixfmt
+    nixpkgs-fmt
     httpstat
     postman
     sshfs
