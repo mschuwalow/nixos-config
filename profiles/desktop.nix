@@ -43,10 +43,8 @@
     enableDefaultFonts = true;
     fonts = with pkgs; [
       twitter-color-emoji
-      roboto
-      roboto-slab
-      roboto-mono
       ubuntu_font_family
+      crimson
       (nerdfonts.override {
         fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
       })
@@ -54,9 +52,9 @@
     fontconfig = {
       defaultFonts = {
         emoji = [ "Twitter Color Emoji" ];
-        monospace = [ "Roboto Mono" ];
-        sansSerif = [ "Roboto" ];
-        serif = [ "Roboto Slab" ];
+        monospace = [ "Ubuntu Mono" ];
+        sansSerif = [ "Ubuntu" ];
+        serif = [ "Crimson Roman" ];
       };
     };
   };
@@ -121,7 +119,6 @@
       displayManager.gdm.enable = true;
       enable = true;
       layout = "us";
-      # xkbVariant = "colemak";
     };
   };
 

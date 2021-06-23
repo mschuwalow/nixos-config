@@ -57,7 +57,8 @@
         };
         nixpkgs.overlays = overlays;
       };
-    in rec {
+    in
+    rec {
       inherit overlays;
       nixosModules.base = baseModule;
       nixosConfigurations = {

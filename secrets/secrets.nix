@@ -8,7 +8,8 @@ let
   laptop-asus =
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7QEjI2ejjrguG5MP9fkHRwUQEOZ9FxgtkrLvPMWP4jfPAJLW3R1L9//HUxfM2kSYx9ssQ3nyoOBpWnqb2O9uRA39jlDYg0zDNV7N2S7G04m/fiIQ9mnyWawHCDnozVFP0nHC++pyAzDstGrU8TEnCmgaIdtDU2X+euU5S3TwqTtX/mxpC1GP8rxju1lQ3oi6+SD49SXTQZosn5TKtZif7cmINYV/ue4yaXXa1qvRiOvRqoUrhqlYnKKACen47Mg30Y0tbVh+IKUjfwEoO0ZLjPAWCh5akCG9R2jU79avS45h0xfFamYTRrqMvRHPu39SI/F+8ReVXhcE0TpPkE+5cBCJp9Rmn4k6e22gAzj0scW7t1z03ffQTZ0Q8cvZDLO4Yd3RPxjZbHvtQRR78rf6wSHpsj0w9tHqD7fZuo4BQ/+d7G6V5BcoSFe/Br0T/iWnpptn7cn2uB4N7kvOupKgjKN8MuIW5MTykjiW8TnT40/gNvVsYslKPyKsg6oAL0QIPMhZ15DZzfKorcqPcD+mSOfa37pLhKqk+s0BHt+cI6voBhm+Xi1of8jO9kGluJwc2xCjOxvc+zvmpQh8aeLfFp+Eyo/dR3ngG5EFpb6DFVqFo1a9XErNvCJNVfHbjlRpxtF881X4832sHhfwR5NFpJzJdhyKIK37CihhBPvVDCQ== root@mschuwalow-laptop-asus";
   all = [ user desktop laptop laptop-asus ];
-in {
+in
+{
   "vpn/purevpn.key.age".publicKeys = all;
   "vpn/purevpn.ovpn.age".publicKeys = all;
   "users/mschuwalow.age".publicKeys = all;

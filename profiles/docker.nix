@@ -13,7 +13,8 @@ let
       }
     ];
   });
-in {
+in
+{
   environment.systemPackages = with pkgs; [ dive docker_compose ];
 
   virtualisation.libvirtd.enable = true;

@@ -3,7 +3,8 @@
 with lib;
 
 let cfg = config.services.bloop;
-in {
+in
+{
   options = {
     services.bloop = {
       extraOptions = mkOption {

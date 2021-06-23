@@ -215,7 +215,8 @@ let
       };
     };
   };
-in {
+in
+{
   python = oldPkgs.python.override { inherit packageOverrides; };
   python3 = oldPkgs.python3.override { inherit packageOverrides; };
   python36 = oldPkgs.python36.override { inherit packageOverrides; };

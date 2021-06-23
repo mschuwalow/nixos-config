@@ -19,7 +19,8 @@ let
     exec ${pkgs.cachix}/bin/cachix -c ${cfg.cachixConfigFilePath} push ${cfg.cacheName} $OUT_PATHS > /tmp/hydra_cachix 2>&1 || true
   '';
 
-in {
+in
+{
   options.nix.cachix-hook = {
     enable = mkOption {
       type = types.bool;

@@ -22,7 +22,8 @@ let
         pkgs.unstable.vscode-extensions.ms-vsliveshare.vsliveshare
       ] ++ sets.scala ++ sets.haskell ++ sets.python ++ sets.rust);
   };
-in {
+in
+{
   environment.systemPackages = with pkgs; [
     awscli
     cabal2nix

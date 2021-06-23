@@ -12,7 +12,8 @@ let
   launcher = super.writeScript "launchJoplin" ''
     ${super.appimage-run}/bin/appimage-run ${src}
   '';
-in {
+in
+{
   joplin-desktop = super.makeDesktopItem {
     name = pname;
     desktopName = "Joplin";

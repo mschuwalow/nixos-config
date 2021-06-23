@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let inherit (lib) hiPrio;
-in {
+in
+{
 
   imports = [
     ./secrets

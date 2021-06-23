@@ -4,7 +4,8 @@ with lib;
 
 let cfg = config.services.bloop-system;
 
-in {
+in
+{
   options.services.bloop-system = {
     extraOptions = mkOption {
       type = types.listOf types.str;

@@ -6,4 +6,5 @@ let
     inherit sha256;
     url = "https://github.com/msteen/nixos-vsliveshare/archive/${rev}.tar.gz";
   };
-in { imports = [ tarball ]; }
+in
+{ imports = [ tarball ]; }

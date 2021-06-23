@@ -53,7 +53,8 @@ let
         fi
 
         cd ..
-      '') dependencies);
+      '')
+      dependencies);
 
   # Recursively composes the dependencies of a package
   composePackage = { name, packageName, src, dependencies ? [ ], ... }@args:
@@ -157,7 +158,8 @@ let
           fs.writeFileSync("package.json", JSON.stringify(packageObj, null, 2));
         '';
       };
-    in ''
+    in
+    ''
       node ${pinpointDependenciesFromPackageJSON} ${
         if production then "production" else "development"
       }
@@ -327,11 +329,13 @@ let
   prepareAndInvokeNPM =
     { packageName, bypassCache, reconstructLock, npmFlags, production }:
     let
-      forceOfflineFlag = if bypassCache then
-        "--offline"
-      else
-        "--registry http://www.example.com";
-    in ''
+      forceOfflineFlag =
+        if bypassCache then
+          "--offline"
+        else
+          "--registry http://www.example.com";
+    in
+    ''
       # Pinpoint the versions of all dependencies to the ones that are actually being used
       echo "pinpointing versions of dependencies..."
       source $pinpointDependenciesScriptPath
@@ -387,11 +391,23 @@ let
     '';
 
   # Builds and composes an NPM package including all its dependencies
-  buildNodePackage = { name, packageName, version, dependencies ? [ ]
-    , buildInputs ? [ ], production ? true, npmFlags ? ""
-    , dontNpmInstall ? false, bypassCache ? false, reconstructLock ? false
-    , preRebuild ? "", dontStrip ? true, unpackPhase ? "true"
-    , buildPhase ? "true", ... }@args:
+  buildNodePackage =
+    { name
+    , packageName
+    , version
+    , dependencies ? [ ]
+    , buildInputs ? [ ]
+    , production ? true
+    , npmFlags ? ""
+    , dontNpmInstall ? false
+    , bypassCache ? false
+    , reconstructLock ? false
+    , preRebuild ? ""
+    , dontStrip ? true
+    , unpackPhase ? "true"
+    , buildPhase ? "true"
+    , ...
+    }@args:
 
     let
       extraArgs = removeAttrs args [
@@ -404,7 +420,8 @@ let
         "unpackPhase"
         "buildPhase"
       ];
-    in stdenv.mkDerivation ({
+    in
+    stdenv.mkDerivation ({
       name = "node_${name}-${version}";
       buildInputs = [ tarWrapper python nodejs ]
         ++ lib.optional (stdenv.isLinux) utillinux
@@ -459,13 +476,27 @@ let
     } // extraArgs);
 
   # Builds a node environment (a node_modules folder and a set of binaries)
-  buildNodeDependencies = { name, packageName, version, src, dependencies ? [ ]
-    , buildInputs ? [ ], production ? true, npmFlags ? ""
-    , dontNpmInstall ? false, bypassCache ? false, reconstructLock ? false
-    , dontStrip ? true, unpackPhase ? "true", buildPhase ? "true", ... }@args:
+  buildNodeDependencies =
+    { name
+    , packageName
+    , version
+    , src
+    , dependencies ? [ ]
+    , buildInputs ? [ ]
+    , production ? true
+    , npmFlags ? ""
+    , dontNpmInstall ? false
+    , bypassCache ? false
+    , reconstructLock ? false
+    , dontStrip ? true
+    , unpackPhase ? "true"
+    , buildPhase ? "true"
+    , ...
+    }@args:
 
     let extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" ];
-    in stdenv.mkDerivation ({
+    in
+    stdenv.mkDerivation ({
       name = "node-dependencies-${name}-${version}";
 
       buildInputs = [ tarWrapper python nodejs ]
@@ -517,13 +548,27 @@ let
     } // extraArgs);
 
   # Builds a development shell
-  buildNodeShell = { name, packageName, version, src, dependencies ? [ ]
-    , buildInputs ? [ ], production ? true, npmFlags ? ""
-    , dontNpmInstall ? false, bypassCache ? false, reconstructLock ? false
-    , dontStrip ? true, unpackPhase ? "true", buildPhase ? "true", ... }@args:
+  buildNodeShell =
+    { name
+    , packageName
+    , version
+    , src
+    , dependencies ? [ ]
+    , buildInputs ? [ ]
+    , production ? true
+    , npmFlags ? ""
+    , dontNpmInstall ? false
+    , bypassCache ? false
+    , reconstructLock ? false
+    , dontStrip ? true
+    , unpackPhase ? "true"
+    , buildPhase ? "true"
+    , ...
+    }@args:
 
     let nodeDependencies = buildNodeDependencies args;
-    in stdenv.mkDerivation {
+    in
+    stdenv.mkDerivation {
       name = "node-shell-${name}-${version}";
 
       buildInputs = [ python nodejs ] ++ lib.optional (stdenv.isLinux) utillinux
@@ -545,7 +590,8 @@ let
         export PATH="${nodeDependencies}/bin:$PATH"
       '';
     };
-in {
+in
+{
   buildNodeSourceDist = lib.makeOverridable buildNodeSourceDist;
   buildNodePackage = lib.makeOverridable buildNodePackage;
   buildNodeDependencies = lib.makeOverridable buildNodeDependencies;

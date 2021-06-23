@@ -7,7 +7,8 @@ let
     nodejs = nodejs-10_x;
   })."bars-git://github.com/jez/bars.git";
 
-in mkDerivation rec {
+in
+mkDerivation rec {
   name = "git-heatmap";
   version = "0.10.3";
 

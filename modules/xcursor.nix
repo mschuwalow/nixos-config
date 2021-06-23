@@ -4,7 +4,8 @@ with lib;
 
 let cfg = config.xcursor;
 
-in {
+in
+{
   options.xcursor = {
     defaultCursor = mkOption {
       type = types.str;
@@ -62,21 +63,23 @@ in {
 
       systemPackages = [
         cfg.package
-        (pkgs.callPackage ({ stdenv }:
-          stdenv.mkDerivation rec {
-            name = "global-cursor-theme";
-            unpackPhase = "true";
-            outputs = [ "out" ];
-            installPhase = ''
-              mkdir -p $out/share/icons/default
-              cat << EOF > $out/share/icons/default/index.theme
-              [Icon Theme]
-              Name=Default
-              Comment=Default Cursor Theme
-              Inherits=${cfg.name}
-              EOF
-            '';
-          }) { })
+        (pkgs.callPackage
+          ({ stdenv }:
+            stdenv.mkDerivation rec {
+              name = "global-cursor-theme";
+              unpackPhase = "true";
+              outputs = [ "out" ];
+              installPhase = ''
+                mkdir -p $out/share/icons/default
+                cat << EOF > $out/share/icons/default/index.theme
+                [Icon Theme]
+                Name=Default
+                Comment=Default Cursor Theme
+                Inherits=${cfg.name}
+                EOF
+              '';
+            })
+          { })
       ];
 
       variables.XCURSOR_SIZE = toString cfg.size;

@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let secrets = import ../secrets;
-in {
+in
+{
   environment.systemPackages = with pkgs; [ cifs-utils ntfs3g ];
 
   systemd.mounts = [

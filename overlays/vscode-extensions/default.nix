@@ -5,7 +5,8 @@ let
       mktplcRef = extension;
       meta = { license = super.lib.licenses.mit; };
     };
-in rec {
+in
+rec {
   vscode-extensions = super.lib.recursiveUpdate super.vscode-extensions {
     alanz.vscode-hie-server = mp {
       name = "vscode-hie-server";
