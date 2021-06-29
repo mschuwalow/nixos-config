@@ -44,7 +44,6 @@
     fonts = with pkgs; [
       twitter-color-emoji
       ubuntu_font_family
-      crimson
       (nerdfonts.override {
         fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
       })
@@ -54,7 +53,7 @@
         emoji = [ "Twitter Color Emoji" ];
         monospace = [ "Ubuntu Mono" ];
         sansSerif = [ "Ubuntu" ];
-        serif = [ "Crimson Roman" ];
+        serif = [ "Ubuntu Condensed" ];
       };
     };
   };
@@ -96,7 +95,7 @@
             cursor-theme='Yaru'
 
             font-name='Ubuntu 11'                                                                                                                 
-            document-font-name='Sans 11'                                                                                                          
+            document-font-name='Ubuntu Condensed 11'                                                                                                          
             monospace-font-name='Ubuntu Mono 10'                                                                                                  
             
             [org.gnome.desktop.sound]
