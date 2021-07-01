@@ -50,7 +50,7 @@
         nix = {
           registry = {
             nixpkgs.flake = nixpkgs;
-            nixpkgs-unstable.flake = nixpkgs.unstable;
+            nixpkgs-unstable.flake = nixpkgs-unstable;
             home-manager.flake = home-manager;
             sys.flake = self;
             nur.flake = nur;
