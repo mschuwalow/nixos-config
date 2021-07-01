@@ -4,7 +4,7 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "nixpkgs/master";
+    nixpkgs.url = "nixpkgs/nixos-21.05";
     nixpkgs-unstable.url = "nixpkgs/master";
     nur.url = "github:nix-community/NUR";
     home-manager = {
@@ -50,6 +50,7 @@
         nix = {
           registry = {
             nixpkgs.flake = nixpkgs;
+            nixpkgs-unstable.flake = nixpkgs.unstable;
             home-manager.flake = home-manager;
             sys.flake = self;
             nur.flake = nur;

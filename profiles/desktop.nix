@@ -2,7 +2,6 @@
   environment.systemPackages = (with pkgs; [
     appimage-run
     bitwarden
-    catt
     ghostwriter
     hunspell
     hunspellDicts.de-de
@@ -21,7 +20,6 @@
     vlc
     xclip
     xdotool
-    youtube-dl
     zoom-us
     yaru-theme
     germinal

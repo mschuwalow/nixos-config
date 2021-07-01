@@ -1,4 +1,4 @@
-PROJECT_DIR := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
+PROJECT_DIR := $(realpath $(dir $(firstword $(MAKEFILE_LIST))))
 
 .PHONY: fmt
 
