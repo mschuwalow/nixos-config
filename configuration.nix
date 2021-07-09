@@ -56,6 +56,7 @@ in
     gnupg
     gping
     gptfdisk
+    htop
     httpie
     hyperfine
     killall
@@ -118,6 +119,7 @@ in
   nixpkgs = {
     config = {
       allowUnfree = true;
+      input-fonts.acceptLicense = true;
       trusted-users = "@wheel";
     };
   };

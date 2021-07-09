@@ -8,7 +8,7 @@
     nixpkgs-unstable.url = "nixpkgs/master";
     nur.url = "github:nix-community/NUR";
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-21.05";
       flake = true;
       inputs.nixpkgs.follows = "nixpkgs";
     };

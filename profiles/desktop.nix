@@ -22,7 +22,6 @@
     xdotool
     zoom-us
     yaru-theme
-    germinal
   ]) ++ (with pkgs.gnome; [
     gnome-disk-utility
     gnome-system-monitor
@@ -42,6 +41,7 @@
     fonts = with pkgs; [
       twitter-color-emoji
       ubuntu_font_family
+      hack-font
       (iosevka.override {
         privateBuildPlan = ''
           [buildPlans.iosevka-custom]
@@ -55,9 +55,6 @@
           enables = [ "exeq" ]
         '';
         set = "custom";
-      })
-      (nerdfonts.override {
-        fonts = [ "FiraCode" "SourceCodePro" ];
       })
     ];
     fontconfig = {
@@ -105,7 +102,6 @@
             gtk-theme='Yaru-dark'
             icon-theme='Yaru'
             cursor-theme='Yaru'
-
             font-name='Ubuntu 11'                                                                                                                 
             document-font-name='Ubuntu Condensed 11'                                                                                                          
             monospace-font-name='Ubuntu Mono 10'                                                                                                  
@@ -116,17 +112,9 @@
             [org/gnome/desktop/wm/preferences]
             titlebar-font='Ubuntu Bold 11'
 
-            [org.gnome.Germinal]
-            decorated=true
-            font='FiraCode Nerd Font 10'
-            forecolor='#eff0eb'
-            backcolor='#16171d'
-            palette=['#282a36', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#f1f1f0', '#686868', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#eff0eb']
-
             [desktop.ibus.panel.emoji]
             hotkey=[]
           '';
-          sessionPath = with pkgs; [ germinal ];
         };
         xterm.enable = false;
       };
