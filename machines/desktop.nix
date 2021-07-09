@@ -43,11 +43,6 @@
 
   networking.hostName = "mschuwalow-desktop";
 
-  nix = {
-    maxJobs = 12;
-    buildCores = 12;
-  };
-
   powerManagement.enable = false;
 
   services.xserver.videoDrivers = [ "nvidia" ];

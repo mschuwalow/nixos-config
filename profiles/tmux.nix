@@ -4,6 +4,8 @@
   programs.tmux = {
     enable = true;
     baseIndex = 1;
+    clock24 = true;
+    newSession = true;
     extraConfig = ''
       ###############
       ### Plugins ###
@@ -34,28 +36,15 @@
       set-option -g visual-bell off
       set-option -g bell-action none
 
-      # pretend to be xterm
-      set -g default-terminal "xterm-256color"
-      set-window-option -g xterm-keys on
-
       ####################
       ### KEY BINDINGS ###
       ####################
-
-      # reload config file (change file location to your the tmux.conf you want to use)
-      bind r source-file ~/.tmux.conf \; display "Config reloaded"
 
       # # switch panes using Alt-Shift-$arrow without prefix
       bind -n M-Left select-pane -L
       bind -n M-Right select-pane -R
       bind -n M-Up select-pane -U
       bind -n M-Down select-pane -D
-
-      # split panes using | and -
-      bind | split-window -h
-      bind - split-window -v
-      unbind '"'
-      unbind %
 
       # fix scrolling to go one line at a time
       bind -Tcopy-mode WheelUpPane send -N1 -X scroll-up

@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
-let inherit (lib) hiPrio;
+let
+  inherit (lib) hiPrio;
 in
 {
 
@@ -94,7 +95,7 @@ in
   nix = {
     autoOptimiseStore = true;
     cachix-hook = {
-      enable = true;
+      enable = false;
       cacheName = "mschuwalow-nixos-systems";
       cachePublicKey =
         "mschuwalow-nixos-systems.cachix.org-1:yE2aPTt48ovOna+s52CklrygkFXcMLIXmrTu6aB6cSU=";
@@ -133,11 +134,6 @@ in
         "HIST_FCNTL_LOCK"
         "HIST_REDUCE_BLANKS"
       ];
-    };
-    tmux = {
-      enable = true;
-      newSession = true;
-      clock24 = true;
     };
   };
 

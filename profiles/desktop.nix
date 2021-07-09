@@ -42,8 +42,22 @@
     fonts = with pkgs; [
       twitter-color-emoji
       ubuntu_font_family
+      (iosevka.override {
+        privateBuildPlan = ''
+          [buildPlans.iosevka-custom]
+          family = "Iosevka Custom"
+          spacing = "fontconfig-mono"
+          serifs = "slab"
+
+          [buildPlans.iosevka-custom.ligations]
+          inherits = "haskell"
+          disables = [ "slasheq" ]
+          enables = [ "exeq" ]
+        '';
+        set = "custom";
+      })
       (nerdfonts.override {
-        fonts = [ "FantasqueSansMono" "FiraCode" "SourceCodePro" ];
+        fonts = [ "FiraCode" "SourceCodePro" ];
       })
     ];
     fontconfig = {
@@ -108,6 +122,9 @@
             forecolor='#eff0eb'
             backcolor='#16171d'
             palette=['#282a36', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#f1f1f0', '#686868', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#eff0eb']
+
+            [desktop.ibus.panel.emoji]
+            hotkey=[]
           '';
           sessionPath = with pkgs; [ germinal ];
         };

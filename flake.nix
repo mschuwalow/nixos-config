@@ -29,7 +29,6 @@
         (import ./overlays/cups-kyocera-ecosys)
         (import ./overlays/sshuttle-fix.nix)
         (import ./overlays/git-heatmap)
-        (import ./overlays/clipboard-indicator-fix.nix)
         (import ./overlays/gtktitlebar)
         (import ./overlays/nix-direnv-flake-support.nix)
         agenix.overlay
