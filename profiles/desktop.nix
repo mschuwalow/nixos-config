@@ -103,7 +103,6 @@
       desktopManager = {
         gnome = {
           enable = true;
-          extraGSettingsOverridePackages = with pkgs; [ germinal ];
           extraGSettingsOverrides = ''
             [org.gnome.desktop.interface]
             gtk-theme='Yaru-dark'

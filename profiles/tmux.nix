@@ -27,10 +27,6 @@ in
       # Enable mouse mode (tmux 2.1 and above)
       set -g mouse on
 
-      # don't rename windows automatically
-      set-window-option -g automatic-rename off
-      set-option -g allow-rename off
-
       ####################
       ### KEY BINDINGS ###
       ####################
