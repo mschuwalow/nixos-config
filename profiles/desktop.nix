@@ -42,18 +42,25 @@
       twitter-color-emoji
       ubuntu_font_family
       hack-font
-      (iosevka.override {
-        privateBuildPlan = ''
-          [buildPlans.iosevka-custom]
-          family = "Iosevka Custom"
-          spacing = "fontconfig-mono"
-          serifs = "slab"
-
-          [buildPlans.iosevka-custom.ligations]
-          inherits = "haskell"
-          disables = [ "slasheq" ]
-          enables = [ "exeq" ]
-        '';
+      (unstable.iosevka.override {
+        privateBuildPlan = {
+          family = "Iosevka Custom";
+          spacing = "normal";
+          serifs = "slab";
+          ligations = {
+            inherits = "haskell";
+            disables = [ "slasheq" ];
+            enables = [ "exeq" ];
+          };
+          variants.design = {
+            asterisk = "penta-low";
+          };
+          widths.normal = {
+            shape = 500;
+            menu = 5;
+            css = "normal";
+          };
+        };
         set = "custom";
       })
     ];
