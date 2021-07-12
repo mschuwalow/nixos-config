@@ -17,4 +17,5 @@ in
   "users/root.age".publicKeys = all;
   "ssh/github_rsa.age".publicKeys = all;
   "cachix.dhall.age".publicKeys = all;
+  "nm/liveintent.nmconnection.age".publicKeys = all;
 }
