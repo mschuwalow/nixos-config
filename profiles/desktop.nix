@@ -14,7 +14,7 @@
     transmission-gtk
     ferdi
     google-chrome
-    brave
+    firefox
     alacritty
     usbutils
     vlc
@@ -41,7 +41,7 @@
     fonts = with pkgs; [
       twitter-color-emoji
       ubuntu_font_family
-      hack-font
+      (nerdfonts.override { fonts = [ "Hack" ]; })
       (unstable.iosevka.override {
         privateBuildPlan = {
           family = "Iosevka Custom";
