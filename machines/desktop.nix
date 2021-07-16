@@ -7,7 +7,6 @@
       checkJournalingFS = false;
       kernelModules = [ ];
     };
-    kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {

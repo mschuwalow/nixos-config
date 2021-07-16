@@ -21,7 +21,6 @@ in
         "/dev/disk/by-uuid/7030d337-7c75-47ec-903c-1a141f7d46e3";
     };
     loader.systemd-boot.enable = true;
-    kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "msr.allow_writes=on" "psmouse.synaptics_intertouch=0" ];
   };
