@@ -1,13 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   environment = {
     etc = {
       "NetworkManager/system-connections/KabelBox-2FF0.nmconnection" = {
-        source = "/run/secrets/nm/KabelBox-2FF0.nmconnection";
+        source = config.age.secrets.nm-wifi-home.path;
       };
       "NetworkManager/system-connections/LiveIntent.nmconnection" = {
-        source = "/run/secrets/nm/LiveIntent.nmconnection";
+        source = config.age.secrets.nm-vpn-liveintent.path;
       };
       # networkmanager vpn activation will fail if file does not exist + is mutable
       "ipsec.secrets" = {
@@ -35,7 +35,7 @@
     avahi.enable = true;
     openvpn.servers = {
       pureVPN = {
-        config = "config /run/secrets/purevpn.ovpn";
+        config = "config ${config.age.secrets.ovpn-purevpn.path}";
         autoStart = false;
         updateResolvConf = false;
       };

@@ -16,7 +16,7 @@
     ];
     createHome = true;
     home = "/home/mschuwalow";
-    passwordFile = "/run/secrets/pw-mschuwalow";
+    passwordFile = config.age.secrets.pw-mschuwalow.path;
     packages = with pkgs; [ home-manager ];
   };
 }

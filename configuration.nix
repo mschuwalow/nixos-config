@@ -7,11 +7,7 @@ in
 
   imports = [
     ./secrets
-
-    # load default services & profiles
     ./profiles
-
-    # create users
     ./users/root.nix
     ./users/mschuwalow.nix
     ./users/pzhang.nix
@@ -100,6 +96,8 @@ in
       cacheName = "mschuwalow-nixos-systems";
       cachePublicKey =
         "mschuwalow-nixos-systems.cachix.org-1:yE2aPTt48ovOna+s52CklrygkFXcMLIXmrTu6aB6cSU=";
+      cachixConfigFilePath =
+        config.age.secrets.cachix.path;
     };
     extraOptions = ''
       keep-outputs = true

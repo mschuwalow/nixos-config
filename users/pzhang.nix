@@ -15,7 +15,7 @@
     ];
     createHome = true;
     home = "/home/pzhang";
-    passwordFile = "/run/secrets/pw-pzhang";
+    passwordFile = config.age.secrets.pw-pzhang.path;
     packages = with pkgs; [ home-manager ];
   };
 }
