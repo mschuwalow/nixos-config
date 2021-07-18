@@ -71,8 +71,7 @@
           system = "x86_64-linux";
         };
         mschuwalow-laptop-asus = nixpkgs.lib.nixosSystem {
-          modules =
-            [ baseModule ./configuration.nix ./machines/laptop-asus.nix ];
+          modules = [ baseModule ./configuration.nix ./machines/laptop-asus.nix ];
           system = "x86_64-linux";
         };
       };

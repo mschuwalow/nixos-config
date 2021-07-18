@@ -13,6 +13,5 @@
     ./ssd.nix
     ./sshd.nix
     ./tmux.nix
-    ./vpn.nix
   ];
 }
