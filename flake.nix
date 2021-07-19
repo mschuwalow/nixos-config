@@ -66,6 +66,10 @@
           modules = [ baseModule ./configuration.nix ./machines/desktop.nix ];
           system = "x86_64-linux";
         };
+        mschuwalow-desktop-home = nixpkgs.lib.nixosSystem {
+	  modules = [ baseModule ./configuration.nix ./machines/desktop-home.nix ];
+	  system = "x86_64-linux";
+	};
         mschuwalow-laptop = nixpkgs.lib.nixosSystem {
           modules = [ baseModule ./configuration.nix ./machines/laptop.nix ];
           system = "x86_64-linux";
