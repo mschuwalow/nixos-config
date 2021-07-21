@@ -10,6 +10,10 @@ let
 in
 {
 
+  networking.hostName = "mschuwalow-laptop";
+
+  imports = [ ../profiles/bluetooth.nix ];
+
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     initrd = {
@@ -17,12 +21,11 @@ in
         [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       checkJournalingFS = false;
       kernelModules = [ "i915" "kvm-intel" "acpi_call" ];
-      luks.devices."luks-7030d337-7c75-47ec-903c-1a141f7d46e3".device =
-        "/dev/disk/by-uuid/7030d337-7c75-47ec-903c-1a141f7d46e3";
+      luks.devices."luks-7030d337-7c75-47ec-903c-1a141f7d46e3".device = "/dev/disk/by-uuid/7030d337-7c75-47ec-903c-1a141f7d46e3";
     };
     loader.systemd-boot.enable = true;
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "msr.allow_writes=on" "psmouse.synaptics_intertouch=0" ];
+    kernelPackages = pkgs.linuxPackages;
+    kernelParams = [ "psmouse.synaptics_intertouch=0" ];
   };
 
   environment.systemPackages = [ nvidia-offload ]
@@ -44,6 +47,7 @@ in
     opengl = {
       enable = true;
       extraPackages = with pkgs; [
+        libva
         vaapiIntel
         vaapiVdpau
         libvdpau-va-gl
@@ -53,42 +57,35 @@ in
     nvidia = {
       modesetting.enable = true;
       prime = {
+        offload.enable = true;
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:45:0:0";
-        offload.enable = true;
       };
     };
   };
 
-  imports = [ ../profiles/bluetooth.nix ];
-
-  networking.hostName = "mschuwalow-laptop";
-
-  nix = {
-    maxJobs = 16;
-    buildCores = 8;
-  };
-
   services = {
-    fprintd.enable = true;
+    fprintd.enable = false;
     hardware.bolt.enable = true;
     throttled.enable = true;
     xserver = {
       libinput.enable = true;
       videoDrivers = [ "nvidia" ];
-      displayManager.gdm.nvidiaWayland = true;
+      displayManager.gdm.wayland = false;
     };
   };
 
-  swapDevices = [{
-    device = "/dev/disk/by-uuid/c601ecaa-698f-45e0-8dfd-c946860db8c7";
-    encrypted = {
-      enable = true;
-      keyFile = "/mnt-root/root/swap.key";
-      label = "luksswap";
-      blkDev = "/dev/disk/by-uuid/4f32d452-0e33-476e-b90c-cba4dfa90ad0";
-    };
-  }];
+  swapDevices = [
+    {
+      device = "/dev/disk/by-uuid/c601ecaa-698f-45e0-8dfd-c946860db8c7";
+      encrypted = {
+        enable = true;
+        keyFile = "/mnt-root/root/swap.key";
+        label = "luksswap";
+        blkDev = "/dev/disk/by-uuid/4f32d452-0e33-476e-b90c-cba4dfa90ad0";
+      };
+    }
+  ];
 
   powerManagement.enable = true;
 

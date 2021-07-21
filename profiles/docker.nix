@@ -17,16 +17,11 @@ in
 {
   environment.systemPackages = with pkgs; [ dive docker_compose ];
 
-  virtualisation.libvirtd.enable = true;
-  virtualisation.lxc.enable = true;
-  virtualisation.lxc.usernetConfig = ''
-    bfo veth lxcbr0 10
-  '';
-
   virtualisation.docker = {
     autoPrune.enable = true;
     enable = true;
     enableOnBoot = true;
+    liveRestore = false;
     extraOptions = "--config-file=${daemonConfig}";
   };
 }
