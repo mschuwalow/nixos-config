@@ -25,7 +25,6 @@ in
   console = {
     earlySetup = true;
     font = "ter-i16b";
-    keyMap = "colemak/colemak";
     packages = with pkgs; [ terminus_font ];
   };
 
