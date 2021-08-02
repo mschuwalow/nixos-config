@@ -31,6 +31,7 @@
         (import ./overlays/git-heatmap)
         (import ./overlays/gtktitlebar)
         (import ./overlays/nix-direnv-flake-support.nix)
+        (import ./overlays/bottles-fix.nix)
         agenix.overlay
       ];
       baseModule = {

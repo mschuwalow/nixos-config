@@ -1,4 +1,8 @@
 { config, pkgs, ... }: {
+  imports = [ ../profiles/gaming.nix ];
+
+  networking.hostName = "mschuwalow-desktop";
+
   boot = {
     extraModulePackages = [ ];
     initrd = {
@@ -37,10 +41,6 @@
     enableRedistributableFirmware = true;
     cpu.amd.updateMicrocode = true;
   };
-
-  imports = [ ../profiles/gaming.nix ];
-
-  networking.hostName = "mschuwalow-desktop";
 
   powerManagement.enable = false;
 

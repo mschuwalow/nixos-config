@@ -4,6 +4,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
+  imports = [ ../profiles/gaming.nix ];
 
   networking.hostName = "mschuwalow-desktop-home";
 
@@ -20,6 +21,8 @@
       device = "/dev/osdisk";
       useOSProber = true;
       version = 2;
+      gfxmodeBios = "1280x1024,auto";
+      gfxpayloadBios = "keep";
     };
   };
 

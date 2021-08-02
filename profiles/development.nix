@@ -41,7 +41,7 @@ in
     sshfs
     ghq
     jq
-    yq
+    yq-go
     ngrok
     pspg
     watch

@@ -120,6 +120,9 @@
 
             [desktop.ibus.panel.emoji]
             hotkey=[]
+
+            [org/gnome/desktop/input-sources]
+            xkb-options=['terminate:ctrl_alt_bksp', 'lv3:ralt_switch', 'compose:caps']
           '';
         };
         xterm.enable = false;
