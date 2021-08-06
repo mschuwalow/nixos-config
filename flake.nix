@@ -22,18 +22,19 @@
           unstable = import nixpkgs-unstable { inherit (super) system config; };
           home-manager = home-manager.defaultPackage."${super.system}";
         })
-        (import ./overlays/python-packages)
-        (import ./overlays/vscode-extensions)
-        (import ./overlays/joplin.nix)
-        (import ./overlays/ibus-rime)
-        (import ./overlays/cups-kyocera-ecosys)
-        (import ./overlays/sshuttle-fix.nix)
-        (import ./overlays/git-heatmap)
-        (import ./overlays/gtktitlebar)
-        (import ./overlays/nix-direnv-flake-support.nix)
-        (import ./overlays/bottles-fix.nix)
         agenix.overlay
-      ];
+      ] ++ (map import [
+        ./overlays/bottles-fix.nix
+        ./overlays/cups-kyocera-ecosys
+        ./overlays/git-heatmap
+        ./overlays/gtktitlebar
+        ./overlays/ibus-rime
+        ./overlays/joplin.nix
+        ./overlays/nix-direnv-flake-support.nix
+        ./overlays/python-packages
+        ./overlays/sshuttle-fix.nix
+        ./overlays/vscode-extensions
+      ]);
       baseModule = {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
