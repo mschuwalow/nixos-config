@@ -125,6 +125,7 @@ in
     zsh = {
       enable = true;
       enableBashCompletion = true;
+      histFile = "$HOME/.zsh_history_custom";
       setOptions = [
         "HIST_IGNORE_ALL_DUPS"
         "HIST_IGNORE_SPACE"
