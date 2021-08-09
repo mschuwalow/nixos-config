@@ -15,7 +15,6 @@
     ferdi
     google-chrome
     firefox
-    tridactyl-native
     alacritty
     usbutils
     vlc
