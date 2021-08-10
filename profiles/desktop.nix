@@ -123,7 +123,13 @@
 
             [org/gnome/desktop/input-sources]
             xkb-options=['terminate:ctrl_alt_bksp', 'lv3:ralt_switch', 'compose:caps']
+
+            [org/gnome/gedit/preferences/editor]
+            scheme='Yaru-dark'
           '';
+          extraGSettingsOverridePackages = with pkgs.gnome; [
+            gedit
+          ];
         };
         xterm.enable = false;
       };
@@ -132,6 +138,8 @@
       layout = "us";
     };
   };
+
+  nixpkgs.config.firefox.enableGnomeExtensions = true;
 
   xdg.portal = {
     enable = true;
