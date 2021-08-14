@@ -150,10 +150,7 @@ in
     };
   };
 
-  systemd.services = {
-    systemd-udev-settle.enable = false;
-    NetworkManager-wait-online.enable = false;
-  };
+  systemd.services.systemd-udev-settle.enable = false;
 
   time.timeZone = "Europe/Berlin";
 
