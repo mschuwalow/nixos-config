@@ -9,8 +9,8 @@
     libreoffice-fresh
     nmap-graphical
     okular
-    rtv
     screenkey
+    spotify
     transmission-gtk
     ferdi
     google-chrome
@@ -22,6 +22,7 @@
     xdotool
     zoom-us
     yaru-theme
+    authy
   ]) ++ (with pkgs.gnome; [
     gnome-disk-utility
     gnome-system-monitor
@@ -138,8 +139,6 @@
       layout = "us";
     };
   };
-
-  nixpkgs.config.firefox.enableGnomeExtensions = true;
 
   xdg.portal = {
     enable = true;

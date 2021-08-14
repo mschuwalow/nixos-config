@@ -24,7 +24,7 @@
         })
         agenix.overlay
       ] ++ (map import [
-        ./overlays/bottles-fix.nix
+        ./overlays/bottles
         ./overlays/cups-kyocera-ecosys
         ./overlays/git-heatmap
         ./overlays/gtktitlebar

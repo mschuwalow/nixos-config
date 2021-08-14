@@ -55,6 +55,7 @@ in
     httpie
     hyperfine
     killall
+    lsof
     micro
     mkpasswd
     moreutils
@@ -80,6 +81,7 @@ in
     vim
     wget
     whois
+    xe
     zip
   ];
 
@@ -125,14 +127,14 @@ in
     zsh = {
       enable = true;
       enableBashCompletion = true;
-      histFile = "$HOME/.zsh_history_custom";
+      histSize = 50000;
       setOptions = [
+        "HIST_FCNTL_LOCK"
         "HIST_IGNORE_ALL_DUPS"
         "HIST_IGNORE_SPACE"
-        "SHARE_HISTORY"
-        "HIST_VERIFY"
-        "HIST_FCNTL_LOCK"
         "HIST_REDUCE_BLANKS"
+        "HIST_VERIFY"
+        "SHARE_HISTORY"
       ];
     };
   };
@@ -146,6 +148,11 @@ in
       enable = true;
       wheelNeedsPassword = false;
     };
+  };
+
+  systemd.services = {
+    systemd-udev-settle.enable = false;
+    NetworkManager-wait-online.enable = false;
   };
 
   time.timeZone = "Europe/Berlin";

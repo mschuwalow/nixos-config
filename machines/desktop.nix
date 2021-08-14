@@ -4,15 +4,12 @@
   networking.hostName = "mschuwalow-desktop";
 
   boot = {
-    extraModulePackages = [ ];
     initrd = {
       availableKernelModules =
         [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
       checkJournalingFS = false;
-      kernelModules = [ ];
     };
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       grub = {
         device = "nodev";
@@ -42,14 +39,12 @@
     cpu.amd.updateMicrocode = true;
   };
 
-  powerManagement.enable = false;
-
   services.xserver.videoDrivers = [ "nvidia" ];
 
   swapDevices =
     [{ device = "/dev/disk/by-uuid/12b2d777-9cdd-4f78-a6b3-e98d7ce15cd0"; }];
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.05";
 
   time.hardwareClockInLocalTime = true;
 }
