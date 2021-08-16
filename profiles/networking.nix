@@ -26,7 +26,7 @@
 
   networking = {
     networkmanager.insertNameservers = [ "1.1.1.1" "1.0.0.1" ];
-    firewall = { enable = true; };
+    firewall.enable = true;
   };
 
   programs.ssh.startAgent = true;

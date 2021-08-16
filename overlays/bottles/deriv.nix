@@ -16,21 +16,21 @@
 , gobject-introspection
 , gspell
 , gtk3
-, steam-run-native
+, steam-run
 , xdg-utils
 , pciutils
 , cabextract
+, wineWowPackages
 }:
-
 python3Packages.buildPythonApplication rec {
   pname = "bottles";
-  version = "2021.7.28-treviso-2";
+  version = "2021.8.14-treviso";
 
   src = fetchFromGitHub {
     owner = "bottlesdevs";
     repo = pname;
     rev = version;
-    sha256 = "0kvwcajm9izvkwfg7ir7bks39bpc665idwa8mc8d536ajyjriysn";
+    sha256 = "bMAvDvN6lGnaGEG/urNCis/7ytNvcdLU9f3lA2h6oGc=";
   };
 
   postPatch = ''
@@ -71,9 +71,10 @@ python3Packages.buildPythonApplication rec {
     patool
   ] ++ [
     cabextract
-    steam-run-native
+    steam-run
     xdg-utils
     pciutils
+    wineWowPackages.minimal
   ];
 
   format = "other";
@@ -83,11 +84,13 @@ python3Packages.buildPythonApplication rec {
   preConfigure = ''
     substituteInPlace build-aux/meson/postinstall.py \
       --replace "'update-desktop-database'" "'${desktop-file-utils}/bin/update-desktop-database'"
+
     substituteInPlace src/runner.py \
-      --replace " {runner}" " ${steam-run-native}/bin/steam-run {runner}" \
-      --replace " {dxvk_setup}" " ${steam-run-native}/bin/steam-run {dxvk_setup}"
+      --replace " {runner}" " ${steam-run}/bin/steam-run {runner}" \
+      --replace " {dxvk_setup}" " ${steam-run}/bin/steam-run {dxvk_setup}"
+
     substituteInPlace src/runner_utilities.py \
-      --replace " {runner}" " ${steam-run-native}/bin/steam-run {runner}" \
+      --replace " {runner}" " ${steam-run}/bin/steam-run {runner}" \
   '';
 
   preFixup = ''
