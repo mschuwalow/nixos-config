@@ -13,6 +13,7 @@
     spotify
     transmission-gtk
     ferdi
+    glxinfo
     google-chrome
     firefox
     alacritty

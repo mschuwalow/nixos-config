@@ -35,9 +35,11 @@
   };
 
   hardware = {
-    enableRedistributableFirmware = true;
     cpu.amd.updateMicrocode = true;
+    enableRedistributableFirmware = true;
   };
+
+  powerManagement.enable = false;
 
   services.xserver.videoDrivers = [ "nvidia" ];
 

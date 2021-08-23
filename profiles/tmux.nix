@@ -7,7 +7,6 @@ in
     enable = true;
     baseIndex = 1;
     clock24 = true;
-    newSession = true;
     terminal = "tmux-256color";
     extraConfig = ''
       ###############

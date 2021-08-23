@@ -1,13 +1,6 @@
 { config, pkgs, ... }: {
   imports = [ ../profiles/bluetooth.nix ];
 
-  environment = {
-    systemPackages = with pkgs; [ powertop ];
-    etc."modprobe.d/iwlwifi.conf".text = ''
-      options iwlwifi remove_when_gone=1
-    '';
-  };
-
   networking.hostName = "mschuwalow-laptop-asus";
 
   boot = {
@@ -34,6 +27,13 @@
     kernelParams = [ "acpi_osi='!Windows 2012'" ];
   };
 
+  environment = {
+    systemPackages = with pkgs; [ powertop ];
+    etc."modprobe.d/iwlwifi.conf".text = ''
+      options iwlwifi remove_when_gone=1
+    '';
+  };
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/5215ec1d-9b87-41ee-b272-349bf0b7365b";
@@ -47,8 +47,6 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  powerManagement.enable = true;
-
   swapDevices = [{
     device = "/dev/disk/by-uuid/49855816-cc2e-48ac-980f-78afbd408ce1";
     encrypted = {
@@ -59,10 +57,5 @@
     };
   }];
 
-  system.stateVersion = "20.09";
-
-  nix = {
-    maxJobs = 8;
-    buildCores = 4;
-  };
+  system.stateVersion = "21.05";
 }

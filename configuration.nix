@@ -23,6 +23,7 @@ in
   };
 
   console = {
+    earlySetup = true;
     font = "ter-i16b";
     packages = with pkgs; [ terminus_font ];
   };
@@ -123,10 +124,14 @@ in
   };
 
   programs = {
+    command-not-found.enable = false;
     zsh = {
       enable = true;
       enableBashCompletion = true;
       histSize = 50000;
+      interactiveShellInit = ''
+        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+      '';
       setOptions = [
         "HIST_FCNTL_LOCK"
         "HIST_IGNORE_ALL_DUPS"
@@ -149,6 +154,8 @@ in
     };
   };
 
+  # Causes very long startup.
+  # https://www.freedesktop.org/software/systemd/man/systemd-udev-settle.service.html
   systemd.services.systemd-udev-settle.enable = false;
 
   time.timeZone = "Europe/Berlin";
