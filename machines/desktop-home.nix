@@ -32,8 +32,8 @@
   };
 
   imports = [
-    ../profiles/bluetooth.nix
-    ../profiles/gaming.nix
+    ../extras/bluetooth.nix
+    ../extras/gaming.nix
   ];
 
   networking.hostName = "mschuwalow-desktop-home";

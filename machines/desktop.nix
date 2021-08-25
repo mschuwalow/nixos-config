@@ -37,7 +37,7 @@
   };
 
   imports = [
-    ../profiles/gaming.nix
+    ../extras/gaming.nix
   ];
 
   networking.hostName = "mschuwalow-desktop";

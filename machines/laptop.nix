@@ -61,7 +61,7 @@ in
   };
 
   imports = [
-    ../profiles/bluetooth.nix
+    ../extras/bluetooth.nix
   ];
 
   networking.hostName = "mschuwalow-laptop";
