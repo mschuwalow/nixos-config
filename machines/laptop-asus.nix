@@ -1,7 +1,4 @@
 { config, pkgs, ... }: {
-  imports = [ ../profiles/bluetooth.nix ];
-
-  networking.hostName = "mschuwalow-laptop-asus";
 
   boot = {
     initrd = {
@@ -16,8 +13,9 @@
       ];
       checkJournalingFS = false;
       kernelModules = [ "i915" "kvm-intel" ];
-      luks.devices."luks-5f3a2359-fe58-4def-83a7-bf6e294bf897".device =
-        "/dev/disk/by-uuid/5f3a2359-fe58-4def-83a7-bf6e294bf897";
+      luks.devices = {
+        "luks-5f3a2359-fe58-4def-83a7-bf6e294bf897".device = "/dev/disk/by-uuid/5f3a2359-fe58-4def-83a7-bf6e294bf897";
+      };
     };
     loader = {
       systemd-boot.enable = true;
@@ -46,6 +44,12 @@
   };
 
   hardware.cpu.intel.updateMicrocode = true;
+
+  imports = [
+    ../profiles/bluetooth.nix
+  ];
+
+  networking.hostName = "mschuwalow-laptop-asus";
 
   swapDevices = [{
     device = "/dev/disk/by-uuid/49855816-cc2e-48ac-980f-78afbd408ce1";

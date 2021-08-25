@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 {
-  boot.kernel.sysctl = { "vm.swappiness" = lib.mkDefault 1; };
+  boot.kernel.sysctl = { "vm.swappiness" = 1; };
 
-  services.fstrim.enable = lib.mkDefault true;
+  services.fstrim.enable = true;
 }

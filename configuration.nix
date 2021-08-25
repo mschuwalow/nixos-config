@@ -5,14 +5,6 @@ let
 in
 {
 
-  imports = [
-    ./secrets
-    ./profiles
-    ./users/root.nix
-    ./users/mschuwalow.nix
-    ./users/pzhang.nix
-  ];
-
   boot = {
     cleanTmpDir = true;
     kernel.sysctl = {
@@ -90,6 +82,12 @@ in
     supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
   };
 
+  imports = [
+    ./secrets
+    ./profiles
+    ./users
+  ];
+
   nix = {
     autoOptimiseStore = true;
     cachix-hook = {
@@ -143,8 +141,6 @@ in
     };
   };
 
-  services.fwupd.enable = true;
-
   security = {
     polkit.enable = true;
 
@@ -153,6 +149,8 @@ in
       wheelNeedsPassword = false;
     };
   };
+
+  services.fwupd.enable = true;
 
   # Causes very long startup.
   # https://www.freedesktop.org/software/systemd/man/systemd-udev-settle.service.html

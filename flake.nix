@@ -4,18 +4,18 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "nixpkgs/nixos-21.05";
-    nixpkgs-unstable.url = "nixpkgs/master";
-    nur.url = "github:nix-community/NUR";
     home-manager = {
       url = "github:nix-community/home-manager/release-21.05";
       flake = true;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs.url = "nixpkgs/nixos-21.05";
+    nixpkgs-unstable.url = "nixpkgs/master";
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs =
-    { self, agenix, nixpkgs, nixpkgs-unstable, nur, home-manager }@inputs:
+    { self, agenix, home-manager, nixpkgs, nixpkgs-unstable, nur, }@inputs:
     let
       overlays = [
         (self: super: {
@@ -50,10 +50,10 @@
         ];
         nix = {
           registry = {
-            nixpkgs.flake = nixpkgs;
-            nixpkgs-unstable.flake = nixpkgs-unstable;
+            current-system.flake = self;
             home-manager.flake = home-manager;
-            sys.flake = self;
+            nixpkgs-unstable.flake = nixpkgs-unstable;
+            nixpkgs.flake = nixpkgs;
             nur.flake = nur;
           };
         };

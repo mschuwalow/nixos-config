@@ -1,7 +1,4 @@
 { config, pkgs, ... }: {
-  imports = [ ../profiles/gaming.nix ];
-
-  networking.hostName = "mschuwalow-desktop";
 
   boot = {
     initrd = {
@@ -39,12 +36,19 @@
     enableRedistributableFirmware = true;
   };
 
+  imports = [
+    ../profiles/gaming.nix
+  ];
+
+  networking.hostName = "mschuwalow-desktop";
+
   powerManagement.enable = false;
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/12b2d777-9cdd-4f78-a6b3-e98d7ce15cd0"; }];
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/12b2d777-9cdd-4f78-a6b3-e98d7ce15cd0"; }
+  ];
 
   system.stateVersion = "21.05";
 

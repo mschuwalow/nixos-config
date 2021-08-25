@@ -1,17 +1,15 @@
 { config, lib, pkgs, modulesPath, ... }: {
-  imports = [ ../profiles/gaming.nix ];
-
-  networking.hostName = "mschuwalow-desktop-home";
 
   boot = {
     initrd = {
       availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usb_storage" "usbhid" "sd_mod" ];
-      kernelModules = [ ];
-      luks.devices."luks-b3af58fe-579b-41a6-b1f9-af17408b1144".device = "/dev/disk/by-uuid/b3af58fe-579b-41a6-b1f9-af17408b1144";
+      checkJournalingFS = false;
+      luks.devices = {
+        "luks-b3af58fe-579b-41a6-b1f9-af17408b1144".device = "/dev/disk/by-uuid/b3af58fe-579b-41a6-b1f9-af17408b1144";
+      };
     };
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = [ ];
     loader.grub = {
       enable = true;
       device = "/dev/osdisk";
@@ -33,6 +31,20 @@
     };
   };
 
+  imports = [
+    ../profiles/bluetooth.nix
+    ../profiles/gaming.nix
+  ];
+
+  networking.hostName = "mschuwalow-desktop-home";
+
+  services = {
+    udev.extraRules = ''
+      SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_SERIAL}=="CT500MX500SSD1_2113E5911C84", SYMLINK+="osdisk"
+    '';
+    xserver.videoDrivers = [ "nvidia" ];
+  };
+
   swapDevices = [
     {
       device = "/dev/disk/by-uuid/90aaf398-b7a3-441d-887a-52b81057053a";
@@ -45,13 +57,7 @@
     }
   ];
 
-  services = {
-    udev.extraRules = ''
-      SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_SERIAL}=="CT500MX500SSD1_2113E5911C84", SYMLINK+="osdisk"
-    '';
-    xserver.videoDrivers = [ "nvidia" ];
-  };
-
   system.stateVersion = "21.05";
+
   time.hardwareClockInLocalTime = true;
 }

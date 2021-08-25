@@ -10,10 +10,6 @@ let
 in
 {
 
-  networking.hostName = "mschuwalow-laptop";
-
-  imports = [ ../profiles/bluetooth.nix ];
-
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     initrd = {
@@ -63,6 +59,12 @@ in
       };
     };
   };
+
+  imports = [
+    ../profiles/bluetooth.nix
+  ];
+
+  networking.hostName = "mschuwalow-laptop";
 
   services = {
     fprintd.enable = false;
