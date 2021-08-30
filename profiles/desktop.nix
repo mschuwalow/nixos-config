@@ -1,42 +1,47 @@
 { pkgs, lib, ... }: {
-  environment.systemPackages = (with pkgs; [
-    appimage-run
-    bitwarden
-    ghostwriter
-    hunspell
-    hunspellDicts.de-de
-    hunspellDicts.en-us
-    libreoffice-fresh
-    nmap-graphical
-    okular
-    screenkey
-    spotify
-    transmission-gtk
-    ferdi
-    glxinfo
-    google-chrome
-    firefox
-    alacritty
-    usbutils
-    vlc
-    xclip
-    xdotool
-    zoom-us
-    yaru-theme
-    authy
-  ]) ++ (with pkgs.gnome; [
-    gnome-disk-utility
-    gnome-system-monitor
-    gnome-tweak-tool
-    gnome-session
-    dconf-editor
-  ]) ++ (with pkgs.gnomeExtensions; [
-    unite
-    clipboard-indicator
-    gtk-title-bar
-    gsconnect
-    caffeine
-  ]);
+  environment = {
+    sessionVariables = {
+      MOZ_X11_EGL = "1";
+    };
+    systemPackages = (with pkgs; [
+      appimage-run
+      bitwarden
+      ghostwriter
+      hunspell
+      hunspellDicts.de-de
+      hunspellDicts.en-us
+      libreoffice-fresh
+      nmap-graphical
+      okular
+      screenkey
+      spotify
+      transmission-gtk
+      ferdi
+      glxinfo
+      google-chrome
+      firefox
+      alacritty
+      usbutils
+      vlc
+      xclip
+      xdotool
+      zoom-us
+      yaru-theme
+      authy
+    ]) ++ (with pkgs.gnome; [
+      gnome-disk-utility
+      gnome-system-monitor
+      gnome-tweak-tool
+      gnome-session
+      dconf-editor
+    ]) ++ (with pkgs.gnomeExtensions; [
+      unite
+      clipboard-indicator
+      gtk-title-bar
+      gsconnect
+      caffeine
+    ]);
+  };
 
   fonts = {
     enableDefaultFonts = true;
@@ -68,7 +73,7 @@
         twitter-color-emoji
         ubuntu_font_family
         (nerdfonts.override { fonts = [ "Hack" ]; })
-        (lib.pushCache iosevka)
+        iosevka-custom
       ];
     fontconfig = {
       defaultFonts = {

@@ -64,12 +64,10 @@ in
   config = mkIf (cfg.enable) {
     environment.systemPackages = [ pkgs.cachix ];
 
-    lib.pushCache = pkgs: pkgs;
-
     nix = {
       binaryCaches = [ "https://${cfg.cacheName}.cachix.org" ];
       binaryCachePublicKeys = [ cfg.cachePublicKey ];
-      extraOptions = lib.optional cfg.autoPush ''
+      extraOptions = lib.optionalString cfg.autoPush ''
         post-build-hook = ${upload_to_cachix}
       '';
     };
