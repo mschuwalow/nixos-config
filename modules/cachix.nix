@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.nix.cachix-hook;
+  cfg = config.nix.cachixIntegration;
   upload_to_cachix = pkgs.writeScript "upload-to-cachix" ''
     #!/bin/sh
     set -eu
@@ -12,21 +12,29 @@ let
     # skip push if the declarative job spec
     OUT_END=$(echo ''${OUT_PATHS: -10})
     if [ "$OUT_END" == "-spec.json" ]; then
-    exit 0
+      exit 0
     fi
 
     export HOME=/root
-    exec ${pkgs.cachix}/bin/cachix -c ${cfg.cachixConfigFilePath} push ${cfg.cacheName} $OUT_PATHS > /tmp/hydra_cachix 2>&1 || true
+    exec ${pkgs.cachix}/bin/cachix -c ${cfg.cachixConfigFilePath} push ${cfg.cacheName} $OUT_PATHS > /tmp/cachix 2>&1 || true
   '';
 
 in
 {
-  options.nix.cachix-hook = {
+  options.nix.cachixIntegration = {
     enable = mkOption {
       type = types.bool;
       default = false;
       description = ''
         Whether to enable.
+      '';
+    };
+
+    autoPush = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Push all build results to cachix.
       '';
     };
 
@@ -56,10 +64,12 @@ in
   config = mkIf (cfg.enable) {
     environment.systemPackages = [ pkgs.cachix ];
 
+    lib.pushCache = pkgs: pkgs;
+
     nix = {
       binaryCaches = [ "https://${cfg.cacheName}.cachix.org" ];
       binaryCachePublicKeys = [ cfg.cachePublicKey ];
-      extraOptions = ''
+      extraOptions = lib.optional cfg.autoPush ''
         post-build-hook = ${upload_to_cachix}
       '';
     };

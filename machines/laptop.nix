@@ -67,7 +67,7 @@ in
   networking.hostName = "mschuwalow-laptop";
 
   services = {
-    fprintd.enable = false;
+    fprintd.enable = true;
     hardware.bolt.enable = true;
     throttled.enable = true;
     xserver = {

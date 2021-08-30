@@ -40,32 +40,36 @@
 
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [
-      twitter-color-emoji
-      ubuntu_font_family
-      (nerdfonts.override { fonts = [ "Hack" ]; })
-      (unstable.iosevka.override {
-        privateBuildPlan = {
-          family = "Iosevka Custom";
-          spacing = "normal";
-          serifs = "slab";
-          ligations = {
-            inherits = "haskell";
-            disables = [ "slasheq" ];
-            enables = [ "exeq" ];
+    fonts = with pkgs;
+      let
+        iosevka-custom = unstable.iosevka.override {
+          privateBuildPlan = {
+            family = "Iosevka Custom";
+            spacing = "normal";
+            serifs = "slab";
+            ligations = {
+              inherits = "haskell";
+              disables = [ "slasheq" ];
+              enables = [ "exeq" ];
+            };
+            variants.design = {
+              asterisk = "penta-low";
+            };
+            widths.normal = {
+              shape = 500;
+              menu = 5;
+              css = "normal";
+            };
           };
-          variants.design = {
-            asterisk = "penta-low";
-          };
-          widths.normal = {
-            shape = 500;
-            menu = 5;
-            css = "normal";
-          };
+          set = "custom";
         };
-        set = "custom";
-      })
-    ];
+      in
+      [
+        twitter-color-emoji
+        ubuntu_font_family
+        (nerdfonts.override { fonts = [ "Hack" ]; })
+        (lib.pushCache iosevka)
+      ];
     fontconfig = {
       defaultFonts = {
         emoji = [ "Twitter Color Emoji" ];
