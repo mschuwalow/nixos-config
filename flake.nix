@@ -50,6 +50,7 @@
         ];
         nix = {
           registry = {
+            agenix.flake = agenix;
             current-system.flake = self;
             home-manager.flake = home-manager;
             nixpkgs-unstable.flake = nixpkgs-unstable;
