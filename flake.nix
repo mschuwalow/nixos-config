@@ -27,9 +27,6 @@
         ./overlays/bottles
         ./overlays/cups-kyocera-ecosys
         ./overlays/git-heatmap
-        ./overlays/gtktitlebar
-        ./overlays/ibus-rime
-        ./overlays/joplin.nix
         ./overlays/nix-direnv-flake-support.nix
         ./overlays/python-packages
         ./overlays/sshuttle-fix.nix

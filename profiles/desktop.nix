@@ -37,7 +37,6 @@
     ]) ++ (with pkgs.gnomeExtensions; [
       unite
       clipboard-indicator
-      gtk-title-bar
       gsconnect
       caffeine
     ]);
