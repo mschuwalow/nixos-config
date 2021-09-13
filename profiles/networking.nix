@@ -7,6 +7,9 @@
         source = config.age.secrets.nm-wifi-home.path;
       };
       "NetworkManager/system-connections/LiveIntent.nmconnection" = {
+        source = config.age.secrets.nm-liveintent.path;
+      };
+      "NetworkManager/system-connections/LiveIntent-VPN.nmconnection" = {
         source = config.age.secrets.nm-vpn-liveintent.path;
       };
       # networkmanager vpn activation will fail if file does not exist + is mutable

@@ -28,9 +28,13 @@
       name = "cachix.dhall";
       file = ./cachix.dhall.age;
     };
-    nm-vpn-liveintent = {
+    nm-liveintent = {
       name = "nm/LiveIntent.nmconnection";
       file = ./nm/LiveIntent.nmconnection.age;
+    };
+    nm-vpn-liveintent = {
+      name = "nm/LiveIntent-VPN.nmconnection";
+      file = ./nm/LiveIntent-VPN.nmconnection.age;
     };
     nm-wifi-home = {
       name = "nm/KabelBox-2FF0.nmconnection";

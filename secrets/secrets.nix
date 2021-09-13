@@ -14,6 +14,7 @@ in
   "users/root.age".publicKeys = all;
   "ssh/github_rsa.age".publicKeys = all;
   "cachix.dhall.age".publicKeys = all;
+  "nm/LiveIntent-VPN.nmconnection.age".publicKeys = all;
   "nm/LiveIntent.nmconnection.age".publicKeys = all;
   "nm/KabelBox-2FF0.nmconnection.age".publicKeys = all;
 }

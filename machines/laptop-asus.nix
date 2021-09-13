@@ -51,6 +51,8 @@
 
   networking.hostName = "mschuwalow-laptop-asus";
 
+  services.xserver.libinput.enable = true;
+
   swapDevices = [{
     device = "/dev/disk/by-uuid/49855816-cc2e-48ac-980f-78afbd408ce1";
     encrypted = {
