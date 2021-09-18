@@ -1,6 +1,15 @@
 pkgs: oldPkgs:
 let
   packageOverrides = self: super: {
+    aws2-wrap = super.buildPythonPackage rec {
+      pname = "aws2-wrap";
+      version = "1.2.2";
+      propagatedBuildInputs = [ self.psutil ];
+      src = super.fetchPypi {
+        inherit pname version;
+        sha256 = "sha256-8y25Gd6UYlvEDN8BmPxuXLcqFUElsIQ7o7ZB8QF5DH4=";
+      };
+    };
     jep = self.callPackage ./jep.nix { };
     opentracing = super.buildPythonPackage rec {
       pname = "opentracing";

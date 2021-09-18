@@ -15,7 +15,7 @@
   };
 
   outputs =
-    { self, agenix, home-manager, nixpkgs, nixpkgs-unstable, nur, }@inputs:
+    { self, agenix, home-manager, nixpkgs, nixpkgs-unstable, nur, }:
     let
       overlays = [
         (self: super: {
@@ -27,9 +27,11 @@
         ./overlays/bottles
         ./overlays/cups-kyocera-ecosys
         ./overlays/git-heatmap
+        ./overlays/iosevka.nix
         ./overlays/nix-direnv-flake-support.nix
         ./overlays/python-packages
         ./overlays/sshuttle-fix.nix
+        ./overlays/steam-fix-browser.nix
         ./overlays/vscode-extensions
       ]);
       baseModule = {
@@ -46,6 +48,9 @@
           ./modules/cachix.nix
         ];
         nix = {
+          nixPath = [
+            "nixpkgs=${nixpkgs}"
+          ];
           registry = {
             agenix.flake = agenix;
             current-system.flake = self;

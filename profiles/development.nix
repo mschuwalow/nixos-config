@@ -25,32 +25,34 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    awscli
+    awscli2
+    awslogs
+    binutils-unwrapped
     cabal2nix
-    vscode
-    kubetail
+    ghq
+    gnumake
+    httpie
+    httpstat
+    jq
+    k9s
     kubectl
     kubernetes-helm
-    k9s
-    sublime-merge
-    gnumake
+    kubetail
+    ngrok
     niv
     nixpkgs-fmt
-    httpstat
-    postman
-    sshfs
-    ghq
-    jq
-    yq-go
-    ngrok
-    pspg
-    watch
-    wget
-    httpie
-    binutils-unwrapped
     nixpkgs-review
     patchelf
+    postman
+    pspg
+    python3Packages.aws2-wrap
     rnix-lsp
+    sshfs
+    sublime-merge
+    vscode
+    watch
+    wget
+    yq-go
   ];
 
   # disable sublime asking for license

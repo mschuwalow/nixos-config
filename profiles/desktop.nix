@@ -4,9 +4,15 @@
       MOZ_X11_EGL = "1";
     };
     systemPackages = (with pkgs; [
+      alacritty
       appimage-run
+      authy
       bitwarden
+      ferdi
+      firefox
       ghostwriter
+      glxinfo
+      google-chrome
       hunspell
       hunspellDicts.de-de
       hunspellDicts.en-us
@@ -16,64 +22,36 @@
       screenkey
       spotify
       transmission-gtk
-      ferdi
-      glxinfo
-      google-chrome
-      firefox
-      alacritty
       usbutils
       vlc
       xclip
       xdotool
-      zoom-us
       yaru-theme
-      authy
+      zoom-us
     ]) ++ (with pkgs.gnome; [
+      dconf-editor
       gnome-disk-utility
+      gnome-session
       gnome-system-monitor
       gnome-tweak-tool
-      gnome-session
-      dconf-editor
-    ]) ++ (with pkgs.gnomeExtensions; [
-      unite
+    ]) ++ (with pkgs.unstable.gnomeExtensions; [
+      caffeine
       clipboard-indicator
       gsconnect
-      caffeine
+      gtk-title-bar
+      material-shell
+      unite
     ]);
   };
 
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs;
-      let
-        iosevka-custom = unstable.iosevka.override {
-          privateBuildPlan = {
-            family = "Iosevka Custom";
-            spacing = "normal";
-            serifs = "slab";
-            ligations = {
-              inherits = "haskell";
-              disables = [ "slasheq" ];
-              enables = [ "exeq" ];
-            };
-            variants.design = {
-              asterisk = "penta-low";
-            };
-            widths.normal = {
-              shape = 500;
-              menu = 5;
-              css = "normal";
-            };
-          };
-          set = "custom";
-        };
-      in
-      [
-        twitter-color-emoji
-        ubuntu_font_family
-        (nerdfonts.override { fonts = [ "Hack" ]; })
-        iosevka-custom
-      ];
+    fonts = with pkgs; [
+      twitter-color-emoji
+      ubuntu_font_family
+      (nerdfonts.override { fonts = [ "Hack" ]; })
+      iosevka-custom
+    ];
     fontconfig = {
       defaultFonts = {
         emoji = [ "Twitter Color Emoji" ];

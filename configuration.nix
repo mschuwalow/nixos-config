@@ -108,7 +108,6 @@ in
       options = "--delete-older-than 30d";
     };
     package = pkgs.nixUnstable;
-    useSandbox = "relaxed";
   };
 
   nixpkgs = {
