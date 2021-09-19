@@ -40,8 +40,10 @@
       dash-to-dock
       dash-to-panel
       gsconnect
+      gtile
       gtk-title-bar
       material-shell
+      tiling-assistant
       unite
     ]);
   };
