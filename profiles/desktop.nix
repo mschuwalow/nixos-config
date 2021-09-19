@@ -37,6 +37,8 @@
     ]) ++ (with pkgs.unstable.gnomeExtensions; [
       caffeine
       clipboard-indicator
+      dash-to-dock
+      dash-to-panel
       gsconnect
       gtk-title-bar
       material-shell
