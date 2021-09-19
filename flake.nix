@@ -33,6 +33,7 @@
         ./overlays/sshuttle-fix.nix
         ./overlays/steam-fix-browser.nix
         ./overlays/vscode-extensions
+        ./overlays/throttled-fix.nix
       ]);
       baseModule = {
         home-manager.useGlobalPkgs = true;
