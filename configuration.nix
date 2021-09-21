@@ -24,7 +24,6 @@ in
 
   environment.systemPackages = with pkgs; [
     (hiPrio parallel)
-    agenix
     bat
     bc
     bottom
@@ -108,14 +107,6 @@ in
       options = "--delete-older-than 30d";
     };
     package = pkgs.nixUnstable;
-  };
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      input-fonts.acceptLicense = true;
-      trusted-users = "@wheel";
-    };
   };
 
   programs = {

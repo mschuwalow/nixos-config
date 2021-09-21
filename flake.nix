@@ -17,6 +17,18 @@
   outputs =
     { self, agenix, home-manager, nixpkgs, nixpkgs-unstable, nur, }:
     let
+      allSystems = [ "x86_64-linux" ];
+
+      nameValuePair = name: value: { inherit name value; };
+      genAttrs = names: f: builtins.listToAttrs (map (n: nameValuePair n (f n)) names);
+
+      config = {
+        allowUnfree = true;
+        input-fonts.acceptLicense = true;
+        oraclejdk.accept_license = true;
+        trusted-users = "@wheel";
+      };
+
       overlays = [
         (self: super: {
           unstable = import nixpkgs-unstable { inherit (super) system config; };
@@ -35,6 +47,7 @@
         ./overlays/vscode-extensions
         ./overlays/throttled-fix.nix
       ]);
+
       baseModule = {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
@@ -42,11 +55,7 @@
           agenix.nixosModules.age
           nixpkgs.nixosModules.notDetected
           home-manager.nixosModules.home-manager
-          ./modules/variables.nix
-          ./modules/xcursor.nix
-          ./modules/vsliveshare.nix
-          ./modules/bloop-system.nix
-          ./modules/cachix.nix
+          ./modules
         ];
         nix = {
           nixPath = [
@@ -62,8 +71,14 @@
             nur.flake = nur;
           };
         };
-        nixpkgs.overlays = overlays;
+        nixpkgs = { inherit overlays config; };
       };
+
+      forAllSystems = f: genAttrs allSystems
+        (system: f {
+          inherit system;
+          pkgs = import nixpkgs { inherit system config overlays; };
+        });
     in
     rec {
       inherit overlays;
@@ -86,5 +101,19 @@
           system = "x86_64-linux";
         };
       };
+      legacyPackages = forAllSystems ({ pkgs, ... }: builtins.trace "Using <nixpkgs> compat wrapper..." pkgs);
+      devShell = forAllSystems
+        ({ system, pkgs, ... }:
+          with pkgs;
+          stdenv.mkDerivation {
+            name = "shell";
+
+            buildInputs = [
+              agenix
+              git
+              gnumake
+              nixpkgs-fmt
+            ];
+          });
     };
 }

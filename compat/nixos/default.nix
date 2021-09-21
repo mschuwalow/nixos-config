@@ -1,6 +1,4 @@
-{ hostname ? with builtins; head (split "\n" (readFile /etc/hostname))
-, ...
-}:
+{ hostname ? with builtins; head (split "\n" (readFile /etc/hostname)), ... }:
 let
   flake = import
     (fetchTarball {

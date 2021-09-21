@@ -2,8 +2,8 @@
 
 with lib;
 
-let cfg = config.services.bloop-system;
-
+let
+  cfg = config.services.bloop-system;
 in
 {
   options.services.bloop-system = {
@@ -44,9 +44,7 @@ in
       wantedBy = [ "multi-user.target" ];
       environment = { PATH = mkForce "${makeBinPath [ cfg.javaPackage ]}"; };
       serviceConfig = {
-        ExecStart = "${pkgs.bloop}/bin/bloop server ${
-            strings.concatStringsSep " " cfg.extraOptions
-          }";
+        ExecStart = "${pkgs.bloop}/bin/bloop server ${strings.concatStringsSep " " cfg.extraOptions}";
         Group = "bloop";
         RuntimeDirectoryMode = "775";
         StandardOutput = "journal";

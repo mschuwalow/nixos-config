@@ -1,5 +1,4 @@
-{ ...  # So that `import <pkgs> {}` works as expected
-}:
+{ ... }:
 let
   flake = import
     (fetchTarball {
