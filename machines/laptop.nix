@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
@@ -52,6 +52,7 @@ in
     };
     nvidia = {
       modesetting.enable = true;
+      powerManagement.enable = true;
       prime = {
         offload.enable = true;
         intelBusId = "PCI:0:2:0";
@@ -66,13 +67,24 @@ in
 
   networking.hostName = "mschuwalow-laptop";
 
+  powerManagement.enable = true;
+
   services = {
     fprintd.enable = true;
     hardware.bolt.enable = true;
     throttled.enable = true;
     xserver = {
       libinput.enable = true;
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "nvidia" "displaylink" ];
+      displayManager = {
+        gdm = {
+          nvidiaWayland = true;
+          wayland = true;
+        };
+        sessionCommands = ''
+          ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0
+        '';
+      };
     };
   };
 
