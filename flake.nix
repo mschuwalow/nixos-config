@@ -50,7 +50,8 @@
         ];
         nix = {
           nixPath = [
-            "nixpkgs=${nixpkgs}"
+            "nixpkgs=${self}/compat"
+            "nixos-config=${self}/compat/nixos"
           ];
           registry = {
             agenix.flake = agenix;

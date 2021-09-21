@@ -42,8 +42,6 @@
 
   networking.hostName = "mschuwalow-desktop";
 
-  powerManagement.enable = false;
-
   services.xserver.videoDrivers = [ "nvidia" ];
 
   swapDevices = [

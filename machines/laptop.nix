@@ -40,19 +40,8 @@ in
 
   hardware = {
     cpu.intel.updateMicrocode = true;
-    opengl = {
-      enable = true;
-      extraPackages = with pkgs; [
-        libva
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-        intel-media-driver
-      ];
-    };
     nvidia = {
       modesetting.enable = true;
-      powerManagement.enable = true;
       prime = {
         offload.enable = true;
         intelBusId = "PCI:0:2:0";
@@ -66,8 +55,6 @@ in
   ];
 
   networking.hostName = "mschuwalow-laptop";
-
-  powerManagement.enable = true;
 
   services = {
     fprintd.enable = true;
