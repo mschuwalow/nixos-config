@@ -19,11 +19,12 @@
       };
     };
     systemPackages = with pkgs; [
+      dnsutils
       etherape
       ettercap
+      openvpn
       tcpdump
       wireshark
-      openvpn
     ];
   };
 
