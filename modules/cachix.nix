@@ -4,16 +4,19 @@ with lib;
 
 let
   cfg = config.nix.cachixIntegration;
-  pathPattern = "(${lib.concatStringsSep "|" (map (s: " ${s} ") cfg.autoPushPatterns)})";
+  pathPattern = "(${lib.concatStringsSep "|" cfg.autoPushPatterns})";
   upload_to_cachix = pkgs.writeScript "upload-to-cachix" ''
     #!${pkgs.bash}/bin/bash
     set -eu
     set -f # disable globbing
 
-    if [[ " $OUT_PATHS " =~ "${pathPattern}" ]]; then
+    paths=($OUT_PATHS)
+    hits=($(printf '%s\n' "''${paths[@]}" | grep -E '${pathPattern}' || true))
+    
+    if [[ -v hits && ! ''${#hits[@]} -eq 0 ]]; then
       echo "Pushing to cachix: $OUT_PATHS"
       export HOME=/root
-      ! exec ${pkgs.cachix}/bin/cachix -c ${cfg.cachixConfigFilePath} push ${cfg.cacheName} $OUT_PATHS > /tmp/cachix 2>&1
+      exec ${pkgs.cachix}/bin/cachix -c ${cfg.cachixConfigFilePath} push ${cfg.cacheName} $OUT_PATHS > /tmp/cachix 2>&1 || true
     fi
   '';
 in
