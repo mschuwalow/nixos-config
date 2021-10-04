@@ -4,22 +4,20 @@ with lib;
 
 let
   cfg = config.nix.cachixIntegration;
+  pathPattern = "(${lib.concatStringsSep "|" (map (s: " ${s} ") cfg.autoPushPatterns)})";
   upload_to_cachix = pkgs.writeScript "upload-to-cachix" ''
-    #!/bin/sh
+    #!${pkgs.bash}/bin/bash
     set -eu
     set -f # disable globbing
 
-    # skip push if the declarative job spec
-    OUT_END=$(echo ''${OUT_PATHS: -10})
-    if [ "$OUT_END" == "-spec.json" ]; then
-      exit 0
+    if [[ " $OUT_PATHS " =~ "${pathPattern}" ]]; then
+      echo "Pushing to cachix: $OUT_PATHS"
+      export HOME=/root
+      ! exec ${pkgs.cachix}/bin/cachix -c ${cfg.cachixConfigFilePath} push ${cfg.cacheName} $OUT_PATHS > /tmp/cachix 2>&1
     fi
-
-    export HOME=/root
-    exec ${pkgs.cachix}/bin/cachix -c ${cfg.cachixConfigFilePath} push ${cfg.cacheName} $OUT_PATHS > /tmp/cachix 2>&1 || true
   '';
-
 in
+
 {
   options.nix.cachixIntegration = {
     enable = mkOption {
@@ -32,9 +30,17 @@ in
 
     autoPush = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = ''
-        Push all build results to cachix.
+        Add a post-build hook that pushes to cachix.
+      '';
+    };
+
+    autoPushPatterns = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = ''
+        Regex patterns of path names that should be pushed to the cache.
       '';
     };
 

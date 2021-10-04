@@ -90,6 +90,9 @@ in
   nix = {
     autoOptimiseStore = true;
     cachixIntegration = {
+      autoPushPatterns = [
+        ".*iosevka.*"
+      ];
       enable = true;
       cacheName = "mschuwalow-nixos-systems";
       cachePublicKey = "mschuwalow-nixos-systems.cachix.org-1:yE2aPTt48ovOna+s52CklrygkFXcMLIXmrTu6aB6cSU=";
