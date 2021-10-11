@@ -31,20 +31,7 @@
     ]) ++ (with pkgs.gnome; [
       dconf-editor
       gnome-disk-utility
-      gnome-session
       gnome-system-monitor
-      gnome-tweak-tool
-    ]) ++ (with pkgs.unstable.gnomeExtensions; [
-      caffeine
-      clipboard-indicator
-      dash-to-dock
-      dash-to-panel
-      gsconnect
-      gtile
-      gtk-title-bar
-      material-shell
-      tiling-assistant
-      unite
     ]);
   };
 
@@ -56,14 +43,6 @@
       (nerdfonts.override { fonts = [ "Hack" ]; })
       iosevka-custom
     ];
-    fontconfig = {
-      defaultFonts = {
-        emoji = [ "Twitter Color Emoji" ];
-        monospace = [ "Ubuntu Mono" ];
-        sansSerif = [ "Ubuntu" ];
-        serif = [ "Ubuntu Condensed" ];
-      };
-    };
   };
 
   hardware.opengl = {
@@ -81,51 +60,17 @@
 
   networking.firewall = {
     allowedTCPPorts = [ 57621 ]; # spotify
-    allowedTCPPortRanges = [
-      { from = 1714; to = 1764; } # kde-connect
-    ];
-    allowedUDPPortRanges = [
-      { from = 1714; to = 1764; } # kde-connect
-    ];
   };
+
+  programs.pantheon-tweaks.enable = true;
 
   services = {
     flatpak.enable = true;
     xserver = {
       desktopManager = {
-        gnome = {
-          enable = true;
-          extraGSettingsOverrides = ''
-            [org.gnome.desktop.interface]
-            gtk-theme='Yaru-dark'
-            icon-theme='Yaru'
-            cursor-theme='Yaru'
-            font-name='Ubuntu 11'                                                                                                                 
-            document-font-name='Ubuntu Condensed 11'                                                                                                          
-            monospace-font-name='Ubuntu Mono 10'                                                                                                  
-            
-            [org.gnome.desktop.sound]
-            theme-name='Yaru'
-
-            [org/gnome/desktop/wm/preferences]
-            titlebar-font='Ubuntu Bold 11'
-
-            [desktop.ibus.panel.emoji]
-            hotkey=[]
-
-            [org/gnome/desktop/input-sources]
-            xkb-options=['terminate:ctrl_alt_bksp', 'lv3:ralt_switch', 'compose:caps']
-
-            [org/gnome/gedit/preferences/editor]
-            scheme='Yaru-dark'
-          '';
-          extraGSettingsOverridePackages = with pkgs.gnome; [
-            gedit
-          ];
-        };
+        pantheon.enable = true;
         xterm.enable = false;
       };
-      displayManager.gdm.enable = true;
       enable = true;
       layout = "us";
     };

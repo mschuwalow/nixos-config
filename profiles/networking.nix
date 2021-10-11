@@ -24,6 +24,7 @@
       ettercap
       openvpn
       tcpdump
+      tcptrack
       wireshark
     ];
   };

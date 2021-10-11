@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
   users.users.pzhang = {
-    description = "Peixun Zhang (BB)";
+    description = "Peixun Zhang";
     isNormalUser = true;
     uid = 1001;
     extraGroups = [
