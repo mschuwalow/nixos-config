@@ -2,17 +2,18 @@
 
   environment.systemPackages = with pkgs; [ pavucontrol ];
 
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = false; # replace with pipewire
 
-  #security.rtkit.enable = true;
-  #
-  #services.pipewire = {
-  #  enable = true;
-  #  alsa = {
-  #    enable = true;
-  #    support32Bit = true;
-  #  };
-  #  jack.enable = true;
-  #  pulse.enable = true;
-  #};
+  security.rtkit.enable = true;
+  
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
+  };
+
+  sound.enable = true;
 }

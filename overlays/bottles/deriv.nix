@@ -16,12 +16,21 @@
 , gobject-introspection
 , gspell
 , gtk3
-, steam-run
+, steam
 , xdg-utils
 , pciutils
 , cabextract
 , wineWowPackages
 }:
+let
+  runner = (steam.override {
+    nativeOnly = false;
+    extraPkgs = pkgs: with pkgs; [
+      libxml2
+      libusb1
+    ];
+  }).run;
+in
 python3Packages.buildPythonApplication rec {
   pname = "bottles";
   version = "2021.8.14-treviso";
@@ -71,7 +80,7 @@ python3Packages.buildPythonApplication rec {
     patool
   ] ++ [
     cabextract
-    steam-run
+    runner
     xdg-utils
     pciutils
     wineWowPackages.minimal
@@ -86,11 +95,11 @@ python3Packages.buildPythonApplication rec {
       --replace "'update-desktop-database'" "'${desktop-file-utils}/bin/update-desktop-database'"
 
     substituteInPlace src/runner.py \
-      --replace " {runner}" " ${steam-run}/bin/steam-run {runner}" \
-      --replace " {dxvk_setup}" " ${steam-run}/bin/steam-run {dxvk_setup}"
+      --replace " {runner}" " ${runner}/bin/steam-run {runner}" \
+      --replace " {dxvk_setup}" " ${runner}/bin/steam-run {dxvk_setup}"
 
     substituteInPlace src/runner_utilities.py \
-      --replace " {runner}" " ${steam-run}/bin/steam-run {runner}" \
+      --replace " {runner}" " ${runner}/bin/steam-run {runner}" \
   '';
 
   preFixup = ''

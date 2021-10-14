@@ -22,6 +22,7 @@
       dnsutils
       etherape
       ettercap
+      iprange
       openvpn
       tcpdump
       tcptrack
