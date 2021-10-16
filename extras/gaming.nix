@@ -11,16 +11,16 @@
   };
 
 
-  # diablo 2 dclone filers
+  # diablo 2 dclone filters
   networking.firewall.extraCommands = ''
     iptables -N LOG_DROP || true
     iptables -F LOG_DROP
     iptables -A LOG_DROP -j LOG --log-prefix "IPTables-Dropped: " --log-level 6
-    iptables -A LOG_DROP -j REJECT
+    iptables -A LOG_DROP -j DROP
 
     iptables -N d2r-dclone || true
     iptables -F d2r-dclone
-    # iptables -A d2r-americas -m iprange --dst-range 35.243.1.1-35.243.255.255 -j ACCEPT
+    iptables -A d2r-dclone -d 34.93.251.115 -j ACCEPT
     iptables -A d2r-dclone -m iprange --dst-range 158.115.1.1-158.115.206.255 -j LOG_DROP
     iptables -A d2r-dclone -m iprange --dst-range 158.115.211.1-158.115.255.255 -j LOG_DROP
     iptables -A d2r-dclone -m iprange --dst-range 34.1.1.1-34.116.255.255 -j LOG_DROP
