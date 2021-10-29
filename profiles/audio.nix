@@ -5,7 +5,7 @@
   hardware.pulseaudio.enable = false; # replace with pipewire
 
   security.rtkit.enable = true;
-  
+
   services.pipewire = {
     enable = true;
     alsa = {

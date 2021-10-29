@@ -41,7 +41,7 @@ in
 
     autoPushPatterns = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = ''
         Regex patterns of path names that should be pushed to the cache.
       '';
