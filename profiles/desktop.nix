@@ -1,8 +1,8 @@
 { pkgs, lib, ... }: {
   environment = {
-    #sessionVariables = {
-    #  MOZ_X11_EGL = "1";
-    #};
+    sessionVariables = {
+      MOZ_X11_EGL = "1";
+    };
     systemPackages = (with pkgs; [
       alacritty
       appimage-run
@@ -26,7 +26,6 @@
       vlc
       xclip
       xdotool
-      yaru-theme
       zoom-us
     ]) ++ (with pkgs.gnome; [
       dconf-editor

@@ -27,6 +27,9 @@
         input-fonts.acceptLicense = true;
         oraclejdk.accept_license = true;
         trusted-users = "@wheel";
+        permittedInsecurePackages = [
+          "electron-9.4.4"
+        ];
       };
 
       overlays = [
