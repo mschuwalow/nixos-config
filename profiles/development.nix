@@ -29,6 +29,7 @@ in
     awslogs
     binutils-unwrapped
     cabal2nix
+    circleci-cli
     ghq
     gnumake
     httpie

@@ -2,11 +2,12 @@
 
 {
   environment.systemPackages = with pkgs; [
+    (sbt-extras.override { jdk = jdk8; })
+    ammonite-repl
     coursier
     idea.idea-community
     jd-gui
     visualvm
-    (sbt-extras.override { jdk = jdk8; })
   ];
 
   programs.java = {
