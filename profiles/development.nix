@@ -54,6 +54,7 @@ in
     watch
     wget
     yq-go
+    postgresql
   ];
 
   # disable sublime asking for license
